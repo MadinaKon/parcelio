@@ -5,14 +5,17 @@ import dbConnect from "../../../db/models/connect";
 
 export default async function handler(request, response) {
   await dbConnect();
-  // return response.status(200).json(db_places);
+
   // Write the POST API route in pages/api/places/index.js
+  if (request.method === "GET") {
+    const services = await Service.find();
+    return response.status(200).json(services);
+  }
+
   if (request.method === "POST") {
     try {
       const serviceData = request.body;
-
       console.log("serviceData ", serviceData);
-
       await Service.create(serviceData);
 
       response.status(201).json({ status: "service created" });
