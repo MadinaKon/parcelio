@@ -1,4 +1,3 @@
-// import { db_places } from "../../../lib/db_places";
 
 import Service from "../../../db/models/Service";
 import dbConnect from "../../../db/models/connect";
