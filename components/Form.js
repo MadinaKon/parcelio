@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Form({ onSubmit, formName, defaultData }) {
-  console.log(" onSubmit ", onSubmit);
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -34,6 +33,54 @@ export default function Form({ onSubmit, formName, defaultData }) {
         name="userName"
         type="text"
         defaultValue={defaultData?.userName}
+      />
+      <br />
+      <label htmlFor="password">password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        defaultValue={defaultData?.password}
+      />
+      <br />
+      <label htmlFor="fromCity">From city</label>
+      <input
+        id="fromCity"
+        name="fromCity"
+        type="text"
+        defaultValue={defaultData?.fromCity}
+      />
+      <br />
+      <label htmlFor="toCity">To city</label>
+      <input
+        id="toCity"
+        name="toCity"
+        type="text"
+        defaultValue={defaultData?.toCity}
+      />
+      <br />
+      <label htmlFor="flightDateTime">Flight date time</label>
+      <input
+        id="flightDateTime"
+        name="flightDateTime"
+        type="date"
+        defaultValue={defaultData?.flightDateTime}
+      />
+      <br />
+      <label htmlFor="availableKilos">availableKilos</label>
+      <input
+        id="availableKilos"
+        name="availableKilos"
+        type="text"
+        defaultValue={defaultData?.availableKilos}
+      />
+      <br />
+      <label htmlFor="phoneNumber">Phone number</label>
+      <input
+        id="phoneNumber"
+        name="phoneNumber"
+        type="text"
+        defaultValue={defaultData?.phoneNumber}
       />
       <br />
       <label htmlFor="description">Description</label>
