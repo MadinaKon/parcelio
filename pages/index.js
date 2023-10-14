@@ -1,7 +1,10 @@
 import Head from "next/head";
-import Form from "../../components/Form";
+import Form from "../components/Form";
+import useSWR from "swr";
 
 export default function Home() {
+  const { data } = useSWR("/api/services", { fallbackData: [] });
+
   return (
     <>
       <Head>
