@@ -1,11 +1,12 @@
 import React from "react";
 
 export default function Form({ onSubmit, formName, defaultData }) {
+  console.log(" onSubmit ", onSubmit);
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("DATA from FORM ", data);
+
     onSubmit(data);
   }
 
@@ -22,7 +23,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
       <label htmlFor="lastName">last name</label>
       <input
         id="lastName"
-        name="image"
+        name="lastName"
         type="text"
         defaultValue={defaultData?.lastName}
       />

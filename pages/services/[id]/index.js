@@ -64,7 +64,6 @@ export default function DetailsPage() {
       {/* <Link href={place.mapURL} passHref legacyBehavior>
         <StyledLocationLink>Location on Google Maps</StyledLocationLink>
       </Link> */}
-      <p>{place.description}</p>
       <ButtonContainer>
         {/* TODO  check href for correctness*/}
         {/* <Link href={`/services/${id}/update`} passHref legacyBehavior>
