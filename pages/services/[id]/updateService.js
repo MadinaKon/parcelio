@@ -8,10 +8,28 @@ export default function UpdateServicePage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
-  const { data: service, isLoading, error } = useSWR(`/api/services/${id}`);
+  const {
+    data: service,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR(`/api/services/${id}`);
 
   async function updateService(service) {
-    console.log("service updated (but not really...)");
+    const response = await fetch(`/api/services/${id}`, {
+      // TODO PATCH or PUT?
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(service),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
   }
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
