@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+// import "@/styles/globals.css";
 import { SWRConfig } from "swr";
 
 // const fetcher = (url) => fetch(url).then((response) => response.json());
