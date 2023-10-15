@@ -6,6 +6,7 @@ import { StyledLink } from "../components/StyledLink.js";
 import CreateServicePage from "./createService";
 import UpdateServicePage from "./services/[id]/updateService";
 import TableOverview from "../components/TableOverview";
+import { mainListItems } from "../components/listItems";
 
 const List = styled.ul`
   list-style: none;
@@ -42,6 +43,8 @@ export default function Home() {
       <main>
         {/* <CreateServicePage /> */}
         {/* <UpdateServicePage /> */}
+
+        {/* <List component="nav">{mainListItems}</List> */}
         <TableOverview data={data} />
       </main>
     </>
