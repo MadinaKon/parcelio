@@ -37,10 +37,6 @@ const columns = [
 export default function DataGridComponent({ data }) {
   const getRowId = (data) => data._id;
 
-  function handleContactButtonClick(rowData) {
-    console.log("Contact button clicked for row:", rowData);
-  }
-
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
