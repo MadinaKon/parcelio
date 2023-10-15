@@ -12,6 +12,26 @@ const columns = [
   { field: "toCity", headerName: "To City", width: 150 },
   { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
   { field: "availableKilos", headerName: "Available Kilos", width: 150 },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 150,
+    renderCell: (params) => {
+      function handleContactButtonClick() {
+        console.log("Contact button clicked for row:", params.row);
+      }
+
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleContactButtonClick}
+        >
+          Contact
+        </Button>
+      );
+    },
+  },
 ];
 
 export default function DataGridComponent({ data }) {
@@ -20,6 +40,7 @@ export default function DataGridComponent({ data }) {
   function handleContactButtonClick(rowData) {
     console.log("Contact button clicked for row:", rowData);
   }
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
