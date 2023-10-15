@@ -31,7 +31,7 @@ export default function TableOverview({ data }) {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row._id}>
               <TableCell>{row.firstName}</TableCell>
               <TableCell>{row.lastName}</TableCell>
               <TableCell>{row.userName}</TableCell>
