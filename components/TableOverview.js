@@ -1,10 +1,19 @@
 import * as React from "react";
-import Link from "@mui/material/Link";
+import styled from "styled-components";
+// import Link from "@mui/material/Link";
+import Link from "next/link.js";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { StyledLink } from "../components/StyledLink.js";
+
+const FixedLink = styled(StyledLink)`
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+`;
 
 function preventDefault(event) {
   event.preventDefault();
@@ -46,8 +55,13 @@ export default function TableOverview({ data }) {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
+
+      {/* <Link href="/createService" passHref legacyBehavior>
+        <FixedLink> Add service</FixedLink>
+      </Link> */}
+
+      <Link href="/createService" passHref legacyBehavior>
+        <FixedLink> Add service</FixedLink>
       </Link>
     </React.Fragment>
   );
