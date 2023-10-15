@@ -8,6 +8,7 @@ import UpdateServicePage from "./services/[id]/updateService";
 import TableOverview from "../components/TableOverview";
 import { mainListItems } from "../components/listItems";
 import TableDataGrid from "../components/TableDataGrid";
+import DataGridComponent from "../components/TableDataGrid";
 
 const List = styled.ul`
   list-style: none;
@@ -47,7 +48,8 @@ export default function Home() {
 
         {/* <List component="nav">{mainListItems}</List> */}
         {/* <TableOverview data={data} /> */}
-        <TableDataGrid />
+        {/* <TableDataGrid data={data} /> */}
+        <DataGridComponent data={data} />
       </main>
     </>
   );
