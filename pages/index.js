@@ -49,6 +49,7 @@ export default function Home() {
         {/* <List component="nav">{mainListItems}</List> */}
         {/* <TableOverview data={data} /> */}
         {/* <TableDataGrid data={data} /> */}
+        <h1>Parcelio - send your parcel through community</h1>
         <DataGridComponent data={data} />
       </main>
     </>
