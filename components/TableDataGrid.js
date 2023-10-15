@@ -1,9 +1,18 @@
 import React from "react";
+import styled from "styled-components";
+import Link from "next/link.js";
+import { StyledLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 
+const FixedLink = styled(StyledLink)`
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+`;
+
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
+  //   { field: "id", headerName: "ID", width: 70 },
   { field: "firstName", headerName: "First Name", width: 150 },
   { field: "lastName", headerName: "Last Name", width: 150 },
   { field: "userName", headerName: "Username", width: 150 },
@@ -48,6 +57,9 @@ export default function DataGridComponent({ data }) {
         disableSelectionOnClick
         getRowId={getRowId}
       />
+      <Link href="/createService" passHref legacyBehavior>
+        <FixedLink> Add service</FixedLink>
+      </Link>
     </div>
   );
 }
