@@ -10,6 +10,17 @@ export default async function handler(request, response) {
     return;
   }
 
+  // if (request.method === "GET") {
+  //   const services = await Service.findById(id);
+  //   return response.status(200).json({ services });
+  // }
+
+  if (request.method === "GET") {
+    const services = await Service.findById(id);
+    console.log("services ", services);
+    return response.status(200).json(services);
+  }
+
   if (request.method === "PATCH") {
     await Service.findByIdAndUpdate(
       id,
