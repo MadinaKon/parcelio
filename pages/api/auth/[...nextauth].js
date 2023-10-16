@@ -28,10 +28,16 @@ export const authOptions = {
     // }),
   ],
   adapter: MongoDBAdapter(clientPromise),
+  //   callbacks: {
+  //     async session({ session, user }) {
+  //       session.user.userId = user.id;
+  //       return session;
+  //     },
+  //   },
   callbacks: {
-    async session({ session, user }) {
-      session.user.userId = user.id;
-      return session;
+    async session(data) {
+      console.log("callbacks DATA ", data);
+      return data;
     },
   },
 };
