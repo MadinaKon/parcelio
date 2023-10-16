@@ -17,7 +17,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     const services = await Service.findById(id);
-    console.log("services ", services);
+
     return response.status(200).json(services);
   }
 
