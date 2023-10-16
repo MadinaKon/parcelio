@@ -1,0 +1,21 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav a:hover {
+  background-color: var(--accent);
+  color: var(--primary-dark);
+}
