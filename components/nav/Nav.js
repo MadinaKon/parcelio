@@ -10,10 +10,8 @@ export default function Nav() {
       <Link href="/">Home</Link>
 
       <>
-        {/* <Link href="/user/">Your Posts</Link>
-        <Link href="/user/edit">Edit Profile</Link>
-        <Link href="/createService">New Post</Link> */}
         {/* <Link href="/user/">Your services</Link> */}
+        {/* <Link href="/updateService">Update service</Link> */}
         <Link href="/update-service">Update service</Link>
         <Link href="/createService">New service</Link>
       </>
