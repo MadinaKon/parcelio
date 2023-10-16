@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { nav } from "./Nav.module.css";
 // import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Nav() {
   // const { data: session } = useSession();
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
     <nav className={nav}>
@@ -11,8 +14,9 @@ export default function Nav() {
 
       <>
         {/* <Link href="/user/">Your services</Link> */}
-        {/* <Link href="/updateService">Update service</Link> */}
-        <Link href="/update-service">Update service</Link>
+        {/* TODO here we need authentication, after that http://localhost:3001/services/undefined/updateService will be replaced userId services */}
+        {/* <Link href={`/services/${id}/updateService`}>Update service</Link> */}
+        {/* <Link href="/update-service">Update service</Link> */}
         <Link href="/createService">New service</Link>
       </>
     </nav>
