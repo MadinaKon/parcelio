@@ -1,5 +1,4 @@
 import Image from "next/image";
-// import AuthButton from "@/components/auth-button/AuthButton";
 
 import AuthButton from "../../auth-button/AuthButton";
 
