@@ -2,6 +2,7 @@
 import { SWRConfig } from "swr";
 // import Main_Layout from "@/components/layouts/Main_Layout";
 import Main_Layout from "../components/layouts/Main_Layout";
+import { SessionProvider } from "next-auth/react";
 
 // const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -14,7 +15,10 @@ import Main_Layout from "../components/layouts/Main_Layout";
 //     </>
 //   );
 // }
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
     <SWRConfig
       value={{
@@ -27,9 +31,11 @@ export default function App({ Component, pageProps }) {
         },
       }}
     >
-      <Main_Layout>
-        <Component {...pageProps} />
-      </Main_Layout>
+      <SessionProvider session={session}>
+        <Main_Layout>
+          <Component {...pageProps} />
+        </Main_Layout>
+      </SessionProvider>
     </SWRConfig>
   );
 }
