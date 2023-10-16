@@ -1,4 +1,5 @@
-import AuthButton from "@/components/auth-button/AuthButton";
+// import AuthButton from "@/components/auth-button/AuthButton";
+import AuthButton from "../../auth-button/AuthButton";
 
 export default function SignIn() {
   return (

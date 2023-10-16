@@ -9,6 +9,7 @@ import TableOverview from "../components/TableOverview";
 import { mainListItems } from "../components/listItems";
 import TableDataGrid from "../components/TableDataGrid";
 import DataGridComponent from "../components/TableDataGrid";
+import Profile from "../components/profile";
 
 const List = styled.ul`
   list-style: none;
@@ -41,7 +42,7 @@ export default function Home() {
 
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <Profile />
       <main>
         {/* <CreateServicePage /> */}
         {/* <UpdateServicePage /> */}
