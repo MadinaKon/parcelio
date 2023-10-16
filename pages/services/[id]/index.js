@@ -69,9 +69,16 @@ export default function DetailsPage() {
         {/* <Link href={`/services/${id}/update`} passHref legacyBehavior>
           <StyledLink>Edit</StyledLink>
         </Link> */}
-
-        <Link href={`/services/${id}/updateService`} passHref legacyBehavior>
+        {/* <Link href={`/services/${id}/updateService`} passHref legacyBehavior>
           <StyledLink>Edit</StyledLink>
+        </Link> */}
+
+        {/* <Link href={`/services/${id}/updateService`} passHref legacyBehavior>
+          <StyledLink>Edit</StyledLink>
+        </Link> */}
+
+        <Link href={`/services/${id}/update-service`} passHref legacyBehavior>
+          <StyledLink>Update</StyledLink>
         </Link>
         <StyledButton onClick={deleteService} type="button" variant="delete">
           Delete
