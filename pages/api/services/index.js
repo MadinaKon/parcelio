@@ -1,4 +1,3 @@
-
 import Service from "../../../db/models/Service";
 import dbConnect from "../../../db/models/connect";
 
@@ -14,7 +13,6 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const serviceData = request.body;
-      console.log("serviceData ", serviceData);
       await Service.create(serviceData);
 
       response.status(201).json({ status: "service created" });
