@@ -27,7 +27,7 @@ const columns = [
     width: 150,
     renderCell: (params) => {
       function handleContactButtonClick() {
-        console.log("Contact button clicked for row:", params.row);
+        // console.log("Contact button clicked for row:", params.row);
       }
 
       return (
