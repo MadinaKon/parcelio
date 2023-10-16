@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import AuthButton from "../../auth-button/AuthButton";
 
 export default function ProfileInfo({ session }) {
