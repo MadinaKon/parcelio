@@ -1,5 +1,7 @@
 // import "@/styles/globals.css";
 import { SWRConfig } from "swr";
+// import Main_Layout from "@/components/layouts/Main_Layout";
+import Main_Layout from "../components/layouts/Main_Layout";
 
 // const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -25,7 +27,9 @@ export default function App({ Component, pageProps }) {
         },
       }}
     >
-      <Component {...pageProps} />
+      <Main_Layout>
+        <Component {...pageProps} />
+      </Main_Layout>
     </SWRConfig>
   );
 }
