@@ -11,6 +11,10 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
     onSubmit(data);
   }
 
+  //   address: { type: String, required: true },
+  //   postalCode: { type: String, required: true },
+  //   enum: directionEnum,
+
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
       <label htmlFor="firstName">First name</label>
@@ -37,37 +41,56 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.userName}
       />
       <br />
-      <label htmlFor="password">password</label>
+      <label htmlFor="country">country</label>
       <input
-        id="password"
-        name="password"
-        type="password"
-        defaultValue={defaultData?.password}
+        id="country"
+        name="country"
+        type="text"
+        defaultValue={defaultData?.country}
       />
       <br />
-      <label htmlFor="fromCity">From city</label>
+      <label htmlFor="city">city</label>
       <input
-        id="fromCity"
-        name="fromCity"
+        id="city"
+        name="city"
         type="text"
-        defaultValue={defaultData?.fromCity}
-      />
-      <br />
-      <label htmlFor="toCity">To city</label>
-      <input
-        id="toCity"
-        name="toCity"
-        type="text"
-        defaultValue={defaultData?.toCity}
+        defaultValue={defaultData?.city}
       />
       <br />
 
+      <label htmlFor="address">address</label>
+      <input
+        id="address"
+        name="address"
+        type="text"
+        defaultValue={defaultData?.address}
+      />
+      <br />
+
+      <label htmlFor="postalCode">postalCode</label>
+      <input
+        id="postalCode"
+        name="postalCode"
+        type="text"
+        defaultValue={defaultData?.postalCode}
+      />
+      <br />
       <label htmlFor="phoneNumber">Phone number</label>
       <input
         id="phoneNumber"
         name="phoneNumber"
         type="text"
         defaultValue={defaultData?.phoneNumber}
+      />
+      <br />
+
+      <label htmlFor="weight">Weight</label>
+
+      <input
+        name="weight"
+        id="weight"
+        type="text"
+        defaultValue={defaultData?.weight}
       />
       <br />
       <label htmlFor="description">Description</label>
@@ -79,6 +102,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.description}
       ></textarea>
       <br />
+
       <button type="submit">
         {defaultData ? "Update service" : "Add service"}
       </button>
