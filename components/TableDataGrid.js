@@ -4,6 +4,7 @@ import Link from "next/link.js";
 import { StyledLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
+import SenderForm from "./form/SenderForm.js";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -46,6 +47,22 @@ const columns = [
 export default function DataGridComponent({ data }) {
   const getRowId = (data) => data._id;
 
+  async function addSenderService(service) {
+    const response = await fetch("/api/sender/form", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(service),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
+  }
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -60,6 +77,8 @@ export default function DataGridComponent({ data }) {
       <Link href="/createService" passHref legacyBehavior>
         <FixedLink> Add service</FixedLink>
       </Link>
+
+      <SenderForm onSubmit={addSenderService} formName={"add-sender-service"} />
     </div>
   );
 }
