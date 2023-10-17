@@ -8,6 +8,8 @@ export default function Nav() {
   const router = useRouter();
   const { id } = router.query;
 
+  console.log("ID from ROUTER QUERY ", id);
+
   return (
     <nav className={nav}>
       <Link href="/">Home</Link>
@@ -15,8 +17,8 @@ export default function Nav() {
         <>
           {/* <Link href="/user/">Your services</Link> */}
           {/* TODO here we need authentication, after that http://localhost:3001/services/undefined/updateService will be replaced userId services */}
-          {/* <Link href={`/services/${id}/updateService`}>Update service</Link> */}
-          <Link href="/update-service">Update service</Link>
+          <Link href={`/services/${id}/updateService`}>Update service</Link>
+
           <Link href="/createService">New service</Link>
         </>
       )}
