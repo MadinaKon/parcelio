@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Form from "../components/Form";
 import useSWR from "swr";
 import styled from "styled-components";
 import { StyledLink } from "../components/StyledLink.js";
