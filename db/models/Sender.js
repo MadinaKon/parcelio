@@ -16,7 +16,7 @@ const senderSchema = new Schema({
   description: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   enum: directionEnum,
-  default: "international",
+  //default: "international",
   weight: { type: String, required: true },
   services: { type: [Schema.Types.ObjectId], ref: "Service" },
 });

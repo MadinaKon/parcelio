@@ -5,6 +5,8 @@ import { StyledLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import SenderForm from "./form/SenderForm.js";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -45,10 +47,13 @@ const columns = [
 ];
 
 export default function DataGridComponent({ data }) {
+  const router = useRouter();
+  const { mutate } = useSWR("/api/senders");
+
   const getRowId = (data) => data._id;
 
   async function addSenderService(service) {
-    const response = await fetch("/api/sender/form", {
+    const response = await fetch("/api/senders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
