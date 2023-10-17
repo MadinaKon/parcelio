@@ -14,51 +14,65 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
-const columns = [
-  //   { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First Name", width: 150 },
-  { field: "lastName", headerName: "Last Name", width: 150 },
-  { field: "userName", headerName: "Username", width: 150 },
-  { field: "phoneNumber", headerName: "Phone Number", width: 150 },
-  { field: "fromCity", headerName: "From City", width: 150 },
-  { field: "toCity", headerName: "To City", width: 150 },
-  { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
-  { field: "availableKilos", headerName: "Available Kilos", width: 150 },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 150,
-    renderCell: (params) => {
-      function handleContactButtonClick() {
-        console.log("Contact button clicked for row:", params.row);
-      }
-
-      return (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleContactButtonClick}
-        >
-          Contact
-        </Button>
-      );
-    },
-  },
-];
-
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { mutate } = useSWR("/api/senders");
 
+  const handleContactButtonClickWrapper = (addSenderRequest, row) => {
+    return () => {
+      console.log("handleContactButtonClickWrapper row:", row);
+
+      addSenderRequest(row);
+    };
+  };
+
+  const columns = [
+    //   { field: "id", headerName: "ID", width: 70 },
+    { field: "firstName", headerName: "First Name", width: 150 },
+    { field: "lastName", headerName: "Last Name", width: 150 },
+    { field: "userName", headerName: "Username", width: 150 },
+    { field: "phoneNumber", headerName: "Phone Number", width: 150 },
+    { field: "fromCity", headerName: "From City", width: 150 },
+    { field: "toCity", headerName: "To City", width: 150 },
+    { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
+    { field: "availableKilos", headerName: "Available Kilos", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => {
+        // function handleContactButtonClick() {
+        //   console.log("Params:", params);
+        //   console.log("Contact button clicked for row:", params.row);
+        //     addSenderRequest(params.row);
+        // }
+
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            // onClick={handleContactButtonClick}
+            onClick={handleContactButtonClickWrapper(
+              addSenderRequest,
+              params.row
+            )}
+          >
+            Contact
+          </Button>
+        );
+      },
+    },
+  ];
+
   const getRowId = (data) => data._id;
 
-  async function addSenderService(service) {
+  async function addSenderRequest(request) {
     const response = await fetch("/api/senders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(service),
+      body: JSON.stringify(request),
     });
 
     if (response.ok) {
@@ -83,7 +97,7 @@ export default function DataGridComponent({ data }) {
         <FixedLink> Add service</FixedLink>
       </Link>
 
-      <SenderForm onSubmit={addSenderService} formName={"add-sender-service"} />
+      {/* <SenderForm onSubmit={addSenderRequest} formName={"add-sender-service"} /> */}
     </div>
   );
 }
