@@ -102,6 +102,16 @@ export default function SignUp() {
                   autoComplete="email"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="phoneNumber"
+                  label="Phone number"
+                  name="phoneNumber"
+                  autoComplete="phoneNumber"
+                />
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
@@ -132,6 +142,17 @@ export default function SignUp() {
                   fullWidth
                   id="address"
                   label="Address"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="postalCode"
+                  required
+                  fullWidth
+                  id="postalCode"
+                  label="Postal code"
                   autoFocus
                 />
               </Grid>
