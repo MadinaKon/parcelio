@@ -43,9 +43,6 @@ export default function Home() {
       </Head>
       <Profile />
       <main>
-        {/* <CreateServicePage /> */}
-        {/* <UpdateServicePage /> */}
-
         {/* <List component="nav">{mainListItems}</List> */}
         {/* <TableOverview data={data} /> */}
         {/* <TableDataGrid data={data} /> */}
