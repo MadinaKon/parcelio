@@ -9,7 +9,6 @@
 
   color: var(--secondary);
 
-  border-style: solid;
   border-image: linear-gradient(
       to right,
       var(--primary-dark) -10%,
