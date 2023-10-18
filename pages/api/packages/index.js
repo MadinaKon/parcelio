@@ -41,7 +41,7 @@ export default async function handler(request, response) {
       const data = request.body;
       await Package.create(data);
 
-      response.status(201).json({ status: "sender request created" });
+      response.status(201).json({ status: "package request created" });
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });
