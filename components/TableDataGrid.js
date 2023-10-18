@@ -95,12 +95,17 @@ export default function DataGridComponent({ data }) {
         getRowId={getRowId}
       />
 
-      <BasicModal />
       <Link href="/createService" passHref legacyBehavior>
         <FixedLink> Add service</FixedLink>
       </Link>
 
       {/* <SenderForm onSubmit={addSenderRequest} formName={"add-sender-service"} /> */}
+      <BasicModal>
+        <SenderForm
+          onSubmit={addSenderRequest}
+          formName={"add-sender-service"}
+        />
+      </BasicModal>
     </div>
   );
 }
