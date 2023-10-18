@@ -19,7 +19,7 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const router = useRouter();
-  const { mutate } = useSWR("/api/senders");
+  const { mutate } = useSWR("/api/packages");
   const handleSubmit = (event) => {
     event.preventDefault();
     // const data = new FormData(event.currentTarget);
@@ -31,7 +31,7 @@ export default function SignUp() {
   };
 
   async function addSenderRequest(request) {
-    const response = await fetch("/api/senders", {
+    const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
