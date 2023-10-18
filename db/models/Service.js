@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import "./Sender";
+import "./Package";
 
 const { Schema } = mongoose;
 

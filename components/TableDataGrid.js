@@ -17,7 +17,7 @@ const FixedLink = styled(StyledLink)`
 
 export default function DataGridComponent({ data }) {
   const router = useRouter();
-  const { mutate } = useSWR("/api/senders");
+  const { mutate } = useSWR("/api/packages");
 
   const handleContactButtonClickWrapper = (addSenderRequest, row) => {
     return () => {
@@ -66,7 +66,7 @@ export default function DataGridComponent({ data }) {
   const getRowId = (data) => data._id;
 
   async function addSenderRequest(request) {
-    const response = await fetch("/api/senders", {
+    const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
