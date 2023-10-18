@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import AuthButton from "../auth-button/AuthButton";
 
 const defaultTheme = createTheme();
 
@@ -193,6 +194,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
+        <AuthButton />
       </Container>
     </ThemeProvider>
   );
