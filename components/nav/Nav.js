@@ -16,6 +16,7 @@ export default function Nav() {
     <nav className={nav}>
       <Link href="/">Home</Link>
       <Link href="/signup">Sign up</Link>
+      <Link href="/signin">Sign in</Link>
       {session && (
         <>
           {/* <Link href="/user/">Your services</Link> */}
