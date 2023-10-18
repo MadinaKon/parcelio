@@ -12,7 +12,7 @@ const serviceSchema = new Schema({
   flightDateTime: { type: String, required: true },
   availableKilos: { type: String, required: true },
   phoneNumber: { type: String, required: true },
-  senders: { type: [Schema.Types.ObjectId], ref: "Sender" },
+  senders: { type: [Schema.Types.ObjectId], ref: "Package" },
 });
 
 const Service =
