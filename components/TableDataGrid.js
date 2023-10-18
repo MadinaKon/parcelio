@@ -43,8 +43,6 @@ export default function DataGridComponent({ data }) {
       width: 150,
       renderCell: (params) => {
         // function handleContactButtonClick() {
-        //   console.log("Params:", params);
-        //   console.log("Contact button clicked for row:", params.row);
         //     addSenderRequest(params.row);
         // }
 
@@ -99,7 +97,6 @@ export default function DataGridComponent({ data }) {
         <FixedLink> Add service</FixedLink>
       </Link>
 
-      {/* <SenderForm onSubmit={addSenderRequest} formName={"add-sender-service"} /> */}
       <BasicModal>
         <SenderForm
           onSubmit={addSenderRequest}

@@ -5,9 +5,6 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
-    console.log("DATA ", data);
-
     onSubmit(data);
   }
 
