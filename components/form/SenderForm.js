@@ -1,13 +1,19 @@
 import React from "react";
 
-export default function Form({ onSubmit, formName, defaultData }) {
+export default function SenderForm({ onSubmit, formName, defaultData }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
+    console.log("DATA ", data);
+
     onSubmit(data);
   }
+
+  //   address: { type: String, required: true },
+  //   postalCode: { type: String, required: true },
+  //   enum: directionEnum,
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
@@ -35,44 +41,38 @@ export default function Form({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.userName}
       />
       <br />
-      <label htmlFor="password">password</label>
+      <label htmlFor="country">country</label>
       <input
-        id="password"
-        name="password"
-        type="password"
-        defaultValue={defaultData?.password}
-      />
-      <br />
-      <label htmlFor="fromCity">From city</label>
-      <input
-        id="fromCity"
-        name="fromCity"
+        id="country"
+        name="country"
         type="text"
-        defaultValue={defaultData?.fromCity}
+        defaultValue={defaultData?.country}
       />
       <br />
-      <label htmlFor="toCity">To city</label>
+      <label htmlFor="city">city</label>
       <input
-        id="toCity"
-        name="toCity"
+        id="city"
+        name="city"
         type="text"
-        defaultValue={defaultData?.toCity}
+        defaultValue={defaultData?.city}
       />
       <br />
-      <label htmlFor="flightDateTime">Flight date time</label>
+
+      <label htmlFor="address">address</label>
       <input
-        id="flightDateTime"
-        name="flightDateTime"
-        type="date"
-        defaultValue={defaultData?.flightDateTime}
-      />
-      <br />
-      <label htmlFor="availableKilos">availableKilos</label>
-      <input
-        id="availableKilos"
-        name="availableKilos"
+        id="address"
+        name="address"
         type="text"
-        defaultValue={defaultData?.availableKilos}
+        defaultValue={defaultData?.address}
+      />
+      <br />
+
+      <label htmlFor="postalCode">postalCode</label>
+      <input
+        id="postalCode"
+        name="postalCode"
+        type="text"
+        defaultValue={defaultData?.postalCode}
       />
       <br />
       <label htmlFor="phoneNumber">Phone number</label>
@@ -81,6 +81,16 @@ export default function Form({ onSubmit, formName, defaultData }) {
         name="phoneNumber"
         type="text"
         defaultValue={defaultData?.phoneNumber}
+      />
+      <br />
+
+      <label htmlFor="weight">Weight</label>
+
+      <input
+        name="weight"
+        id="weight"
+        type="text"
+        defaultValue={defaultData?.weight}
       />
       <br />
       <label htmlFor="description">Description</label>
@@ -92,6 +102,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.description}
       ></textarea>
       <br />
+
       <button type="submit">
         {defaultData ? "Update service" : "Add service"}
       </button>

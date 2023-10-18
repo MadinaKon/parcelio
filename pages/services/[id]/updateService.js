@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useSWR from "swr";
-import Form from "../../../components/Form.js";
 import { StyledLink } from "../../../components/StyledLink.js";
+import TransporterForm from "../../../components/form/TransporterForm.js";
 
 export default function UpdateServicePage() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function UpdateServicePage() {
       <Link href={`/services/${id}`} passHref legacyBehavior>
         <StyledLink justifySelf="start">back</StyledLink>
       </Link>
-      <Form
+      <TransporterForm
         onSubmit={updateService}
         formName={"update-service"}
         defaultData={service}
