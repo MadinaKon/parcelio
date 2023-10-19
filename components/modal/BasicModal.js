@@ -23,17 +23,7 @@ export default function BasicModal({ children }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { data: session, status } = useSession();
-  // if (status === "loading") {
-  //   return <div>Loading...</div>;
-  // }
-  // if (session) {
-  //   // User is authenticated
-  //   return <div>User is authenticated</div>;
-  // } else {
-  //   // User is not authenticated
-  //   return <div>User is not authenticated</div>;
-  // }
+  const { data: session } = useSession();
 
   return (
     <div>
