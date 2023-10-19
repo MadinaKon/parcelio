@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import "./Package";
+import "./User";
 
 const { Schema } = mongoose;
 
@@ -12,6 +13,7 @@ const serviceSchema = new Schema({
   flightDateTime: { type: String, required: true },
   availableKilos: { type: String, required: true },
   phoneNumber: { type: String, required: true },
+  userId: { type: [Schema.Types.ObjectId], ref: "User" },
   senders: { type: [Schema.Types.ObjectId], ref: "Package" },
 });
 
