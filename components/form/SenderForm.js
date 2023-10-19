@@ -58,67 +58,6 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.height}
       />
       <br />
-
-      {/* <label htmlFor="lastName">last name</label>
-      <input
-        id="lastName"
-        name="lastName"
-        type="text"
-        defaultValue={defaultData?.lastName}
-      />
-      <br /> */}
-      {/* <label htmlFor="userName">userName</label>
-      <input
-        id="userName"
-        name="userName"
-        type="text"
-        defaultValue={defaultData?.userName}
-      />
-      <br /> 
-            <label htmlFor="country">country</label>
-      <input
-        id="country"
-        name="country"
-        type="text"
-        defaultValue={defaultData?.country}
-      />
-      <br />
-            <label htmlFor="city">city</label>
-      <input
-        id="city"
-        name="city"
-        type="text"
-        defaultValue={defaultData?.city}
-      />
-      <br />
-
-            <label htmlFor="address">address</label>
-      <input
-        id="address"
-        name="address"
-        type="text"
-        defaultValue={defaultData?.address}
-      />
-      <br />
-
-      <label htmlFor="postalCode">postalCode</label>
-      <input
-        id="postalCode"
-        name="postalCode"
-        type="text"
-        defaultValue={defaultData?.postalCode}
-      />
-      <br />
-      <label htmlFor="phoneNumber">Phone number</label>
-      <input
-        id="phoneNumber"
-        name="phoneNumber"
-        type="text"
-        defaultValue={defaultData?.phoneNumber}
-      />
-      <br />
-      */}
-
       <label htmlFor="weight">Weight</label>
       <input
         name="weight"
