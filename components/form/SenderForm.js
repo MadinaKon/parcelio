@@ -8,7 +8,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    data.userId = session.user.userId;
+    data.userId = session?.user?.userId;
 
     onSubmit(data);
   }
