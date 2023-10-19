@@ -39,7 +39,6 @@ export default function BasicModal({ children }) {
     <div>
       {session ? (
         <>
-          <Button onClick={handleOpen}>Contact</Button>
           <Button onClick={handleOpen}>Update</Button>
         </>
       ) : (
