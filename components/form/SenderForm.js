@@ -17,31 +17,66 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
-      <label htmlFor="firstName">First name</label>
+      <label htmlFor="packageType">Package type</label>
       <input
-        id="firstName"
-        name="firstName"
+        id="packageType"
+        name="packageType"
         type="text"
-        defaultValue={defaultData?.firstName}
+        defaultValue={defaultData?.packageType}
       />
       <br />
-      <label htmlFor="lastName">last name</label>
+      <label htmlFor="totalWeight">Total weight</label>
+      <input
+        id="totalWeight"
+        name="totalWeight"
+        type="text"
+        defaultValue={defaultData?.totalWeight}
+      />
+      <br />
+
+      <label htmlFor="height">Height</label>
+      <input
+        id="height"
+        name="height"
+        type="text"
+        defaultValue={defaultData?.height}
+      />
+      <br />
+
+      <label htmlFor="width">Width</label>
+      <input
+        id="width"
+        name="width"
+        type="text"
+        defaultValue={defaultData?.height}
+      />
+      <br />
+      <label htmlFor="length">Length</label>
+      <input
+        id="length"
+        name="length"
+        type="text"
+        defaultValue={defaultData?.height}
+      />
+      <br />
+
+      {/* <label htmlFor="lastName">last name</label>
       <input
         id="lastName"
         name="lastName"
         type="text"
         defaultValue={defaultData?.lastName}
       />
-      <br />
-      <label htmlFor="userName">userName</label>
+      <br /> */}
+      {/* <label htmlFor="userName">userName</label>
       <input
         id="userName"
         name="userName"
         type="text"
         defaultValue={defaultData?.userName}
       />
-      <br />
-      <label htmlFor="country">country</label>
+      <br /> 
+            <label htmlFor="country">country</label>
       <input
         id="country"
         name="country"
@@ -49,7 +84,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.country}
       />
       <br />
-      <label htmlFor="city">city</label>
+            <label htmlFor="city">city</label>
       <input
         id="city"
         name="city"
@@ -58,7 +93,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
       />
       <br />
 
-      <label htmlFor="address">address</label>
+            <label htmlFor="address">address</label>
       <input
         id="address"
         name="address"
@@ -83,9 +118,9 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.phoneNumber}
       />
       <br />
+      */}
 
       <label htmlFor="weight">Weight</label>
-
       <input
         name="weight"
         id="weight"
