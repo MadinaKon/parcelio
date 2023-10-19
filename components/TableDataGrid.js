@@ -23,8 +23,17 @@ export default function DataGridComponent({ data }) {
   const { data: session } = useSession();
   const { userId } = data;
 
-  console.log("DATA DataGridComponent ", data);
+  // const {
+  //   firstName,
+  //   lastName,
+  //   userName,
+  //   phoneNumber,
+  //   fromCity,
+  //   toCity,
+  //   availableKilos,
+  // } = data;
 
+  console.log("DATA DataGridComponent ", data);
   console.log("DataGridComponent DATA userId ", userId);
 
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
@@ -79,12 +88,17 @@ export default function DataGridComponent({ data }) {
             </Button> */}
             <BasicModal>
               {session ? (
-                <TransporterForm />
+                <TransporterForm defaultData={data} />
               ) : (
                 <SenderForm
                   onSubmit={openSenderRequest}
                   formName={"add-sender-service"}
-                  defaultData={data}
+                  defaultData={params}
+                  onClick={handleContactButtonClickWrapper(
+                    openSenderRequest,
+                    params.row
+                  )}
+
                   //  defaultData={defaultData}
                   //   defaultValue={defaultData?.packageType}
                 />

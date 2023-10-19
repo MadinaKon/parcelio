@@ -19,9 +19,9 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
-      {/* <h3>Send a package details</h3> */}
+      <h3>Send a package details</h3>
 
-      {defaultData ? "Update service details" : "Send a package details"}
+      {/* {defaultData ? "Update service details" : "Send a package details"} */}
       <br />
       <label htmlFor="packageType">Package type</label>
       <input
