@@ -23,7 +23,6 @@ export default function SignUp() {
   const { mutate } = useSWR("/api/users");
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 

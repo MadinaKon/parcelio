@@ -1,19 +1,17 @@
+import { useSession } from "next-auth/react";
 import React from "react";
 
 export default function SenderForm({ onSubmit, formName, defaultData }) {
+  const { data: session } = useSession();
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
-    console.log("DATA ", data);
+    data.userId = session.user.userId;
 
     onSubmit(data);
   }
-
-  //   address: { type: String, required: true },
-  //   postalCode: { type: String, required: true },
-  //   enum: directionEnum,
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>

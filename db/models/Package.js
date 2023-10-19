@@ -15,8 +15,8 @@ const packageSchema = new Schema({
   packageType: { type: String, required: true },
   description: { type: String, required: true },
   // recipientAddress: { type: String, required: true },
-  users: { type: [Schema.Types.ObjectId], ref: "User" },
-  services: { type: [Schema.Types.ObjectId], ref: "Service" },
+  userId: { type: [Schema.Types.ObjectId], ref: "User" },
+  serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },
 });
 
 const Package =

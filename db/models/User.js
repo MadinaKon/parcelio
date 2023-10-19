@@ -14,7 +14,7 @@ const userSchema = new Schema({
   country: { type: String, required: true },
   city: { type: String, required: true },
   phoneNumber: { type: String, required: true },
-  services: { type: [Schema.Types.ObjectId], ref: "Service" },
+  serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

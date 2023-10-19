@@ -14,6 +14,7 @@ export default async function handler(request, response) {
     try {
       const data = request.body;
       await Package.create(data);
+      console.log("PACKAFE DATA ", data);
 
       response.status(201).json({ status: "package request created" });
     } catch (error) {
