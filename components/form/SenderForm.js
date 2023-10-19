@@ -10,14 +10,8 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
     const data = Object.fromEntries(formData);
     data.userId = session.user.userId;
 
-    console.log("DATA ", data);
-
     onSubmit(data);
   }
-
-  //   address: { type: String, required: true },
-  //   postalCode: { type: String, required: true },
-  //   enum: directionEnum,
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>

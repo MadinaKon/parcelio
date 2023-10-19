@@ -1,10 +1,17 @@
 import React from "react";
+import { useSession } from "next-auth/react";
 
 export default function TransporterForm({ onSubmit, formName, defaultData }) {
+  const { data: session } = useSession();
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    data.userId = session.user.userId;
+
+    console.log("TransporterForm DATA ", data);
+
     onSubmit(data);
   }
 
@@ -34,14 +41,14 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         defaultValue={defaultData?.userName}
       />
       <br />
-      <label htmlFor="password">password</label>
+      {/* <label htmlFor="password">password</label>
       <input
         id="password"
         name="password"
         type="password"
         defaultValue={defaultData?.password}
       />
-      <br />
+      <br /> */}
       <label htmlFor="fromCity">From city</label>
       <input
         id="fromCity"
