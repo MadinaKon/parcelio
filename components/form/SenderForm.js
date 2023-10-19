@@ -6,6 +6,8 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
 
   console.log("defaultData ", defaultData);
 
+  console.log("SESSION ", session);
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);

@@ -8,6 +8,8 @@ import SenderForm from "./form/SenderForm.js";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import BasicModal from "./modal/BasicModal.js";
+import { useSession } from "next-auth/react";
+import TransporterForm from "./form/TransporterForm.js";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -18,7 +20,7 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { mutate } = useSWR("/api/packages");
-
+  const { data: session } = useSession();
   const { userId } = data;
 
   console.log("DATA DataGridComponent ", data);
@@ -65,7 +67,7 @@ export default function DataGridComponent({ data }) {
       renderCell: (params) => {
         return (
           <>
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               onClick={handleContactButtonClickWrapper(
@@ -74,15 +76,19 @@ export default function DataGridComponent({ data }) {
               )}
             >
               Contact
-            </Button>
+            </Button> */}
             <BasicModal>
-              <SenderForm
-                onSubmit={openSenderRequest}
-                formName={"add-sender-service"}
-                defaultData={data}
-                //  defaultData={defaultData}
-                //   defaultValue={defaultData?.packageType}
-              />
+              {session ? (
+                <TransporterForm />
+              ) : (
+                <SenderForm
+                  onSubmit={openSenderRequest}
+                  formName={"add-sender-service"}
+                  defaultData={data}
+                  //  defaultData={defaultData}
+                  //   defaultValue={defaultData?.packageType}
+                />
+              )}
             </BasicModal>
           </>
         );
