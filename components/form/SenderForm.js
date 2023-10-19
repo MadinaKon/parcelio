@@ -15,6 +15,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
+      <h3>Send a package details</h3>
       <label htmlFor="packageType">Package type</label>
       <input
         id="packageType"

@@ -21,8 +21,7 @@ export default function DataGridComponent({ data }) {
 
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
-      console.log("handleContactButtonClickWrapper row:", row);
-
+      console.log("handleContactButtonClickWrapper row:", row._id);
       openSenderRequest(row);
     };
   };
@@ -65,7 +64,7 @@ export default function DataGridComponent({ data }) {
               color="primary"
               onClick={handleContactButtonClickWrapper(
                 openSenderRequest,
-                params.row
+                params.row._id
               )}
             >
               Contact
@@ -75,7 +74,6 @@ export default function DataGridComponent({ data }) {
                 onSubmit={openSenderRequest}
                 formName={"add-sender-service"}
               />
-              Contact
             </BasicModal>
           </>
         );
@@ -100,13 +98,6 @@ export default function DataGridComponent({ data }) {
       <Link href="/createService" passHref legacyBehavior>
         <FixedLink> Add service</FixedLink>
       </Link>
-
-      {/* <BasicModal>
-        <SenderForm
-          onSubmit={openSenderRequest}
-          formName={"add-sender-service"}
-        />
-      </BasicModal> */}
     </div>
   );
 }
