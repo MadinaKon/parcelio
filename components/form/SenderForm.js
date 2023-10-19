@@ -1,10 +1,14 @@
+import { useSession } from "next-auth/react";
 import React from "react";
 
 export default function SenderForm({ onSubmit, formName, defaultData }) {
+  const { data: session } = useSession();
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    data.userId = session.user.userId;
 
     console.log("DATA ", data);
 
