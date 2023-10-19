@@ -24,7 +24,7 @@ export default function BasicModal({ children }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Contact</Button>
       <Modal
         open={open}
         onClose={handleClose}
