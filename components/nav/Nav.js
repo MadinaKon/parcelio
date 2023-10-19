@@ -10,8 +10,6 @@ export default function Nav() {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("ID from ROUTER QUERY ", id);
-
   return (
     <nav className={nav}>
       <Link href="/">Home</Link>
