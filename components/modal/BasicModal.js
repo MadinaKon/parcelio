@@ -23,16 +23,16 @@ export default function BasicModal({ children }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   return (
     <div>
       <Button onClick={handleOpen}>Contact</Button>
-      {session && (
+      {/* {session && (
         <>
           <Button onClick={handleOpen}>Update</Button>
         </>
-      )}
+      )} */}
 
       {/* {session ? (
         <>
