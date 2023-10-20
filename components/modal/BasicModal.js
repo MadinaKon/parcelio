@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import SenderForm from "../form/SenderForm";
+import { useSession } from "next-auth/react";
 
 const style = {
   position: "absolute",
@@ -22,9 +23,18 @@ export default function BasicModal({ children }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { data: session } = useSession();
+
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      {session ? (
+        <>
+          <Button onClick={handleOpen}>Update</Button>
+        </>
+      ) : (
+        <Button onClick={handleOpen}>Contact</Button>
+      )}
+
       <Modal
         open={open}
         onClose={handleClose}
