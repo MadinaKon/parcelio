@@ -10,13 +10,11 @@ export default function Nav() {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("ID from ROUTER QUERY ", id);
-
   return (
     <nav className={nav}>
       <Link href="/">Home</Link>
-      {/* <Link href="/signup">Sign up</Link>
-      <Link href="/signin">Sign in</Link> */}
+      <Link href="/signup">Sign up</Link>
+      <Link href="/signin">Sign in</Link>
       {session && (
         <>
           {/* <Link href="/user/">Your services</Link> */}

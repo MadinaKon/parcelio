@@ -8,6 +8,8 @@ import SenderForm from "./form/SenderForm.js";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import BasicModal from "./modal/BasicModal.js";
+import { useSession } from "next-auth/react";
+import TransporterForm from "./form/TransporterForm.js";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -18,14 +20,32 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { mutate } = useSWR("/api/packages");
+  const { data: session } = useSession();
 
-  const handleContactButtonClickWrapper = (addSenderRequest, row) => {
+  console.log("DATA DataGridComponent ", data);
+
+  const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
-      console.log("handleContactButtonClickWrapper row:", row);
-
-      addSenderRequest(row);
+      console.log("handleContactButtonClickWrapper row:", row._id);
+      openSenderRequest(row);
     };
   };
+
+  async function openSenderRequest(request) {
+    const response = await fetch("/api/packages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
+  }
 
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
@@ -42,44 +62,41 @@ export default function DataGridComponent({ data }) {
       headerName: "Actions",
       width: 150,
       renderCell: (params) => {
-        // function handleContactButtonClick() {
-        //     addSenderRequest(params.row);
-        // }
-
         return (
-          <Button
-            variant="contained"
-            color="primary"
-            // onClick={handleContactButtonClick}
-            onClick={handleContactButtonClickWrapper(
-              addSenderRequest,
-              params.row
-            )}
-          >
-            Contact
-          </Button>
+          <>
+            {/* <Button
+              variant="contained"
+              color="primary"
+              onClick={handleContactButtonClickWrapper(
+                openSenderRequest,
+                params.row._id
+              )}
+            >
+              Contact
+            </Button> */}
+            <BasicModal>
+              {session ? (
+                // <TransporterForm defaultData={data} />
+                <TransporterForm defaultData={params} />
+              ) : (
+                <SenderForm
+                  onSubmit={openSenderRequest}
+                  formName={"add-sender-service"}
+                  defaultData={params}
+                  onClick={handleContactButtonClickWrapper(
+                    openSenderRequest,
+                    params.row
+                  )}
+                />
+              )}
+            </BasicModal>
+          </>
         );
       },
     },
   ];
 
   const getRowId = (data) => data._id;
-
-  async function addSenderRequest(request) {
-    const response = await fetch("/api/packages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(request),
-    });
-
-    if (response.ok) {
-      mutate();
-    }
-
-    router.push("/");
-  }
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -96,13 +113,6 @@ export default function DataGridComponent({ data }) {
       <Link href="/createService" passHref legacyBehavior>
         <FixedLink> Add service</FixedLink>
       </Link>
-
-      <BasicModal>
-        <SenderForm
-          onSubmit={addSenderRequest}
-          formName={"add-sender-service"}
-        />
-      </BasicModal>
     </div>
   );
 }
