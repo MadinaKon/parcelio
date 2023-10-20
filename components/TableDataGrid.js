@@ -20,7 +20,9 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   // const { mutate } = useSWR("/api/packages");
-  const { data: service, mutate } = useSWR("/api/packages");
+  // const { data: service, mutate } = useSWR("/api/packages");
+
+  const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
   // console.log("DATA DataGridComponent ", data);
@@ -63,26 +65,18 @@ export default function DataGridComponent({ data }) {
   //   router.push("/");
   // }
   async function updateService(id) {
-
-    console.log(id);
-
     const findObjectById = (array, id) => {
-      array.find(function (obj) {
-        
-
-        //if (obj._id === id) {
-          console.log('obj: ', obj);
-        //}
-      });
-
       return array.find((obj) => obj._id === id);
     };
 
     const foundObject = findObjectById(service, id);
-    //console.log('id: ', id);
-    // console.log("FOUND OBJECT ", foundObject);
+    console.log("FOUND OBJECT ", foundObject);
 
-    // console.log(JSON.stringify(service));
+    // Create an object with only the fields that need to be updated
+    const updatedFields = {
+      firstName: foundObject.firstName,
+      lastName: foundObject.lastName,
+    };
 
     const response = await fetch(`/api/services/${id}`, {
       // TODO PATCH or PUT?
@@ -90,7 +84,7 @@ export default function DataGridComponent({ data }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(foundObject),
+      body: JSON.stringify(updatedFields),
     });
 
     if (response.ok) {
