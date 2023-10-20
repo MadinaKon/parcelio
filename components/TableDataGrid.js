@@ -23,7 +23,7 @@ export default function DataGridComponent({ data }) {
   const { data: service, mutate } = useSWR("/api/packages");
   const { data: session } = useSession();
 
-  console.log("DATA DataGridComponent ", data);
+  // console.log("DATA DataGridComponent ", data);
 
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
@@ -63,13 +63,34 @@ export default function DataGridComponent({ data }) {
   //   router.push("/");
   // }
   async function updateService(id) {
+
+    console.log(id);
+
+    const findObjectById = (array, id) => {
+      array.find(function (obj) {
+        
+
+        //if (obj._id === id) {
+          console.log('obj: ', obj);
+        //}
+      });
+
+      return array.find((obj) => obj._id === id);
+    };
+
+    const foundObject = findObjectById(service, id);
+    //console.log('id: ', id);
+    // console.log("FOUND OBJECT ", foundObject);
+
+    // console.log(JSON.stringify(service));
+
     const response = await fetch(`/api/services/${id}`, {
       // TODO PATCH or PUT?
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(service),
+      body: JSON.stringify(foundObject),
     });
 
     if (response.ok) {
