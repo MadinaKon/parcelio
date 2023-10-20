@@ -29,6 +29,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         name="packageType"
         type="text"
         defaultValue={defaultData?.packageType}
+        required
       />
       <br />
       <label htmlFor="totalWeight">Total weight</label>
@@ -37,6 +38,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         name="totalWeight"
         type="text"
         defaultValue={defaultData?.totalWeight}
+        required
       />
       <br />
 
@@ -46,6 +48,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         name="height"
         type="text"
         defaultValue={defaultData?.height}
+        required
       />
       <br />
 
@@ -55,6 +58,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         name="width"
         type="text"
         defaultValue={defaultData?.height}
+        required
       />
       <br />
       <label htmlFor="length">Length</label>
@@ -63,6 +67,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         name="length"
         type="text"
         defaultValue={defaultData?.height}
+        required
       />
       <br />
       <label htmlFor="weight">Weight</label>
@@ -71,6 +76,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         id="weight"
         type="text"
         defaultValue={defaultData?.weight}
+        required
       />
       <br />
       <label htmlFor="description">Description</label>
@@ -80,6 +86,7 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
         cols="30"
         rows="10"
         defaultValue={defaultData?.description}
+        required
       ></textarea>
       <br />
 
