@@ -65,7 +65,6 @@ export default function DataGridComponent({ data }) {
   //   router.push("/");
   // }
   async function updateService() {
-    alert('hi');
     const response = await fetch(`/api/services`, {
       // TODO PATCH or PUT?
       method: "PATCH",
@@ -121,7 +120,8 @@ export default function DataGridComponent({ data }) {
                 <SenderForm
                   onSubmit={openSenderRequest}
                   formName={"add-sender-service"}
-                  defaultData={params}
+                  // defaultData={params}
+                  defaultData={params.row}
                   onClick={handleContactButtonClickWrapper(
                     openSenderRequest,
                     params.row
