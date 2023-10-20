@@ -109,8 +109,6 @@ export default function DataGridComponent({ data }) {
             </Button> */}
             <BasicModal>
               {session ? (
-                // <TransporterForm defaultData={data} />
-                // <TransporterForm defaultData={params} />
                 <TransporterForm
                   onSubmit={updateService}
                   formName={"update-service"}
@@ -120,7 +118,6 @@ export default function DataGridComponent({ data }) {
                 <SenderForm
                   onSubmit={openSenderRequest}
                   formName={"add-sender-service"}
-                  // defaultData={params}
                   defaultData={params.row}
                   onClick={handleContactButtonClickWrapper(
                     openSenderRequest,
