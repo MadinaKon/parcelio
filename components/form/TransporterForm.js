@@ -23,6 +23,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="firstName"
         type="text"
         defaultValue={defaultData?.firstName}
+        required
       />
       <br />
       <label htmlFor="lastName">last name</label>
@@ -31,6 +32,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="lastName"
         type="text"
         defaultValue={defaultData?.lastName}
+        required
       />
       <br />
       <label htmlFor="userName">userName</label>
@@ -39,6 +41,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="userName"
         type="text"
         defaultValue={defaultData?.userName}
+        required
       />
       <br />
       {/* <label htmlFor="password">password</label>
@@ -55,6 +58,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="fromCity"
         type="text"
         defaultValue={defaultData?.fromCity}
+        required
       />
       <br />
       <label htmlFor="toCity">To city</label>
@@ -63,6 +67,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="toCity"
         type="text"
         defaultValue={defaultData?.toCity}
+        required
       />
       <br />
       <label htmlFor="flightDateTime">Flight date time</label>
@@ -71,6 +76,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="flightDateTime"
         type="date"
         defaultValue={defaultData?.flightDateTime}
+        required
       />
       <br />
       <label htmlFor="availableKilos">availableKilos</label>
@@ -79,6 +85,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="availableKilos"
         type="text"
         defaultValue={defaultData?.availableKilos}
+        required
       />
       <br />
       <label htmlFor="phoneNumber">Phone number</label>
@@ -87,6 +94,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         name="phoneNumber"
         type="text"
         defaultValue={defaultData?.phoneNumber}
+        required
       />
       <br />
       <label htmlFor="description">Description</label>
@@ -96,6 +104,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         cols="30"
         rows="10"
         defaultValue={defaultData?.description}
+        required
       ></textarea>
       <br />
       <button type="submit">
