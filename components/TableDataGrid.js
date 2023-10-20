@@ -19,7 +19,8 @@ const FixedLink = styled(StyledLink)`
 
 export default function DataGridComponent({ data }) {
   const router = useRouter();
-  const { mutate } = useSWR("/api/packages");
+  // const { mutate } = useSWR("/api/packages");
+  const { data: service, mutate } = useSWR("/api/packages");
   const { data: session } = useSession();
 
   console.log("DATA DataGridComponent ", data);
@@ -47,6 +48,39 @@ export default function DataGridComponent({ data }) {
     router.push("/");
   }
 
+  // async function updateService(service) {
+  //   const response = await fetch(`/api/services/${id}`, {
+  //     // TODO PATCH or PUT?
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(service),
+  //   });
+
+  //   if (response.ok) {
+  //     mutate();
+  //   }
+
+  //   router.push("/");
+  // }
+  async function updateService() {
+    alert('hi');
+    const response = await fetch(`/api/services`, {
+      // TODO PATCH or PUT?
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(service),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
+  }
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
@@ -77,7 +111,12 @@ export default function DataGridComponent({ data }) {
             <BasicModal>
               {session ? (
                 // <TransporterForm defaultData={data} />
-                <TransporterForm defaultData={params} />
+                // <TransporterForm defaultData={params} />
+                <TransporterForm
+                  onSubmit={updateService}
+                  formName={"update-service"}
+                  defaultData={params.row}
+                />
               ) : (
                 <SenderForm
                   onSubmit={openSenderRequest}
