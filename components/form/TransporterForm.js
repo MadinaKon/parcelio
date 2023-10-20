@@ -104,7 +104,6 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         cols="30"
         rows="10"
         defaultValue={defaultData?.description}
-        required
       ></textarea>
       <br />
       <button type="submit">
