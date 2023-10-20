@@ -8,12 +8,22 @@ export default function UpdateServicePage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
+  // const {
+  //   // data: service,
+  //   data: { service } = {},
+  //   isLoading,
+  //   error,
+  //   mutate,
+  // } = useSWR(`/api/services/${id}`);
   const {
     data: service,
+    // data: { service } = {},
     isLoading,
     error,
     mutate,
-  } = useSWR(`/api/services/${id}`);
+  } = useSWR(`/api/services`);
+
+  console.log("DEFAULT DATA SERVICE ", service);
 
   async function updateService(service) {
     const response = await fetch(`/api/services/${id}`, {
