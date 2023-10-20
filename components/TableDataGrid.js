@@ -48,8 +48,8 @@ export default function DataGridComponent({ data }) {
     router.push("/");
   }
 
-  // async function updateService(service) {
-  //   const response = await fetch(`/api/services/${id}`, {
+  // async function updateService() {
+  //   const response = await fetch(`/api/services`, {
   //     // TODO PATCH or PUT?
   //     method: "PATCH",
   //     headers: {
@@ -57,15 +57,13 @@ export default function DataGridComponent({ data }) {
   //     },
   //     body: JSON.stringify(service),
   //   });
-
   //   if (response.ok) {
   //     mutate();
   //   }
-
   //   router.push("/");
   // }
-  async function updateService() {
-    const response = await fetch(`/api/services`, {
+  async function updateService(id) {
+    const response = await fetch(`/api/services/${id}`, {
       // TODO PATCH or PUT?
       method: "PATCH",
       headers: {
@@ -80,6 +78,7 @@ export default function DataGridComponent({ data }) {
 
     router.push("/");
   }
+
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
@@ -110,7 +109,8 @@ export default function DataGridComponent({ data }) {
             <BasicModal>
               {session ? (
                 <TransporterForm
-                  onSubmit={updateService}
+                  // onSubmit={updateService}
+                  onSubmit={() => updateService(params.row._id)}
                   formName={"update-service"}
                   defaultData={params.row}
                 />
