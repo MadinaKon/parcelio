@@ -19,9 +19,6 @@ const FixedLink = styled(StyledLink)`
 
 export default function DataGridComponent({ data }) {
   const router = useRouter();
-  // const { mutate } = useSWR("/api/packages");
-  // const { data: service, mutate } = useSWR("/api/packages");
-
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
@@ -50,20 +47,6 @@ export default function DataGridComponent({ data }) {
     router.push("/");
   }
 
-  // async function updateService() {
-  //   const response = await fetch(`/api/services`, {
-  //     // TODO PATCH or PUT?
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(service),
-  //   });
-  //   if (response.ok) {
-  //     mutate();
-  //   }
-  //   router.push("/");
-  // }
   async function updateService(id) {
     const findObjectById = (array, id) => {
       return array.find((obj) => obj._id === id);
@@ -73,6 +56,10 @@ export default function DataGridComponent({ data }) {
     console.log("FOUND OBJECT ", foundObject);
 
     // Create an object with only the fields that need to be updated
+    const updatedFields = {
+      firstName: foundObject.firstName,
+      lastName: foundObject.lastName,
+    };
 
     const response = await fetch(`/api/services/${id}`, {
       // TODO PATCH or PUT?
@@ -80,7 +67,7 @@ export default function DataGridComponent({ data }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(foundObject),
+      body: JSON.stringify(updatedFields),
     });
 
     if (response.ok) {
@@ -107,20 +94,9 @@ export default function DataGridComponent({ data }) {
       renderCell: (params) => {
         return (
           <>
-            {/* <Button
-              variant="contained"
-              color="primary"
-              onClick={handleContactButtonClickWrapper(
-                openSenderRequest,
-                params.row._id
-              )}
-            >
-              Contact
-            </Button> */}
             <BasicModal>
               {session ? (
                 <TransporterForm
-                  // onSubmit={updateService}
                   onSubmit={() => updateService(params.row._id)}
                   formName={"update-service"}
                   defaultData={params.row}
