@@ -16,8 +16,27 @@ export default function TransporterForm({ formName, defaultData, id }) {
     data.id = id;
 
     //console.log("TransporterForm DATA ", data);
+    if (formName === "add-service") {
+      addService(data);
+    } else {
+      updateService(data);
+    }
+  }
 
-    updateService(data);
+  async function addService(service) {
+    const response = await fetch("/api/services", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(service),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
   }
 
   async function updateService(data) {
