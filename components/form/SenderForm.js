@@ -1,12 +1,15 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 
-export default function SenderForm({ onSubmit, formName, defaultData }) {
+export default function SenderForm({ formName, defaultData }) {
   const { data: session } = useSession();
 
-  console.log("defaultData ", defaultData);
-
-  console.log("SESSION ", session);
+  const handleContactButtonClickWrapper = (openSenderRequest, row) => {
+    return () => {
+      console.log("handleContactButtonClickWrapper row:", row._id);
+      openSenderRequest(row);
+    };
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,7 +17,23 @@ export default function SenderForm({ onSubmit, formName, defaultData }) {
     const data = Object.fromEntries(formData);
     data.userId = session?.user?.userId;
 
-    onSubmit(data);
+    openSenderRequest(data);
+  }
+
+  async function openSenderRequest(request) {
+    const response = await fetch("/api/services", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
   }
 
   return (

@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import SenderForm from "../form/SenderForm";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const style = {
   position: "absolute",
@@ -18,18 +18,31 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ children }) {
+export default function BasicModal({ children, id }) {
+  const router = useRouter();
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const { data: session } = useSession();
 
+  async function deleteService(id) {
+    await fetch(`/api/services/${id}`, {
+      method: "DELETE",
+    });
+
+    router.push("/");
+  }
+
   return (
     <div>
       {session ? (
         <>
           <Button onClick={handleOpen}>Update</Button>
+          <Button onClick={() => deleteService(id)} type="button">
+            DELETE
+          </Button>
         </>
       ) : (
         <Button onClick={handleOpen}>Contact</Button>

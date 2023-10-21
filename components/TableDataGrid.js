@@ -3,10 +3,8 @@ import styled from "styled-components";
 import Link from "next/link.js";
 import { StyledLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
-import Button from "@mui/material/Button";
 import SenderForm from "./form/SenderForm.js";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
@@ -19,33 +17,7 @@ const FixedLink = styled(StyledLink)`
 
 export default function DataGridComponent({ data }) {
   const router = useRouter();
-  const { mutate } = useSWR("/api/packages");
   const { data: session } = useSession();
-
-  console.log("DATA DataGridComponent ", data);
-
-  const handleContactButtonClickWrapper = (openSenderRequest, row) => {
-    return () => {
-      console.log("handleContactButtonClickWrapper row:", row._id);
-      openSenderRequest(row);
-    };
-  };
-
-  async function openSenderRequest(request) {
-    const response = await fetch("/api/packages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(request),
-    });
-
-    if (response.ok) {
-      mutate();
-    }
-
-    router.push("/");
-  }
 
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
@@ -64,29 +36,17 @@ export default function DataGridComponent({ data }) {
       renderCell: (params) => {
         return (
           <>
-            {/* <Button
-              variant="contained"
-              color="primary"
-              onClick={handleContactButtonClickWrapper(
-                openSenderRequest,
-                params.row._id
-              )}
-            >
-              Contact
-            </Button> */}
-            <BasicModal>
+            <BasicModal id={params.row._id}>
               {session ? (
-                // <TransporterForm defaultData={data} />
-                <TransporterForm defaultData={params} />
+                <TransporterForm
+                  formName={"update-service"}
+                  defaultData={params.row}
+                  id={params.row._id}
+                />
               ) : (
                 <SenderForm
-                  onSubmit={openSenderRequest}
                   formName={"add-sender-service"}
-                  defaultData={params}
-                  onClick={handleContactButtonClickWrapper(
-                    openSenderRequest,
-                    params.row
-                  )}
+                  defaultData={params.row}
                 />
               )}
             </BasicModal>

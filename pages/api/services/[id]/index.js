@@ -10,11 +10,6 @@ export default async function handler(request, response) {
     return;
   }
 
-  // if (request.method === "GET") {
-  //   const services = await Service.findById(id);
-  //   return response.status(200).json({ services });
-  // }
-
   if (request.method === "GET") {
     const services = await Service.findById(id);
 
@@ -22,15 +17,29 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "PATCH") {
-    await Service.findByIdAndUpdate(
-      id,
-      {
-        $set: request.body,
-      },
-      { new: true }
-    );
-    response.status(200).json({ status: `Service with id ${id} updated!` });
+    try {
+      await Service.findByIdAndUpdate(
+        id,
+        { $set: request.body },
+        { new: true }
+      );
+      response.status(200).json({ status: `Service with id ${id} updated!` });
+    } catch (error) {
+      console.log(error);
+      response.status(400).json({ error: error.message });
+    }
   }
 
-  // response.status(200).json({ place: place, comments: comments });
+  if (request.method === "DELETE") {
+    try {
+      await Service.findByIdAndDelete(id);
+
+      response
+        .status(200)
+        .json({ status: `service with id ${id} successfully deleted.` });
+    } catch (error) {
+      console.log(error);
+      response.status(400).json({ error: error.message });
+    }
+  }
 }

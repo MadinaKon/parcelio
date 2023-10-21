@@ -32,11 +32,11 @@ export default function DetailsPage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
-  const {
-    data: { service } = {},
-    isLoading,
-    error,
-  } = useSWR(`/api/services/${id}`);
+  // const {
+  //   data: { service } = {},
+  //   isLoading,
+  //   error,
+  // } = useSWR(`/api/services/${id}`);
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
