@@ -3,10 +3,8 @@ import styled from "styled-components";
 import Link from "next/link.js";
 import { StyledLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
-import Button from "@mui/material/Button";
 import SenderForm from "./form/SenderForm.js";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
@@ -19,7 +17,6 @@ const FixedLink = styled(StyledLink)`
 
 export default function DataGridComponent({ data }) {
   const router = useRouter();
-  const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
   const columns = [
@@ -50,10 +47,6 @@ export default function DataGridComponent({ data }) {
                 <SenderForm
                   formName={"add-sender-service"}
                   defaultData={params.row}
-                  // onClick={handleContactButtonClickWrapper(
-                  //   openSenderRequest,
-                  //   params.row
-                  // )}
                 />
               )}
             </BasicModal>

@@ -10,11 +10,6 @@ export default async function handler(request, response) {
     return;
   }
 
-  // if (request.method === "GET") {
-  //   const services = await Service.findById(id);
-  //   return response.status(200).json({ services });
-  // }
-
   if (request.method === "GET") {
     const services = await Service.findById(id);
 
