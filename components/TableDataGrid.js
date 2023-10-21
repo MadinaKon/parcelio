@@ -9,6 +9,7 @@ import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
 import { Button } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -75,9 +76,17 @@ export default function DataGridComponent({ data }) {
         {session ? (
           <FixedLink> Add service</FixedLink>
         ) : (
-          <Button variant="contained" color="primary" disabled>
-            Add service
-          </Button>
+          <Tooltip
+            title="Add service is available only for logged-in users"
+            arrow
+          >
+            {" "}
+            <span>
+              <Button variant="contained" color="primary" disabled>
+                Add service
+              </Button>
+            </span>
+          </Tooltip>
         )}
       </Link>
     </div>
