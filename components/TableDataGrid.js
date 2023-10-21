@@ -39,7 +39,7 @@ export default function DataGridComponent({ data }) {
       renderCell: (params) => {
         return (
           <>
-            <BasicModal>
+            <BasicModal id={params.row._id}>
               {session ? (
                 <TransporterForm
                   formName={"update-service"}

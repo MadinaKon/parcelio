@@ -20,9 +20,9 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ children }) {
+export default function BasicModal({ children, id }) {
   const router = useRouter();
-  const { id } = router.query;
+  // const { id } = router.query;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -30,7 +30,7 @@ export default function BasicModal({ children }) {
 
   const { data: session } = useSession();
 
-  async function deleteService() {
+  async function deleteService(id) {
     await fetch(`/api/services/${id}`, {
       method: "DELETE",
     });
@@ -43,7 +43,7 @@ export default function BasicModal({ children }) {
       {session ? (
         <>
           <Button onClick={handleOpen}>Update</Button>
-          <Button onClick={deleteService} type="button">
+          <Button onClick={() => deleteService(id)} type="button">
             DELETE
           </Button>
         </>
