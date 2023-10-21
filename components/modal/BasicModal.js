@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import SenderForm from "../form/SenderForm";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import TransporterForm from "../form/TransporterForm";
 
 const style = {
   position: "absolute",
@@ -19,17 +21,31 @@ const style = {
 };
 
 export default function BasicModal({ children }) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const { data: session } = useSession();
 
+  async function deleteService() {
+    await fetch(`/api/services/${id}`, {
+      method: "DELETE",
+    });
+
+    router.push("/");
+  }
+
   return (
     <div>
       {session ? (
         <>
           <Button onClick={handleOpen}>Update</Button>
+          <Button onClick={deleteService} type="button">
+            DELETE
+          </Button>
         </>
       ) : (
         <Button onClick={handleOpen}>Contact</Button>

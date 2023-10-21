@@ -22,7 +22,6 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "PATCH") {
-    console.log("request.body ", request.body);
     try {
       await Service.findByIdAndUpdate(
         id,
@@ -30,6 +29,19 @@ export default async function handler(request, response) {
         { new: true }
       );
       response.status(200).json({ status: `Service with id ${id} updated!` });
+    } catch (error) {
+      console.log(error);
+      response.status(400).json({ error: error.message });
+    }
+  }
+
+  if (request.method === "DELETE") {
+    try {
+      await Service.findByIdAndDelete(id);
+
+      response
+        .status(200)
+        .json({ status: `service with id ${id} successfully deleted.` });
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });
