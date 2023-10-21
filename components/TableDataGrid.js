@@ -22,8 +22,6 @@ export default function DataGridComponent({ data }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
-  // console.log("DATA DataGridComponent ", data);
-
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
       console.log("handleContactButtonClickWrapper row:", row._id);
@@ -55,19 +53,13 @@ export default function DataGridComponent({ data }) {
     const foundObject = findObjectById(service, id);
     console.log("FOUND OBJECT ", foundObject);
 
-    // Create an object with only the fields that need to be updated
-    const updatedFields = {
-      firstName: foundObject.firstName,
-      lastName: foundObject.lastName,
-    };
-
     const response = await fetch(`/api/services/${id}`, {
       // TODO PATCH or PUT?
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedFields),
+      body: JSON.stringify(service),
     });
 
     if (response.ok) {

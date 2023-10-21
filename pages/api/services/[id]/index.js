@@ -32,7 +32,7 @@ export default async function handler(request, response) {
   //   response.status(200).json({ status: `Service with id ${id} updated!` });
   // }
 
-  if (request.method === "PATCH") {
+  if (request.method === "PUT") {
     console.log("request.body ", request.body);
     try {
       await Service.findByIdAndUpdate(
