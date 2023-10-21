@@ -21,14 +21,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
   }
 
   async function updateService(data) {
-    console.log(data);
-
-    // const foundObject = findObjectById(service, id);
-    // console.log("FOUND OBJECT ", foundObject);
-
     const response = await fetch(`/api/services/${id}`, {
-      // TODO PATCH or PUT?
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
