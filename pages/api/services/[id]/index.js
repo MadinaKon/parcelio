@@ -21,18 +21,7 @@ export default async function handler(request, response) {
     return response.status(200).json(services);
   }
 
-  // if (request.method === "PATCH") {
-  //   await Service.findByIdAndUpdate(
-  //     id,
-  //     {
-  //       $set: request.body,
-  //     },
-  //     { new: true }
-  //   );
-  //   response.status(200).json({ status: `Service with id ${id} updated!` });
-  // }
-
-  if (request.method === "PUT") {
+  if (request.method === "PATCH") {
     console.log("request.body ", request.body);
     try {
       await Service.findByIdAndUpdate(
@@ -46,6 +35,4 @@ export default async function handler(request, response) {
       response.status(400).json({ error: error.message });
     }
   }
-
-  // response.status(200).json({ place: place, comments: comments });
 }
