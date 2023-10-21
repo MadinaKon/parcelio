@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
+import { Button } from "@mui/material";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -71,7 +72,13 @@ export default function DataGridComponent({ data }) {
       />
 
       <Link href="/createService" passHref legacyBehavior>
-        <FixedLink> Add service</FixedLink>
+        {session ? (
+          <FixedLink> Add service</FixedLink>
+        ) : (
+          <Button variant="contained" color="primary" disabled>
+            Add service
+          </Button>
+        )}
       </Link>
     </div>
   );
