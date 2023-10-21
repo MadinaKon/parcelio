@@ -89,9 +89,9 @@ export default function DataGridComponent({ data }) {
             <BasicModal>
               {session ? (
                 <TransporterForm
-                  onSubmit={() => updateService(params.row._id)}
                   formName={"update-service"}
                   defaultData={params.row}
+                  id={params.row._id}
                 />
               ) : (
                 <SenderForm
