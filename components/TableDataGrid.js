@@ -22,29 +22,6 @@ export default function DataGridComponent({ data }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
-  const handleContactButtonClickWrapper = (openSenderRequest, row) => {
-    return () => {
-      console.log("handleContactButtonClickWrapper row:", row._id);
-      openSenderRequest(row);
-    };
-  };
-
-  async function openSenderRequest(request) {
-    const response = await fetch("/api/packages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(request),
-    });
-
-    if (response.ok) {
-      mutate();
-    }
-
-    router.push("/");
-  }
-
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
@@ -71,13 +48,12 @@ export default function DataGridComponent({ data }) {
                 />
               ) : (
                 <SenderForm
-                  onSubmit={openSenderRequest}
                   formName={"add-sender-service"}
                   defaultData={params.row}
-                  onClick={handleContactButtonClickWrapper(
-                    openSenderRequest,
-                    params.row
-                  )}
+                  // onClick={handleContactButtonClickWrapper(
+                  //   openSenderRequest,
+                  //   params.row
+                  // )}
                 />
               )}
             </BasicModal>

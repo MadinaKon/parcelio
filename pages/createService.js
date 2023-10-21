@@ -14,21 +14,21 @@ export default function CreateServicePage() {
   const { mutate } = useSWR("/api/services");
   const router = useRouter();
 
-  async function addService(service) {
-    const response = await fetch("/api/services", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(service),
-    });
+  // async function addService(service) {
+  //   const response = await fetch("/api/services", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(service),
+  //   });
 
-    if (response.ok) {
-      mutate();
-    }
+  //   if (response.ok) {
+  //     mutate();
+  //   }
 
-    router.push("/");
-  }
+  //   router.push("/");
+  // }
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function CreateServicePage() {
       <Link href="/" passHref legacyBehavior>
         <StyledBackLink>back</StyledBackLink>
       </Link>
-      <TransporterForm onSubmit={addService} formName={"add-service"} />
+      <TransporterForm formName={"add-service"} />
     </>
   );
 }
