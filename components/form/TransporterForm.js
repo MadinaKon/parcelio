@@ -10,7 +10,7 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
     const data = Object.fromEntries(formData);
     data.userId = session.user.userId;
 
-    //console.log("TransporterForm DATA ", data);
+    console.log("TransporterForm DATA ", data);
 
     onSubmit(data);
   }

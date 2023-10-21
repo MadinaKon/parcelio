@@ -73,10 +73,6 @@ export default function DataGridComponent({ data }) {
     console.log("FOUND OBJECT ", foundObject);
 
     // Create an object with only the fields that need to be updated
-    const updatedFields = {
-      firstName: foundObject.firstName,
-      lastName: foundObject.lastName,
-    };
 
     const response = await fetch(`/api/services/${id}`, {
       // TODO PATCH or PUT?
@@ -84,7 +80,7 @@ export default function DataGridComponent({ data }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedFields),
+      body: JSON.stringify(foundObject),
     });
 
     if (response.ok) {
