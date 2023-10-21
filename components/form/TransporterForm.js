@@ -18,8 +18,10 @@ export default function TransporterForm({ formName, defaultData, id }) {
     //console.log("TransporterForm DATA ", data);
     if (formName === "add-service") {
       addService(data);
-    } else {
+    } else if (formName === "update-service") {
       updateService(data);
+    } else {
+      deleteService(id);
     }
   }
 
@@ -54,6 +56,21 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
     router.push("/");
   }
+  async function deleteService(id) {
+    await fetch(`/api/services/${id}`, {
+      method: "DELETE",
+    });
+
+    router.push("/");
+  }
+
+  // async function deleteService() {
+  //   await fetch(`/api/services/${id}`, {
+  //     method: "DELETE",
+  //   });
+
+  //   router.push("/");
+  // }
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
