@@ -21,47 +21,4 @@ export default async function handler(request, response) {
       response.status(400).json({ error: error.message });
     }
   }
-
-  if (request.method === "PATCH") {
-    console.log("request.body ", request.body);
-    try {
-      await Service.findByIdAndUpdate(id, { $set: requestBody }, { new: true });
-      response.status(200).json({ status: `Service with id ${id} updated!` });
-    } catch (error) {
-      console.log(error);
-      response.status(400).json({ error: error.message });
-    }
-  }
-
-  // if (request.method === "PATCH") {
-  //   try {
-  //     await Service.findByIdAndUpdate(
-  //       id,
-  //       {
-  //         $set: request.body,
-  //       },
-  //       { new: true }
-  //     );
-  //     response.status(200).json({ status: `Service with id ${id} updated!` });
-  //   } catch (error) {
-  //     console.log(error);
-  //     response.status(400).json({ error: error.message });
-  //   }
-  // }
-
-  // if (request.method === "PATCH") {
-  //   try {
-  //     await Service.findByIdAndUpdate(
-  //       id,
-  //       {
-  //         $set: request.body,
-  //       },
-  //       { new: true }
-  //     );
-  //     response.status(200).json({ status: `Service with id ${id} updated!` });
-  //   } catch (error) {
-  //     console.log(error);
-  //     response.status(400).json({ error: error.message });
-  //   }
-  // }
 }
