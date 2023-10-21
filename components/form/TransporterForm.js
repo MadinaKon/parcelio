@@ -1,7 +1,11 @@
 import React from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 
-export default function TransporterForm({ onSubmit, formName, defaultData }) {
+export default function TransporterForm({ formName, defaultData, id }) {
+  const router = useRouter();
+  const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
   function handleSubmit(event) {
@@ -9,10 +13,33 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     data.userId = session.user.userId;
+    data.id = id;
 
-    console.log("TransporterForm DATA ", data);
+    //console.log("TransporterForm DATA ", data);
 
-    onSubmit(data);
+    updateService(data);
+  }
+
+  async function updateService(data) {
+    console.log(data);
+
+    // const foundObject = findObjectById(service, id);
+    // console.log("FOUND OBJECT ", foundObject);
+
+    const response = await fetch(`/api/services/${id}`, {
+      // TODO PATCH or PUT?
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
   }
 
   return (
