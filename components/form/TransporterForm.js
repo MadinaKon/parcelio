@@ -1,7 +1,11 @@
 import React from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 
-export default function TransporterForm({ onSubmit, formName, defaultData }) {
+export default function TransporterForm({ formName, defaultData, id }) {
+  const router = useRouter();
+  const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
   function handleSubmit(event) {
@@ -9,10 +13,54 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     data.userId = session.user.userId;
+    data.id = id;
 
-    console.log("TransporterForm DATA ", data);
+    if (formName === "add-service") {
+      addService(data);
+    } else if (formName === "update-service") {
+      updateService(data);
+    } else {
+      deleteService(id);
+    }
+  }
 
-    onSubmit(data);
+  async function addService(service) {
+    const response = await fetch("/api/services", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(service),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
+  }
+
+  async function updateService(data) {
+    const response = await fetch(`/api/services/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/");
+  }
+  async function deleteService(id) {
+    await fetch(`/api/services/${id}`, {
+      method: "DELETE",
+    });
+
+    router.push("/");
   }
 
   return (
@@ -44,14 +92,6 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         required
       />
       <br />
-      {/* <label htmlFor="password">password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        defaultValue={defaultData?.password}
-      />
-      <br /> */}
       <label htmlFor="fromCity">From city</label>
       <input
         id="fromCity"
@@ -104,7 +144,6 @@ export default function TransporterForm({ onSubmit, formName, defaultData }) {
         cols="30"
         rows="10"
         defaultValue={defaultData?.description}
-        required
       ></textarea>
       <br />
       <button type="submit">
