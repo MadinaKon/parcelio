@@ -3,10 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import SenderForm from "../form/SenderForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import TransporterForm from "../form/TransporterForm";
 
 const style = {
   position: "absolute",
@@ -22,7 +20,6 @@ const style = {
 
 export default function BasicModal({ children, id }) {
   const router = useRouter();
-  // const { id } = router.query;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

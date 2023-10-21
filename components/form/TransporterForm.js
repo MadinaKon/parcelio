@@ -15,7 +15,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
     data.userId = session.user.userId;
     data.id = id;
 
-    //console.log("TransporterForm DATA ", data);
     if (formName === "add-service") {
       addService(data);
     } else if (formName === "update-service") {
@@ -64,14 +63,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
     router.push("/");
   }
 
-  // async function deleteService() {
-  //   await fetch(`/api/services/${id}`, {
-  //     method: "DELETE",
-  //   });
-
-  //   router.push("/");
-  // }
-
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
       <label htmlFor="firstName">First name</label>
@@ -101,14 +92,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
         required
       />
       <br />
-      {/* <label htmlFor="password">password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        defaultValue={defaultData?.password}
-      />
-      <br /> */}
       <label htmlFor="fromCity">From city</label>
       <input
         id="fromCity"

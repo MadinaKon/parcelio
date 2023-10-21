@@ -2,11 +2,6 @@ import Head from "next/head";
 import useSWR from "swr";
 import styled from "styled-components";
 import { StyledLink } from "../components/StyledLink.js";
-import CreateServicePage from "./createService";
-
-import TableOverview from "../components/TableOverview";
-import { mainListItems } from "../components/listItems";
-import TableDataGrid from "../components/TableDataGrid";
 import DataGridComponent from "../components/TableDataGrid";
 import Profile from "../components/profile";
 
@@ -43,9 +38,6 @@ export default function Home() {
       </Head>
       <Profile />
       <main>
-        {/* <List component="nav">{mainListItems}</List> */}
-        {/* <TableOverview data={data} /> */}
-        {/* <TableDataGrid data={data} /> */}
         <h1>Parcelio - send your parcel through community</h1>
         <DataGridComponent data={data} />
       </main>

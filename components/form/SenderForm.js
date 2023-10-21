@@ -4,10 +4,6 @@ import React from "react";
 export default function SenderForm({ formName, defaultData }) {
   const { data: session } = useSession();
 
-  console.log("defaultData ", defaultData);
-
-  console.log("SESSION ", session);
-
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
       console.log("handleContactButtonClickWrapper row:", row._id);
@@ -25,8 +21,6 @@ export default function SenderForm({ formName, defaultData }) {
   }
 
   async function openSenderRequest(request) {
-    // /api/services
-    // /api/packages
     const response = await fetch("/api/services", {
       method: "POST",
       headers: {
