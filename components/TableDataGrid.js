@@ -45,30 +45,6 @@ export default function DataGridComponent({ data }) {
     router.push("/");
   }
 
-  async function updateService(id) {
-    const findObjectById = (array, id) => {
-      return array.find((obj) => obj._id === id);
-    };
-
-    const foundObject = findObjectById(service, id);
-    console.log("FOUND OBJECT ", foundObject);
-
-    const response = await fetch(`/api/services/${id}`, {
-      // TODO PATCH or PUT?
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(service),
-    });
-
-    if (response.ok) {
-      mutate();
-    }
-
-    router.push("/");
-  }
-
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
