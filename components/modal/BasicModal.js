@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Tooltip } from "@mui/material";
+import DeleteModal from "./DeleteModal";
 
 const style = {
   position: "absolute",
@@ -47,7 +48,9 @@ export default function BasicModal({ children, id }) {
       {session ? (
         <>
           <Button onClick={handleOpen}>Update</Button>
-          <Button onClick={() => deleteService(id)} type="button">
+          {/* <Button onClick={() => deleteService(id)} type="button"> */}
+          <Button type="button">
+            <DeleteModal id={id} />
             DELETE
           </Button>
         </>
