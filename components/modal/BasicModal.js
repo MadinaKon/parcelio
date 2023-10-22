@@ -6,9 +6,6 @@ import Modal from "@mui/material/Modal";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Tooltip } from "@mui/material";
-import Link from "next/link";
-import styled from "styled-components";
-import { StyledLink } from "../../components/StyledLink.js";
 
 const style = {
   position: "absolute",
@@ -21,12 +18,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const FixedLink = styled(StyledLink)`
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-`;
 
 export default function BasicModal({ children, id }) {
   const router = useRouter();
