@@ -33,7 +33,7 @@ export default function DataGridComponent({ data }) {
     {
       field: "actions",
       headerName: "Actions",
-      width: 150,
+      width: 230,
       renderCell: (params) => {
         return (
           <>
@@ -71,7 +71,7 @@ export default function DataGridComponent({ data }) {
         {
           field: "actions",
           headerName: "Actions",
-          width: 150,
+          width: 230,
           renderCell: (params) => {
             return (
               <>
@@ -103,7 +103,7 @@ export default function DataGridComponent({ data }) {
         {
           field: "actions",
           headerName: "Actions",
-          width: 150,
+          width: 230,
           renderCell: (params) => {
             return (
               <>
