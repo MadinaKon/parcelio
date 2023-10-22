@@ -21,6 +21,12 @@ export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { data: session } = useSession();
 
+  const handleButtonClick = (event) => {
+    if (!session) {
+      event.preventDefault();
+    }
+  };
+
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
@@ -73,6 +79,25 @@ export default function DataGridComponent({ data }) {
       />
 
       <Link href="/createService" passHref legacyBehavior>
+        <a onClick={handleButtonClick}>
+          {session ? (
+            <FixedLink> Add service</FixedLink>
+          ) : (
+            <Tooltip
+              title="Add service is available only for logged-in users"
+              arrow
+            >
+              {" "}
+              <span>
+                <Button variant="contained" color="primary" disabled>
+                  Add service
+                </Button>
+              </span>
+            </Tooltip>
+          )}
+        </a>
+      </Link>
+      {/* <Link href="/createService" passHref legacyBehavior>
         {session ? (
           <FixedLink> Add service</FixedLink>
         ) : (
@@ -88,7 +113,7 @@ export default function DataGridComponent({ data }) {
             </span>
           </Tooltip>
         )}
-      </Link>
+      </Link> */}
     </div>
   );
 }
