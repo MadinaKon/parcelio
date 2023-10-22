@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link.js";
 import { StyledLink } from "../components/StyledLink.js";
@@ -20,14 +20,7 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { data: session } = useSession();
-
-  const handleButtonClick = (event) => {
-    if (!session) {
-      event.preventDefault();
-    }
-  };
-
-  const columns = [
+  const [columns, setColumns] = useState([
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
     { field: "lastName", headerName: "Last Name", width: 150 },
@@ -62,13 +55,101 @@ export default function DataGridComponent({ data }) {
         );
       },
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    if (session) {
+      setColumns([
+        { field: "firstName", headerName: "First Name", width: 150 },
+        { field: "lastName", headerName: "Last Name", width: 150 },
+        { field: "userName", headerName: "Username", width: 150 },
+        { field: "phoneNumber", headerName: "Phone Number", width: 150 },
+        { field: "fromCity", headerName: "From City", width: 150 },
+        { field: "toCity", headerName: "To City", width: 150 },
+        { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
+        { field: "availableKilos", headerName: "Available Kilos", width: 150 },
+        {
+          field: "actions",
+          headerName: "Actions",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <>
+                <BasicModal id={params.row._id}>
+                  {session ? (
+                    <TransporterForm
+                      formName={"update-service"}
+                      defaultData={params.row}
+                      id={params.row._id}
+                    />
+                  ) : (
+                    <SenderForm
+                      formName={"add-sender-service"}
+                      defaultData={params.row}
+                    />
+                  )}
+                </BasicModal>
+              </>
+            );
+          },
+        },
+      ]);
+    } else {
+      setColumns([
+        { field: "fromCity", headerName: "From City", width: 150 },
+        { field: "toCity", headerName: "To City", width: 150 },
+        { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
+        { field: "availableKilos", headerName: "Available Kilos", width: 150 },
+        {
+          field: "actions",
+          headerName: "Actions",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <>
+                <BasicModal id={params.row._id}>
+                  {session ? (
+                    <TransporterForm
+                      formName={"update-service"}
+                      defaultData={params.row}
+                      id={params.row._id}
+                    />
+                  ) : (
+                    <SenderForm
+                      formName={"add-sender-service"}
+                      defaultData={params.row}
+                    />
+                  )}
+                </BasicModal>
+              </>
+            );
+          },
+        },
+      ]);
+    }
+  }, [session]);
+
+  const handleButtonClick = (event) => {
+    if (!session) {
+      event.preventDefault();
+    }
+  };
 
   const getRowId = (data) => data._id;
 
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
+        // initialState={{
+        //   columns: {
+        //     columnVisibilityModel: {
+        //       firstName: false,
+        //       lastName: false,
+        //       userName: false,
+        //       phoneNumber: false,
+        //     },
+        //   },
+        // }}
         rows={data}
         columns={columns}
         pageSize={5}
