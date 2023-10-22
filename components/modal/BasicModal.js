@@ -35,24 +35,12 @@ export default function BasicModal({ children, id }) {
     }
   };
 
-  async function deleteService(id) {
-    await fetch(`/api/services/${id}`, {
-      method: "DELETE",
-    });
-
-    router.push("/");
-  }
-
   return (
     <div>
       {session ? (
         <>
           <Button onClick={handleOpen}>Update</Button>
-          {/* <Button onClick={() => deleteService(id)} type="button"> */}
-          <Button type="button">
-            <DeleteModal id={id} />
-            DELETE
-          </Button>
+          <DeleteModal id={id} />
         </>
       ) : (
         <a onClick={handleButtonClick}>

@@ -26,8 +26,8 @@ export default function DeleteModal({ id }) {
   }
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+    <>
+      <Button variant="contained" color="error" onClick={handleClickOpen}>
         Delete
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -46,6 +46,6 @@ export default function DeleteModal({ id }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
