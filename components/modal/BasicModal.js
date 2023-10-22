@@ -5,6 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Tooltip } from "@mui/material";
+import Link from "next/link";
+import styled from "styled-components";
+import { StyledLink } from "../../components/StyledLink.js";
 
 const style = {
   position: "absolute",
@@ -18,6 +22,12 @@ const style = {
   p: 4,
 };
 
+const FixedLink = styled(StyledLink)`
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+`;
+
 export default function BasicModal({ children, id }) {
   const router = useRouter();
 
@@ -26,6 +36,12 @@ export default function BasicModal({ children, id }) {
   const handleClose = () => setOpen(false);
 
   const { data: session } = useSession();
+
+  const handleButtonClick = (event) => {
+    if (!session) {
+      event.preventDefault();
+    }
+  };
 
   async function deleteService(id) {
     await fetch(`/api/services/${id}`, {
@@ -45,7 +61,30 @@ export default function BasicModal({ children, id }) {
           </Button>
         </>
       ) : (
-        <Button onClick={handleOpen}>Contact</Button>
+        <Link href="/createService" passHref legacyBehavior>
+          <a onClick={handleButtonClick}>
+            {session ? (
+              <FixedLink> Add service</FixedLink>
+            ) : (
+              <Tooltip
+                title="Contact is available only for logged-in users"
+                arrow
+              >
+                {" "}
+                <span>
+                  <Button
+                    onClick={handleOpen}
+                    variant="contained"
+                    color="primary"
+                    disabled
+                  >
+                    Contact
+                  </Button>
+                </span>
+              </Tooltip>
+            )}
+          </a>
+        </Link>
       )}
 
       <Modal
