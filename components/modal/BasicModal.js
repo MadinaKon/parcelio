@@ -61,30 +61,25 @@ export default function BasicModal({ children, id }) {
           </Button>
         </>
       ) : (
-        <Link href="/createService" passHref legacyBehavior>
-          <a onClick={handleButtonClick}>
-            {session ? (
-              <FixedLink> Add service</FixedLink>
-            ) : (
-              <Tooltip
-                title="Contact is available only for logged-in users"
-                arrow
-              >
-                {" "}
-                <span>
-                  <Button
-                    onClick={handleOpen}
-                    variant="contained"
-                    color="primary"
-                    disabled
-                  >
-                    Contact
-                  </Button>
-                </span>
-              </Tooltip>
-            )}
-          </a>
-        </Link>
+        <a onClick={handleButtonClick}>
+          {!session && (
+            <Tooltip
+              title="Contact is available only for logged-in users"
+              arrow
+            >
+              <span>
+                <Button
+                  onClick={handleOpen}
+                  variant="contained"
+                  color="primary"
+                  disabled
+                >
+                  Contact
+                </Button>
+              </span>
+            </Tooltip>
+          )}
+        </a>
       )}
 
       <Modal
