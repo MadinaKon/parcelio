@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
+import { Button } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -18,6 +20,12 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { data: session } = useSession();
+
+  const handleButtonClick = (event) => {
+    if (!session) {
+      event.preventDefault();
+    }
+  };
 
   const columns = [
     //   { field: "id", headerName: "ID", width: 70 },
@@ -71,7 +79,23 @@ export default function DataGridComponent({ data }) {
       />
 
       <Link href="/createService" passHref legacyBehavior>
-        <FixedLink> Add service</FixedLink>
+        <a onClick={handleButtonClick}>
+          {session ? (
+            <FixedLink> Add service</FixedLink>
+          ) : (
+            <Tooltip
+              title="Add service is available only for logged-in users"
+              arrow
+            >
+              {" "}
+              <span>
+                <Button variant="contained" color="primary" disabled>
+                  Add service
+                </Button>
+              </span>
+            </Tooltip>
+          )}
+        </a>
       </Link>
     </div>
   );
