@@ -97,23 +97,6 @@ export default function DataGridComponent({ data }) {
           )}
         </a>
       </Link>
-      {/* <Link href="/createService" passHref legacyBehavior>
-        {session ? (
-          <FixedLink> Add service</FixedLink>
-        ) : (
-          <Tooltip
-            title="Add service is available only for logged-in users"
-            arrow
-          >
-            {" "}
-            <span>
-              <Button variant="contained" color="primary" disabled>
-                Add service
-              </Button>
-            </span>
-          </Tooltip>
-        )}
-      </Link> */}
     </div>
   );
 }
