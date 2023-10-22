@@ -69,6 +69,16 @@ export default function DataGridComponent({ data }) {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              firstName: false,
+              lastName: false,
+              userName: false,
+              phoneNumber: false,
+            },
+          },
+        }}
         rows={data}
         columns={columns}
         pageSize={5}
