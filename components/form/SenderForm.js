@@ -1,8 +1,13 @@
 import { useSession } from "next-auth/react";
 import React from "react";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 
 export default function SenderForm({ formName, defaultData }) {
   const { data: session } = useSession();
+  const { data: service, mutate } = useSWR("/api/services");
+
+  console.log("defaultData ", defaultData);
 
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
@@ -21,7 +26,7 @@ export default function SenderForm({ formName, defaultData }) {
   }
 
   async function openSenderRequest(request) {
-    const response = await fetch("/api/services", {
+    const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +38,7 @@ export default function SenderForm({ formName, defaultData }) {
       mutate();
     }
 
-    router.push("/");
+    // router.push("/");
   }
 
   return (
