@@ -45,21 +45,25 @@ export default function BasicModal({ children, id }) {
       ) : (
         <a onClick={handleButtonClick}>
           {!session && (
-            <Tooltip
-              title="Contact is available only for logged-in users"
-              arrow
-            >
-              <span>
-                <Button
-                  onClick={handleOpen}
-                  variant="contained"
-                  color="primary"
-                  disabled
-                >
-                  Contact
-                </Button>
-              </span>
-            </Tooltip>
+            // <Tooltip
+            //   title="Contact is available only for logged-in users"
+            //   arrow
+            // >
+            //   <span>
+            //     <Button
+            //       onClick={handleOpen}
+            //       variant="contained"
+            //       color="primary"
+            //       disabled
+            //     >
+            //       Contact
+            //     </Button>
+            //   </span>
+            // </Tooltip>
+
+            <Button onClick={handleOpen} variant="contained" color="primary">
+              Contact
+            </Button>
           )}
         </a>
       )}
