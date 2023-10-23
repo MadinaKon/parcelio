@@ -8,6 +8,13 @@ export default function TransporterForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    console.log("handle close is clicked");
+    setOpen(false);
+  };
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -19,9 +26,12 @@ export default function TransporterForm({ formName, defaultData, id }) {
       addService(data);
     } else if (formName === "update-service") {
       updateService(data);
+      // handleClose();
     } else {
       deleteService(id);
     }
+    // onClose();
+    handleClose();
   }
 
   async function addService(service) {
@@ -64,91 +74,93 @@ export default function TransporterForm({ formName, defaultData, id }) {
   }
 
   return (
-    <form aria-labelledby={formName} onSubmit={handleSubmit}>
-      <label htmlFor="firstName">First name</label>
-      <input
-        id="firstName"
-        name="firstName"
-        type="text"
-        defaultValue={defaultData?.firstName}
-        required
-      />
-      <br />
-      <label htmlFor="lastName">last name</label>
-      <input
-        id="lastName"
-        name="lastName"
-        type="text"
-        defaultValue={defaultData?.lastName}
-        required
-      />
-      <br />
-      <label htmlFor="userName">userName</label>
-      <input
-        id="userName"
-        name="userName"
-        type="text"
-        defaultValue={defaultData?.userName}
-        required
-      />
-      <br />
-      <label htmlFor="fromCity">From city</label>
-      <input
-        id="fromCity"
-        name="fromCity"
-        type="text"
-        defaultValue={defaultData?.fromCity}
-        required
-      />
-      <br />
-      <label htmlFor="toCity">To city</label>
-      <input
-        id="toCity"
-        name="toCity"
-        type="text"
-        defaultValue={defaultData?.toCity}
-        required
-      />
-      <br />
-      <label htmlFor="flightDateTime">Flight date time</label>
-      <input
-        id="flightDateTime"
-        name="flightDateTime"
-        type="date"
-        defaultValue={defaultData?.flightDateTime}
-        required
-      />
-      <br />
-      <label htmlFor="availableKilos">availableKilos</label>
-      <input
-        id="availableKilos"
-        name="availableKilos"
-        type="text"
-        defaultValue={defaultData?.availableKilos}
-        required
-      />
-      <br />
-      <label htmlFor="phoneNumber">Phone number</label>
-      <input
-        id="phoneNumber"
-        name="phoneNumber"
-        type="text"
-        defaultValue={defaultData?.phoneNumber}
-        required
-      />
-      <br />
-      <label htmlFor="description">Description</label>
-      <textarea
-        name="description"
-        id="description"
-        cols="30"
-        rows="10"
-        defaultValue={defaultData?.description}
-      ></textarea>
-      <br />
-      <button type="submit">
-        {defaultData ? "Update service" : "Add service"}
-      </button>
-    </form>
+    <div className={`dialog ${open ? "open" : "closed"}`}>
+      <form aria-labelledby={formName} onSubmit={handleSubmit}>
+        <label htmlFor="firstName">First name</label>
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          defaultValue={defaultData?.firstName}
+          required
+        />
+        <br />
+        <label htmlFor="lastName">last name</label>
+        <input
+          id="lastName"
+          name="lastName"
+          type="text"
+          defaultValue={defaultData?.lastName}
+          required
+        />
+        <br />
+        <label htmlFor="userName">userName</label>
+        <input
+          id="userName"
+          name="userName"
+          type="text"
+          defaultValue={defaultData?.userName}
+          required
+        />
+        <br />
+        <label htmlFor="fromCity">From city</label>
+        <input
+          id="fromCity"
+          name="fromCity"
+          type="text"
+          defaultValue={defaultData?.fromCity}
+          required
+        />
+        <br />
+        <label htmlFor="toCity">To city</label>
+        <input
+          id="toCity"
+          name="toCity"
+          type="text"
+          defaultValue={defaultData?.toCity}
+          required
+        />
+        <br />
+        <label htmlFor="flightDateTime">Flight date time</label>
+        <input
+          id="flightDateTime"
+          name="flightDateTime"
+          type="date"
+          defaultValue={defaultData?.flightDateTime}
+          required
+        />
+        <br />
+        <label htmlFor="availableKilos">availableKilos</label>
+        <input
+          id="availableKilos"
+          name="availableKilos"
+          type="text"
+          defaultValue={defaultData?.availableKilos}
+          required
+        />
+        <br />
+        <label htmlFor="phoneNumber">Phone number</label>
+        <input
+          id="phoneNumber"
+          name="phoneNumber"
+          type="text"
+          defaultValue={defaultData?.phoneNumber}
+          required
+        />
+        <br />
+        <label htmlFor="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+          defaultValue={defaultData?.description}
+        ></textarea>
+        <br />
+        <button type="submit">
+          {defaultData ? "Update service" : "Add service"}
+        </button>
+      </form>
+    </div>
   );
 }
