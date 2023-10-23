@@ -25,7 +25,11 @@ export default function BasicModal({ children, id }) {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setOpen(false);
+  };
 
   const { data: session } = useSession();
 
