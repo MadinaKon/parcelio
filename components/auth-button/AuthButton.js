@@ -24,7 +24,6 @@ export default function AuthButton() {
       <button className={`${btn} ${login}`} onClick={() => signIn()}>
         Sign in with Google
       </button>
-      {/* <SignUp /> */}
     </>
   );
 }
