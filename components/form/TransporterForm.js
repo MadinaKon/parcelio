@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    console.log("handle close clicked");
+    setOpen(false);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -65,6 +73,9 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
+      <button onClick={handleClose}>
+        <CloseIcon />
+      </button>
       <label htmlFor="firstName">First name</label>
       <input
         id="firstName"
