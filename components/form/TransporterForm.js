@@ -50,21 +50,44 @@ export default function TransporterForm({ formName, defaultData, id }) {
     router.push("/");
   }
 
+  // async function updateService(data) {
+  //   const response = await fetch(`/api/services/${id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
+
+  //   if (response.ok) {
+  //     mutate();
+  //   }
+
+  //   router.push("/");
+  // }
   async function updateService(data) {
-    const response = await fetch(`/api/services/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch(`/api/services/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (response.ok) {
-      mutate();
+      if (response.ok) {
+        mutate();
+      } else {
+        // Handle error scenarios here if needed
+      }
+    } catch (error) {
+      // Handle fetch error
+      console.error("Error updating service:", error);
+    } finally {
+      handleClose(); // This will be called regardless of success or failure
     }
-
-    router.push("/");
   }
+
   async function deleteService(id) {
     await fetch(`/api/services/${id}`, {
       method: "DELETE",
