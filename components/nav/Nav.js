@@ -11,7 +11,6 @@ export default function Nav() {
   return (
     <nav className={nav}>
       <Link href="/">Home</Link>
-
       <Link href="/signin">Sign in</Link>
       {session && (
         <>
