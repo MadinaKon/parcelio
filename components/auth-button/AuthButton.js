@@ -1,4 +1,3 @@
-import SignUp from "../signup/SignUp";
 import { btn, logout, login } from "./AuthButton.module.css";
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -25,7 +24,6 @@ export default function AuthButton() {
       <button className={`${btn} ${login}`} onClick={() => signIn()}>
         Sign in with Google
       </button>
-      {/* <SignUp /> */}
     </>
   );
 }
