@@ -71,7 +71,11 @@ export default function Dashboard({ children }) {
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={99} color="secondary">
-              <NotificationsIcon />
+              <NotificationsIcon
+                onClick={() => {
+                  console.log("onClick");
+                }}
+              />
             </Badge>
           </IconButton>
         </Toolbar>
