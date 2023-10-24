@@ -108,7 +108,7 @@ export default function DataGridComponent({ data }) {
           headerName: "Actions",
           width: 230,
           renderCell: (params) => {
-            console.log("PARAMS NO SESSION: ", params);
+            // console.log("PARAMS NO SESSION: ", params);
             return (
               <>
                 <BasicModal id={params.row._id}>

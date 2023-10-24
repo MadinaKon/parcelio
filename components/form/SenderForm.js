@@ -23,10 +23,6 @@ export default function SenderForm({ formName, defaultData, serviceId }) {
 
     console.log("FORM DATA SENDER ", data);
 
-    // pass the serice id to the component
-    // add service id
-    // for guest and logged in user
-
     openSenderRequest(data);
   }
 
