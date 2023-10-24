@@ -2,6 +2,7 @@ import Link from "next/link";
 import { nav } from "./Nav.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Dashboard from "../dashboard/Dashboard";
 
 export default function Nav() {
   const { data: session } = useSession();
@@ -12,6 +13,7 @@ export default function Nav() {
     <nav className={nav}>
       <Link href="/">Home</Link>
       <Link href="/signin">Sign in</Link>
+
       {session && (
         <>
           {/* <Link href="/user/">Your services</Link> */}

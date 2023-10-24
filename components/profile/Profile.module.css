@@ -23,6 +23,7 @@
 .profile img {
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 8px 8px 0px 0px #18013a, -4px -4px 0px 0px #5202cb,
-    0 0 50px 0px #18013a;
+  margin-top: 100px;
+  /* box-shadow: 8px 8px 0px 0px #18013a, -4px -4px 0px 0px #5202cb,
+    0 0 50px 0px #18013a; */
 }
