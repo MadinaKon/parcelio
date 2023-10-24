@@ -21,6 +21,7 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { data: session } = useSession();
+
   const [columns, setColumns] = useState([
     //   { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First Name", width: 150 },
@@ -87,6 +88,7 @@ export default function DataGridComponent({ data }) {
                     <SenderForm
                       formName={"add-sender-service"}
                       defaultData={params.row}
+                      userId={params.row._id}
                     />
                   )}
                 </BasicModal>
@@ -106,6 +108,7 @@ export default function DataGridComponent({ data }) {
           headerName: "Actions",
           width: 230,
           renderCell: (params) => {
+            // console.log("PARAMS NO SESSION: ", params);
             return (
               <>
                 <BasicModal id={params.row._id}>
@@ -119,6 +122,7 @@ export default function DataGridComponent({ data }) {
                     <SenderForm
                       formName={"add-sender-service"}
                       defaultData={params.row}
+                      serviceId={params.row._id}
                     />
                   )}
                 </BasicModal>

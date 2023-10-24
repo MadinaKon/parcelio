@@ -3,18 +3,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function SenderForm({ formName, defaultData }) {
+export default function SenderForm({ formName, defaultData, serviceId }) {
   const { data: session } = useSession();
   const { data: service, mutate } = useSWR("/api/services");
-
-  console.log("defaultData ", defaultData);
-
-  const handleContactButtonClickWrapper = (openSenderRequest, row) => {
-    return () => {
-      console.log("handleContactButtonClickWrapper row:", row._id);
-      openSenderRequest(row);
-    };
-  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -22,6 +13,8 @@ export default function SenderForm({ formName, defaultData }) {
     const data = Object.fromEntries(formData);
     data.userId = session?.user?.userId;
 
+    console.log("FORM DATA SENDER ", data);
+    // userId: undefined
     openSenderRequest(data);
   }
 
@@ -31,7 +24,8 @@ export default function SenderForm({ formName, defaultData }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(request),
+
+      body: JSON.stringify({ ...request, serviceId: serviceId }),
     });
 
     if (response.ok) {
@@ -46,6 +40,24 @@ export default function SenderForm({ formName, defaultData }) {
       <h3>Send a package details</h3>
 
       {/* {defaultData ? "Update service details" : "Send a package details"} */}
+      <br />
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        defaultValue={defaultData?.email}
+        required
+      />
+      <br />
+      <label htmlFor="phone">Phone number</label>
+      <input
+        id="phone"
+        name="phoneNumber"
+        type="text"
+        defaultValue={defaultData?.phone}
+        required
+      />
       <br />
       <label htmlFor="packageType">Package type</label>
       <input
@@ -110,7 +122,6 @@ export default function SenderForm({ formName, defaultData }) {
         cols="30"
         rows="10"
         defaultValue={defaultData?.description}
-        required
       ></textarea>
       <br />
 
