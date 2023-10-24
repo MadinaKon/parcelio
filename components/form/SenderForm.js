@@ -7,14 +7,6 @@ export default function SenderForm({ formName, defaultData, serviceId }) {
   const { data: session } = useSession();
   const { data: service, mutate } = useSWR("/api/services");
 
-  console.log("SERVICE ID ", serviceId);
-
-  const handleContactButtonClickWrapper = (openSenderRequest, row) => {
-    return () => {
-      openSenderRequest(row);
-    };
-  };
-
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -22,7 +14,7 @@ export default function SenderForm({ formName, defaultData, serviceId }) {
     data.userId = session?.user?.userId;
 
     console.log("FORM DATA SENDER ", data);
-
+    // userId: undefined
     openSenderRequest(data);
   }
 
@@ -32,7 +24,7 @@ export default function SenderForm({ formName, defaultData, serviceId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({ ...request, userId: serviceId }),
+
       body: JSON.stringify({ ...request, serviceId: serviceId }),
     });
 
