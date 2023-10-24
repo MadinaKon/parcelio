@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
 import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
+import Dashboard from "./dashboard/Dashboard.js";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
