@@ -3,15 +3,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function SenderForm({ formName, defaultData }) {
+export default function SenderForm({ formName, defaultData, serviceId }) {
   const { data: session } = useSession();
   const { data: service, mutate } = useSWR("/api/services");
 
-  console.log("defaultData ", defaultData);
+  console.log("SERVICE ID ", serviceId);
 
   const handleContactButtonClickWrapper = (openSenderRequest, row) => {
     return () => {
-      console.log("handleContactButtonClickWrapper row:", row._id);
       openSenderRequest(row);
     };
   };
@@ -22,6 +21,12 @@ export default function SenderForm({ formName, defaultData }) {
     const data = Object.fromEntries(formData);
     data.userId = session?.user?.userId;
 
+    console.log("FORM DATA SENDER ", data);
+
+    // pass the serice id to the component
+    // add service id
+    // for guest and logged in user
+
     openSenderRequest(data);
   }
 
@@ -31,7 +36,7 @@ export default function SenderForm({ formName, defaultData }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(request),
+      body: JSON.stringify({ ...request, userId: serviceId }),
     });
 
     if (response.ok) {
@@ -59,7 +64,7 @@ export default function SenderForm({ formName, defaultData }) {
       <label htmlFor="phone">Phone number</label>
       <input
         id="phone"
-        name="phone"
+        name="phoneNumber"
         type="text"
         defaultValue={defaultData?.phone}
         required

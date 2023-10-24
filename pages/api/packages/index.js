@@ -13,8 +13,10 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const data = request.body;
+
+      console.log("data ", data);
+      // console.log("serviceId ", serviceId);
       await Package.create(data);
-      console.log("PACKAFE DATA ", data);
 
       response.status(201).json({ status: "package request created" });
     } catch (error) {
