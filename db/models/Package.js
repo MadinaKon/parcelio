@@ -14,8 +14,10 @@ const packageSchema = new Schema({
   totalWeight: { type: String, required: true },
   packageType: { type: String, required: true },
   description: { type: String, required: true },
-  // recipientAddress: { type: String, required: true },
   userId: { type: [Schema.Types.ObjectId], ref: "User" },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  // recipientAddress: { type: String, required: true },
   // serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },
 });
 
