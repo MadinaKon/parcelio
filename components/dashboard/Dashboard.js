@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -34,7 +34,21 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function Dashboard({ children }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
+
+  const handleNotificationClick = () => {
+    console.log("handleNotificationClick is being clicked ");
+    setOpen(true);
+  };
+
+  const handleNotificationClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -73,9 +87,10 @@ export default function Dashboard({ children }) {
             {/* <Badge badgeContent={99} color="secondary"> */}
             <Badge badgeContent={99} color="secondary" variant="dot">
               <NotificationsIcon
-                onClick={() => {
-                  console.log("onClick");
-                }}
+                onClick={handleNotificationClick}
+                // onClick={() => {
+                //   console.log("onClick");
+                // }}
               />
             </Badge>
           </IconButton>
