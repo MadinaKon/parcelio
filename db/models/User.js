@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import "./Service";
+import "./Package";
 
 const { Schema } = mongoose;
 
@@ -15,7 +16,7 @@ const userSchema = new Schema({
   city: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },
-  notifications: { type: [Schema.Types.ObjectId], required: false },
+  notifications: { type: [Schema.Types.ObjectId], ref: "Package" },
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
