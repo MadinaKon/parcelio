@@ -37,7 +37,7 @@ export default function Dashboard({ children }) {
   const [open, setOpen] = useState(false);
 
   const handleNotificationClick = () => {
-    console.log("handleNotificationClick is being clicked ");
+
     setOpen(true);
   };
 
