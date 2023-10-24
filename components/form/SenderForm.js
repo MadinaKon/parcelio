@@ -47,6 +47,24 @@ export default function SenderForm({ formName, defaultData }) {
 
       {/* {defaultData ? "Update service details" : "Send a package details"} */}
       <br />
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        defaultValue={defaultData?.email}
+        required
+      />
+      <br />
+      <label htmlFor="phone">Phone number</label>
+      <input
+        id="phone"
+        name="phone"
+        type="text"
+        defaultValue={defaultData?.phone}
+        required
+      />
+      <br />
       <label htmlFor="packageType">Package type</label>
       <input
         id="packageType"
@@ -110,7 +128,6 @@ export default function SenderForm({ formName, defaultData }) {
         cols="30"
         rows="10"
         defaultValue={defaultData?.description}
-        required
       ></textarea>
       <br />
 
