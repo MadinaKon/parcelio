@@ -11,36 +11,21 @@ export default async function handler(request, response) {
     return response.status(200).json(packages);
   }
 
-  // if (request.method === "POST") {
-  //   try {
-  //     const data = request.body;
-
-  //     console.log("DATA API PACKAGES ", data);
-  //     // console.log("serviceId ", serviceId);
-  //     await Package.create(data);
-
-  //     response.status(201).json({ status: "package request created" });
-  //   } catch (error) {
-  //     console.log(error);
-  //     response.status(400).json({ error: error.message });
-  //   }
-  // }
-
   if (request.method === "POST") {
     try {
-      const data = request.body;
+      const { serviceId, userId, ...requestBody } = request.body;
 
-      await Package.create(data);
+      await Package.create({ serviceId, userId, ...requestBody });
 
-      // await User.findByIdAndUpdate(
-      //   id,
-      //   {
-      //     $push: { notifications: data },
-      //   },
-      //   { new: true }
-      // );
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $push: { notifications: serviceId },
+        },
+        { new: true }
+      );
 
-      response.status(201).json({ status: "package request created" });
+      response.status(201).json({ status: "package successfully created" });
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });

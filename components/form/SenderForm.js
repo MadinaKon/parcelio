@@ -1,30 +1,35 @@
-import { useSession } from "next-auth/react";
 import React from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function SenderForm({ formName, defaultData, serviceId }) {
-  const { data: session } = useSession();
+export default function SenderForm({
+  formName,
+  defaultData,
+  serviceId,
+  transporterId,
+}) {
   const { data: service, mutate } = useSWR("/api/services");
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    data.userId = session?.user?.userId;
 
-    // userId: undefined
     openSenderRequest(data);
   }
 
-  async function openSenderRequest(request) {
+  async function openSenderRequest(requestBody) {
     const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify({ ...request, serviceId: serviceId }),
+      body: JSON.stringify({
+        ...requestBody,
+        serviceId: serviceId,
+        userId: transporterId,
+      }),
     });
 
     if (response.ok) {
