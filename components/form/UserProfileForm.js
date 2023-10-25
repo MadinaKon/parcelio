@@ -47,6 +47,7 @@ export default function UserProfileForm({ formName, defaultData, id }) {
         type="text"
         defaultValue={defaultData?.name}
         required
+        readOnly
       />
       <br />
 
@@ -57,6 +58,7 @@ export default function UserProfileForm({ formName, defaultData, id }) {
         type="text"
         defaultValue={defaultData?.email}
         required
+        readOnly
       />
       <br />
       <label htmlFor="image">Image</label>
@@ -66,6 +68,7 @@ export default function UserProfileForm({ formName, defaultData, id }) {
         type="text"
         defaultValue={defaultData?.image}
         required
+        readOnly
       />
       <br />
       <label htmlFor="phoneNumber">Phone number</label>
