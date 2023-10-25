@@ -16,14 +16,10 @@ export default function UserProfileForm({ formName, defaultData }) {
     data.userId = session.user.userId;
     data.id = id;
 
-    console.log("UserProfileForm DATA ", data);
     updateUserProfile(data);
   }
 
   async function updateUserProfile(data) {
-    // console.log("updateUserProfile DATA ", data);
-    console.log("updateUserProfile ID ", id);
-
     const response = await fetch(`/api/users/${id}`, {
       method: "PATCH",
       headers: {
