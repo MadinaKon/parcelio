@@ -8,6 +8,12 @@ export default function UserProfileForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
 
+  //   console.log("LOGGED IN USER ", session);
+  //   console.log("SESSION USER ", session.user);
+  //   console.log("SESSION USER ID ", session.user.userId);
+
+  console.log("DEFAULT DATA ", defaultData);
+
   // formName={"update-profile"}
   function handleSubmit(event) {
     event.preventDefault();
@@ -37,21 +43,32 @@ export default function UserProfileForm({ formName, defaultData, id }) {
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
       <h2>Profile form</h2>
-      <label htmlFor="firstName">First name</label>
+
+      <label htmlFor="name">Name</label>
       <input
-        id="firstName"
-        name="firstName"
+        id="name"
+        name="name"
         type="text"
-        defaultValue={defaultData?.firstName}
+        defaultValue={defaultData?.name}
         required
       />
       <br />
-      <label htmlFor="lastName">last name</label>
+
+      <label htmlFor="email">Email</label>
       <input
-        id="lastName"
-        name="lastName"
+        id="email"
+        name="email"
         type="text"
-        defaultValue={defaultData?.lastName}
+        defaultValue={defaultData?.email}
+        required
+      />
+      <br />
+      <label htmlFor="image">Image</label>
+      <input
+        id="image"
+        name="image"
+        type="text"
+        defaultValue={defaultData?.image}
         required
       />
       <br />
