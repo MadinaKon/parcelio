@@ -13,7 +13,6 @@ export default function SenderForm({ formName, defaultData, serviceId }) {
     const data = Object.fromEntries(formData);
     data.userId = session?.user?.userId;
 
-    console.log("FORM DATA SENDER ", data);
     // userId: undefined
     openSenderRequest(data);
   }

@@ -30,7 +30,6 @@ export default async function handler(request, response) {
     try {
       const data = request.body;
 
-      console.log("DATA API PACKAGES ", data);
       await Package.create(data);
 
       // await User.findByIdAndUpdate(
