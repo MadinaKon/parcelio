@@ -20,7 +20,7 @@ export default function Nav() {
           {/* TODO here we need authentication, after that http://localhost:3001/services/undefined/updateService will be replaced userId services */}
           {/* <Link href={`/services/${id}/updateService`}>Update service</Link> */}
 
-          <Link href="/createService">New service</Link>
+          <Link href="/profile">Profile</Link>
         </>
       )}
     </nav>
