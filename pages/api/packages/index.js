@@ -39,7 +39,10 @@ export default async function handler(request, response) {
     // console.log("WHICH ID ", id);
     try {
       const { serviceId, userId, ...requestBody } = request.body;
-      await Package.create({ requestBody, serviceId });
+      // await Package.create({ requestBody, serviceId });
+
+      await Package.create({ serviceId, userId, ...requestBody });
+
       console.log("REQUEST ", requestBody);
       console.log("SERVICE ID ", serviceId);
       console.log("USER ID ", userId);
