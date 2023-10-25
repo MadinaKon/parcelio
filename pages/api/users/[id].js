@@ -17,6 +17,7 @@ export default async function handler(request, response) {
   if (request.method === "PATCH") {
     try {
       await User.findByIdAndUpdate(id, { $set: request.body }, { new: true });
+
       response.status(200).json({ status: `Update with id ${id} updated!` });
     } catch (error) {
       console.log(error);

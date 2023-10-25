@@ -11,6 +11,7 @@ import Badge from "@mui/material/Badge";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
@@ -35,10 +36,11 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Dashboard({ children }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   const handleNotificationClick = () => {
-
     setOpen(true);
+    router.push("/profile");
   };
 
   const handleNotificationClose = (event, reason) => {

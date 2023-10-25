@@ -21,6 +21,7 @@ export default function Nav() {
           {/* <Link href={`/services/${id}/updateService`}>Update service</Link> */}
 
           <Link href="/profile">Profile</Link>
+          {/* <Link href={`/profile/${id}`}>Profile</Link> */}
         </>
       )}
     </nav>

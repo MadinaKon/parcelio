@@ -3,10 +3,13 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function UserProfileForm({ formName, defaultData, id }) {
+export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
+  const id = session?.user?.userId;
+
+  console.log("ID PASSED TO UserProfileForm ", id);
 
   // formName={"update-profile"}
   function handleSubmit(event) {
@@ -16,12 +19,14 @@ export default function UserProfileForm({ formName, defaultData, id }) {
     data.userId = session.user.userId;
     data.id = id;
 
-    console.log("UserProfileForm DATA ", data);
+    // console.log("UserProfileForm DATA ", data);
     updateUserProfile(data);
   }
 
   async function updateUserProfile(data) {
-    const response = await fetch(`/api/users`, {
+    console.log("updateUserProfile DATA ", data);
+
+    const response = await fetch(`/api/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +38,7 @@ export default function UserProfileForm({ formName, defaultData, id }) {
       mutate();
     }
 
-    router.push("/");
+    // router.push("/");
   }
 
   return (
@@ -77,7 +82,6 @@ export default function UserProfileForm({ formName, defaultData, id }) {
         name="phoneNumber"
         type="text"
         defaultValue={defaultData?.phoneNumber}
-        required
       />
       <br />
 
