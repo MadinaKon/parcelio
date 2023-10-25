@@ -12,14 +12,23 @@ export default async function handler(request, response) {
   }
 
   // if (request.method === "POST") {
+  //   // console.log("WHICH ID ", id);
   //   try {
-  //     const data = request.body;
+  //     const { request, serviceId, userId } = request.body;
+  //     await Package.create({ request, serviceId });
+  //     console.log("REQUEST ", request);
+  //     console.log("SERVICE ID ", serviceId);
+  //     console.log("USER ID ", userId);
 
-  //     console.log("DATA API PACKAGES ", data);
-  //     // console.log("serviceId ", serviceId);
-  //     await Package.create(data);
+  //     await User.findByIdAndUpdate(
+  //       id,
+  //       {
+  //         $push: { notifications: data.serviceId },
+  //       },
+  //       { new: true }
+  //     );
 
-  //     response.status(201).json({ status: "package request created" });
+  //     response.status(201).json({ status: "package successfully created" });
   //   } catch (error) {
   //     console.log(error);
   //     response.status(400).json({ error: error.message });
@@ -27,20 +36,23 @@ export default async function handler(request, response) {
   // }
 
   if (request.method === "POST") {
+    // console.log("WHICH ID ", id);
     try {
-      const data = request.body;
+      const { serviceId, userId, ...requestBody } = request.body;
+      // await Package.create({ requestBody, serviceId });
+      console.log("REQUEST ", requestBody);
+      console.log("SERVICE ID ", serviceId);
+      console.log("USER ID ", userId);
 
-      await Package.create(data);
+      await User.findByIdAndUpdate(
+        id,
+        {
+          $push: { notifications: data.serviceId },
+        },
+        { new: true }
+      );
 
-      // await User.findByIdAndUpdate(
-      //   id,
-      //   {
-      //     $push: { notifications: data },
-      //   },
-      //   { new: true }
-      // );
-
-      response.status(201).json({ status: "package request created" });
+      response.status(201).json({ status: "package successfully created" });
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });

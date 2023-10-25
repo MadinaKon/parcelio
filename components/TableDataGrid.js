@@ -37,19 +37,21 @@ export default function DataGridComponent({ data }) {
       headerName: "Actions",
       width: 230,
       renderCell: (params) => {
+        console.log("PARAMS ROW: ", params.row.userId[0])
         return (
           <>
             <BasicModal id={params.row._id}>
               {session ? (
                 <TransporterForm
-                  formName={"update-service"}
-                  defaultData={params.row}
-                  id={params.row._id}
+                formName={"update-service"}
+                defaultData={params.row}
+                id={params.row._id}
                 />
-              ) : (
-                <SenderForm
+                ) : (
+                  <SenderForm
                   formName={"add-sender-service"}
                   defaultData={params.row}
+                  transporterId={params.row.userId[0]}
                 />
               )}
             </BasicModal>
