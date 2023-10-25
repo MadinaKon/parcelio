@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -82,6 +82,32 @@ export default function UserProfileForm({ formName, defaultData, id }) {
         {/* {defaultData ? "Update service" : "Add service"} */}
         Update user data
       </button>
+      <h4>Notifications</h4>
+      {/* {defaultData?.notifications.map(notification => (
+        notification
+      ))} */}
+
+      {defaultData?.notifications.map(
+        ({
+          _id,
+          length,
+          width,
+          height,
+          totalWeight,
+          packageType,
+          description,
+          serviceId,
+          email,
+          phoneNumber,
+        }) => (
+          <Fragment key={_id}>
+            <div>Length {length}</div>
+            <div>Height {height}</div>
+            <div>Width {width}</div>
+            <div>Total weight {totalWeight}</div>
+          </Fragment>
+        )
+      )}
     </form>
   );
 }
