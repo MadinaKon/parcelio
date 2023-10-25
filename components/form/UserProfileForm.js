@@ -8,10 +8,6 @@ export default function UserProfileForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
 
-  //   console.log("LOGGED IN USER ", session);
-  //   console.log("SESSION USER ", session.user);
-  //   console.log("SESSION USER ID ", session.user.userId);
-
   console.log("DEFAULT DATA ", defaultData);
 
   // formName={"update-profile"}

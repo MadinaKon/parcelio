@@ -19,9 +19,6 @@ export default function ProfilePage() {
 
   const router = useRouter();
 
-  console.log("PROFILE PAGE USER ", user);
-  // console.log("PROFILE PAGE USER ", user[0].email);
-
   return (
     <>
       <h2 id="add-service">Add Service</h2>
