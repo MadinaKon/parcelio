@@ -16,7 +16,6 @@ export default function SenderForm({
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    // userId: undefined
     openSenderRequest(data);
   }
 
