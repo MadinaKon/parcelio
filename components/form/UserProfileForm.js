@@ -8,8 +8,6 @@ export default function UserProfileForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
 
-  console.log("DEFAULT DATA ", defaultData);
-
   // formName={"update-profile"}
   function handleSubmit(event) {
     event.preventDefault();
@@ -17,6 +15,8 @@ export default function UserProfileForm({ formName, defaultData, id }) {
     const data = Object.fromEntries(formData);
     data.userId = session.user.userId;
     data.id = id;
+
+    console.log("UserProfileForm DATA ", data);
     updateUserProfile(data);
   }
 
@@ -81,15 +81,45 @@ export default function UserProfileForm({ formName, defaultData, id }) {
       />
       <br />
 
+      <label htmlFor="country">Country</label>
+      <input
+        id="country"
+        name="country"
+        type="text"
+        defaultValue={defaultData?.country}
+      />
+      <br />
+      <label htmlFor="city">City</label>
+      <input
+        id="city"
+        name="city"
+        type="text"
+        defaultValue={defaultData?.city}
+      />
+      <br />
+
+      <label htmlFor="address">Address</label>
+      <input
+        id="address"
+        name="address"
+        type="text"
+        defaultValue={defaultData?.address}
+      />
+      <br />
+
+      <label htmlFor="postalCode">Postal code</label>
+      <input
+        id="postalCode"
+        name="postalCode"
+        type="text"
+        defaultValue={defaultData?.postalCode}
+      />
+      <br />
       <button type="submit">
         {/* {defaultData ? "Update service" : "Add service"} */}
         Update user data
       </button>
       <h4>Notifications</h4>
-      {/* {defaultData?.notifications.map(notification => (
-        notification
-      ))} */}
-
       {defaultData?.notifications.map(
         ({
           _id,
