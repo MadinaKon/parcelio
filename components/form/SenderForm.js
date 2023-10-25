@@ -9,7 +9,6 @@ export default function SenderForm({
   transporterId,
 }) {
   const { data: service, mutate } = useSWR("/api/services");
-  console.log("TRANSPORTER ID ", transporterId);
 
   function handleSubmit(event) {
     event.preventDefault();
