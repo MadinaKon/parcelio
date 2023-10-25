@@ -39,15 +39,23 @@ export default async function handler(request, response) {
     // console.log("WHICH ID ", id);
     try {
       const { serviceId, userId, ...requestBody } = request.body;
-      // await Package.create({ requestBody, serviceId });
+      await Package.create({ requestBody, serviceId });
       console.log("REQUEST ", requestBody);
       console.log("SERVICE ID ", serviceId);
       console.log("USER ID ", userId);
 
+      // await User.findByIdAndUpdate(
+      //   id,
+      //   {
+      //     $push: { notifications: data.serviceId },
+      //   },
+      //   { new: true }
+      // );
+
       await User.findByIdAndUpdate(
-        id,
+        userId,
         {
-          $push: { notifications: data.serviceId },
+          $push: { notifications: serviceId },
         },
         { new: true }
       );
