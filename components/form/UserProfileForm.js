@@ -9,9 +9,6 @@ export default function UserProfileForm({ formName, defaultData }) {
   const { data: session } = useSession();
   const id = session?.user?.userId;
 
-  console.log("ID PASSED TO UserProfileForm ", id);
-
-  // formName={"update-profile"}
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -19,12 +16,13 @@ export default function UserProfileForm({ formName, defaultData }) {
     data.userId = session.user.userId;
     data.id = id;
 
-    // console.log("UserProfileForm DATA ", data);
+    console.log("UserProfileForm DATA ", data);
     updateUserProfile(data);
   }
 
   async function updateUserProfile(data) {
-    console.log("updateUserProfile DATA ", data);
+    // console.log("updateUserProfile DATA ", data);
+    console.log("updateUserProfile ID ", id);
 
     const response = await fetch(`/api/users/${id}`, {
       method: "PATCH",
@@ -37,8 +35,6 @@ export default function UserProfileForm({ formName, defaultData }) {
     if (response.ok) {
       mutate();
     }
-
-    // router.push("/");
   }
 
   return (
@@ -123,7 +119,7 @@ export default function UserProfileForm({ formName, defaultData }) {
         {/* {defaultData ? "Update service" : "Add service"} */}
         Update user data
       </button>
-      <h4>Notifications</h4>
+      <h4>You have following notifications</h4>
       {defaultData?.notifications.map(
         ({
           _id,
