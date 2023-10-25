@@ -6,14 +6,21 @@ import useSWR from "swr";
 import TransporterForm from "../components/form/TransporterForm.js";
 import SenderForm from "../components/form/SenderForm.js";
 import UserProfileForm from "../components/form/UserProfileForm.js";
+import { useSession } from "next-auth/react";
 
 const StyledBackLink = styled(StyledLink)`
   justify-self: flex-start;
 `;
 
 export default function ProfilePage() {
-  const { mutate } = useSWR("/api/services");
+  const { data: session } = useSession();
+  const id = session?.user?.userId;
+  const { data: user, mutate } = useSWR(`/api/users/${id}`);
+
   const router = useRouter();
+
+  console.log("PROFILE PAGE USER ", user);
+  // console.log("PROFILE PAGE USER ", user[0].email);
 
   return (
     <>
@@ -22,7 +29,7 @@ export default function ProfilePage() {
         <StyledBackLink>back</StyledBackLink>
       </Link>
 
-      <UserProfileForm formName={"update-profile"} />
+      <UserProfileForm formName={"update-profile"} defaultData={user} />
     </>
   );
 }
