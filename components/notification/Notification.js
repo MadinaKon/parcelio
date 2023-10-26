@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,14 +13,52 @@ import styled from "styled-components";
 
 const StyledTableCell = styled(TableCell)`
   background-color: rgb(227, 252, 239);
+  padding: 10px; /* Add padding */
+  margin: 5px; /* Add margin */
+  transition: all 0.3s ease; /* Add transition effect for smooth changes */
 `;
 
+const StyledTableRow = styled(TableRow)`
+  &:hover {
+    background-color: rgba(
+      227,
+      252,
+      239,
+      0.8
+    ); /* Change background color on hover */
+    transform: scale(1.05); /* Add scale effect on hover */
+  }
+
+  /* Add animation for row entry */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  animation: fadeIn 0.5s ease forwards;
+`;
 export default function Notification({ defaultData }) {
+  const [open, setOpen] = useState(false);
+
+  const handleCheckMark = () => {
+    console.log("handleCheckMark is clicked ");
+  };
+
+  const handleCloseIcon = () => {
+    console.log("handleCloseIcon is clicked ");
+    setOpen(false);
+    // handleClose();
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <TableHead>
-          <TableRow
+          <StyledTableRow
             style={{
               backgroundColor: "teal",
               border: "solid 5px yellow",
@@ -33,11 +71,11 @@ export default function Notification({ defaultData }) {
             <StyledTableCell align="right">Notification</StyledTableCell>
             <StyledTableCell align="right">Sender phone number</StyledTableCell>
             <StyledTableCell align="right">Actions</StyledTableCell>
-          </TableRow>
+          </StyledTableRow>
         </TableHead>
         <TableBody>
           {defaultData?.notifications.map((row) => (
-            <TableRow key={row._id}>
+            <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.email}
               </StyledTableCell>
@@ -46,10 +84,10 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
               <StyledTableCell align="right">
-                <CheckIcon />
-                <CloseIcon />
+                <CheckIcon onClick={handleCheckMark} />
+                <CloseIcon onClick={handleCloseIcon} />
               </StyledTableCell>
-            </TableRow>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
