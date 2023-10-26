@@ -6,6 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
 import styled from "styled-components";
 
@@ -43,6 +45,10 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">{row.packageType}</StyledTableCell>
               <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
+              <StyledTableCell align="right">
+                <CheckIcon />
+                <CloseIcon />
+              </StyledTableCell>
             </TableRow>
           ))}
         </TableBody>
