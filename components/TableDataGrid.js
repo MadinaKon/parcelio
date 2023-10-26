@@ -52,6 +52,7 @@ export default function DataGridComponent({ data }) {
                   formName={"add-sender-service"}
                   defaultData={params.row}
                   transporterId={params.row.userId[0]}
+                  serviceId={params.row._id}
                 />
               )}
             </BasicModal>
