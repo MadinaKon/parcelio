@@ -23,4 +23,14 @@ export default async function handler(request, response) {
       response.status(400).json({ error: error.message });
     }
   }
+
+  if (request.method === "DELETE") {
+    try {
+      await User.findByIdAndDelete(id);
+      response.status(200).json({ status: `id ${id} successfully deleted.` });
+    } catch (error) {
+      console.log(error);
+      response.status(400).json({ error: error.message });
+    }
+  }
 }
