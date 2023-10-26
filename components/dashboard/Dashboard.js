@@ -88,12 +88,7 @@ export default function Dashboard({ children }) {
           <IconButton color="inherit">
             {/* <Badge badgeContent={99} color="secondary"> */}
             <Badge badgeContent={99} color="secondary" variant="dot">
-              <NotificationsIcon
-                onClick={handleNotificationClick}
-                // onClick={() => {
-                //   console.log("onClick");
-                // }}
-              />
+              <NotificationsIcon onClick={handleNotificationClick} />
             </Badge>
           </IconButton>
         </Toolbar>

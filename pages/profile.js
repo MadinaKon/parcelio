@@ -17,8 +17,6 @@ export default function ProfilePage() {
   const id = session?.user?.userId;
   const { data: user } = useSWR(`/api/users/${id}`);
 
-  console.log("ProfilePage USER ", user);
-
   return (
     <>
       <h2 id="add-service">Add Service</h2>
