@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import NotificationTable from "../notification-table/NotificationTable";
 
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
@@ -118,7 +117,6 @@ export default function UserProfileForm({ formName, defaultData }) {
         {/* {defaultData ? "Update service" : "Add service"} */}
         Update user data
       </button>
-      {/* <NotificationTable defaultData={defaultData?.notifications} /> */}
     </form>
   );
 }
