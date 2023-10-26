@@ -70,6 +70,7 @@ export default function Notification({ defaultData }) {
             <StyledTableCell align="right">Sender email</StyledTableCell>
             <StyledTableCell align="right">Notification</StyledTableCell>
             <StyledTableCell align="right">Sender phone number</StyledTableCell>
+            <StyledTableCell align="center">Description</StyledTableCell>
             <StyledTableCell align="right">Actions</StyledTableCell>
           </StyledTableRow>
         </TableHead>
