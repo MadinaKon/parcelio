@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import styled from "styled-components";
 
@@ -15,37 +16,19 @@ const StyledTableCell = styled(TableCell)`
   background-color: rgb(227, 252, 239);
   padding: 10px; /* Add padding */
   margin: 5px; /* Add margin */
-  transition: all 0.3s ease; /* Add transition effect for smooth changes */
 `;
 
 const StyledTableRow = styled(TableRow)`
   &:hover {
-    background-color: rgba(
-      227,
-      252,
-      239,
-      0.8
-    ); /* Change background color on hover */
-    transform: scale(1.05); /* Add scale effect on hover */
+    background-color: rgba(227, 252, 239, 0.8);
   }
-
-  /* Add animation for row entry */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  animation: fadeIn 0.5s ease forwards;
 `;
 export default function Notification({ defaultData }) {
   const [open, setOpen] = useState(false);
 
   const handleCheckMark = () => {
     console.log("handleCheckMark is clicked ");
+    // you accepted this request from sender xyz
   };
 
   const handleCloseIcon = () => {
@@ -87,6 +70,7 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">
                 <CheckIcon onClick={handleCheckMark} />
                 <CloseIcon onClick={handleCloseIcon} />
+                {/* <DeleteIcon onClick={handleCloseIcon} /> */}
               </StyledTableCell>
             </StyledTableRow>
           ))}
