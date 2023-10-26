@@ -6,7 +6,8 @@ export default async function handler(request, response) {
   const { id } = request.query;
   if (request.method === "GET") {
     const user = await User.findById(id).populate("notifications");
-    // TODO check why this
+    // const user = await User.findById(id);
+
     console.log("GET REQUEST USER: ", user);
 
     return response.status(200).json(user);
