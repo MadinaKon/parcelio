@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Notification from "../notification/Notification";
+import Divider from "../divider/Divider";
 
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
@@ -117,6 +119,8 @@ export default function UserProfileForm({ formName, defaultData }) {
         {/* {defaultData ? "Update service" : "Add service"} */}
         Update user data
       </button>
+      <Divider />
+      <Notification />
     </form>
   );
 }
