@@ -7,6 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import styled from "styled-components";
+
+const StyledTableCell = styled(TableCell)`
+  background-color: rgb(227, 252, 239);
+`;
+
 export default function Notification({ defaultData }) {
   return (
     <TableContainer component={Paper}>
@@ -20,23 +26,23 @@ export default function Notification({ defaultData }) {
               borderRadius: "100px",
             }}
           >
-            <TableCell>Date/Time</TableCell>
-            <TableCell align="right">Sender email</TableCell>
-            <TableCell align="right">Notification</TableCell>
-            <TableCell align="right">Sender phone number</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <StyledTableCell>Date/Time</StyledTableCell>
+            <StyledTableCell align="right">Sender email</StyledTableCell>
+            <StyledTableCell align="right">Notification</StyledTableCell>
+            <StyledTableCell align="right">Sender phone number</StyledTableCell>
+            <StyledTableCell align="right">Actions</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {defaultData?.notifications.map((row) => (
             <TableRow key={row._id}>
-              <TableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row">
                 {row.email}
-              </TableCell>
-              <TableCell align="right">{row.phoneNumber}</TableCell>
-              <TableCell align="right">{row.packageType}</TableCell>
-              <TableCell align="right">{row.totalWeight}</TableCell>
-              <TableCell align="right">{row.description}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="right">{row.packageType}</StyledTableCell>
+              <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
+              <StyledTableCell align="right">{row.description}</StyledTableCell>
             </TableRow>
           ))}
         </TableBody>
