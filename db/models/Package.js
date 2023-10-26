@@ -18,6 +18,7 @@ const packageSchema = new Schema({
   serviceId: { type: Schema.Types.ObjectId, ref: "Service" },
   email: { type: String, required: true },
   phoneNumber: { type: String, required: true },
+  date: Date,
   // transporterId: { type: Schema.Types.ObjectId, required: true },
   // recipientAddress: { type: String, required: true },
   // serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },

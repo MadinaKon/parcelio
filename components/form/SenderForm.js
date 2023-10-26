@@ -19,6 +19,7 @@ export default function SenderForm({
   }
 
   async function openSenderRequest(requestBody) {
+    console.log("REQUEST PACKAGE ", requestBody);
     const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
