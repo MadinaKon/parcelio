@@ -120,7 +120,7 @@ export default function UserProfileForm({ formName, defaultData }) {
         Update user data
       </button>
       <Divider />
-      <Notification />
+      <Notification defaultData={defaultData} />
     </form>
   );
 }
