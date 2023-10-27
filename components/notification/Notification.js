@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import styled from "styled-components";
 import DeleteSenderNotification from "../modal/DeleteSenderNotification";
+import toast, { Toaster } from "react-hot-toast";
 
 const StyledTableCell = styled(TableCell)`
   background-color: rgb(227, 252, 239);
@@ -26,10 +27,14 @@ const StyledTableRow = styled(TableRow)`
 `;
 export default function Notification({ defaultData }) {
   const [open, setOpen] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const handleCheckMark = () => {
-    console.log("handleCheckMark is clicked ");
-    // you accepted this request from sender xyz
+    toast.success("You accepted this request from sender", {
+      duration: 8000,
+    });
+
+    setIsConfirmed(true);
   };
 
   const handleCloseIcon = () => {
@@ -70,11 +75,19 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
               <StyledTableCell align="right">
-                <CheckIcon onClick={handleCheckMark} />
-
-                <DeleteSenderNotification notificationId={row._id}>
-                  <DeleteIcon onClick={handleCloseIcon} />
-                </DeleteSenderNotification>
+                {isConfirmed ? (
+                  <>
+                    <div>Request confirmed</div>
+                  </>
+                ) : (
+                  <>
+                    <CheckIcon onClick={handleCheckMark} />
+                    <Toaster position="top-right" reverseOrder={false} />
+                    <DeleteSenderNotification notificationId={row._id}>
+                      <DeleteIcon onClick={handleCloseIcon} />
+                    </DeleteSenderNotification>
+                  </>
+                )}
               </StyledTableCell>
             </StyledTableRow>
           ))}
