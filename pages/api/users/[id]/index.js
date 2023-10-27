@@ -1,15 +1,12 @@
-import dbConnect from "../../../db/models/connect";
-import User from "../../../db/models/User";
+import dbConnect from "../../../../db/models/connect";
+import User from "../../../../db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
+
   if (request.method === "GET") {
     const user = await User.findById(id).populate("notifications");
-    // const user = await User.findById(id);
-
-    console.log("GET REQUEST USER: ", user);
-
     return response.status(200).json(user);
   }
 
@@ -26,8 +23,16 @@ export default async function handler(request, response) {
 
   if (request.method === "DELETE") {
     try {
-      await User.findByIdAndDelete(id);
-      response.status(200).json({ status: `id ${id} successfully deleted.` });
+      const user = await User.findById(id);
+      if (!user) {
+        return response.status(404).json({ error: "User not found" });
+      }
+
+      user.notifications = user.notifications.filter(
+        (notification) => notification._id.toString() !== id
+      );
+
+      return response.json(user);
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });

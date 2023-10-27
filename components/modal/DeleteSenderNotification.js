@@ -7,13 +7,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
-export default function DeleteSenderNotification({ children, id }) {
-  console.log("DeleteSenderNotification ID ", id);
+export default function DeleteSenderNotification({ children, notificationId }) {
+  const { data: session } = useSession();
+  const { data: user, mutate } = useSWR(`/api/users`);
+  const userId = session?.user?.userId;
 
   const [open, setOpen] = useState(false);
-
-  const { data: user, mutate } = useSWR(`/api/users`);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,13 +24,20 @@ export default function DeleteSenderNotification({ children, id }) {
     setOpen(false);
   };
 
-  async function deleteSenderNotification(id) {
-    await fetch(`/api/users/${id}`, {
-      method: "DELETE",
-    });
+  async function deleteSenderNotification(notificationId) {
+    console.log("I'M GETTING USER ID ", userId);
+    console.log("I'M GETTING NOTIFICATION ID ", notificationId);
 
-    mutate();
-    handleClose();
+    try {
+      await fetch(`/api/users/${userId}/notifications/${notificationId}`, {
+        method: "DELETE",
+      });
+
+      mutate();
+      handleClose();
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+    }
   }
 
   return (
@@ -49,7 +57,7 @@ export default function DeleteSenderNotification({ children, id }) {
             Cancel
           </Button>
           <Button
-            onClick={() => deleteSenderNotification(id)}
+            onClick={() => deleteSenderNotification(notificationId)}
             color="primary"
             autoFocus
           >

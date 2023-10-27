@@ -11,7 +11,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import styled from "styled-components";
-import { Alert } from "@mui/material";
 import DeleteSenderNotification from "../modal/DeleteSenderNotification";
 
 const StyledTableCell = styled(TableCell)`
@@ -38,18 +37,6 @@ export default function Notification({ defaultData }) {
     setOpen(false);
 
     // handleClose();
-  };
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
   };
 
   return (
@@ -85,7 +72,7 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">
                 <CheckIcon onClick={handleCheckMark} />
 
-                <DeleteSenderNotification id={row._id}>
+                <DeleteSenderNotification notificationId={row._id}>
                   <DeleteIcon onClick={handleCloseIcon} />
                 </DeleteSenderNotification>
               </StyledTableCell>
