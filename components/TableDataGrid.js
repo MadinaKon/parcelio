@@ -37,7 +37,6 @@ export default function DataGridComponent({ data }) {
       headerName: "Actions",
       width: 230,
       renderCell: (params) => {
-        console.log("PARAMS ROW: ", params.row.userId[0]);
         return (
           <>
             <BasicModal id={params.row._id}>
@@ -52,6 +51,7 @@ export default function DataGridComponent({ data }) {
                   formName={"add-sender-service"}
                   defaultData={params.row}
                   transporterId={params.row.userId[0]}
+                  serviceId={params.row._id}
                 />
               )}
             </BasicModal>
@@ -111,7 +111,6 @@ export default function DataGridComponent({ data }) {
           headerName: "Actions",
           width: 230,
           renderCell: (params) => {
-            // console.log("PARAMS NO SESSION: ", params);
             return (
               <>
                 <BasicModal id={params.row._id}>
