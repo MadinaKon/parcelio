@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
+import useLocalStorageState from "use-local-storage-state";
 
 import styled from "styled-components";
 import DeleteSenderNotification from "../modal/DeleteSenderNotification";
@@ -27,21 +28,22 @@ const StyledTableRow = styled(TableRow)`
 `;
 export default function Notification({ defaultData }) {
   const [open, setOpen] = useState(false);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [confirmedPackages, setConfirmedPackages] = useLocalStorageState(
+    "confirmedPackages",
+    { defaultValue: [] }
+  );
 
-  const handleCheckMark = () => {
+  const handleCheckMark = (rowId) => {
     toast.success("You accepted this request from sender", {
       duration: 8000,
     });
 
-    setIsConfirmed(true);
+    setConfirmedPackages([...confirmedPackages, rowId]);
   };
 
   const handleCloseIcon = () => {
     console.log("handleCloseIcon is clicked ");
     setOpen(false);
-
-    // handleClose();
   };
 
   return (
@@ -75,13 +77,13 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
               <StyledTableCell align="right">
-                {isConfirmed ? (
+                {confirmedPackages?.includes(row._id) ? (
                   <>
                     <div>Request confirmed</div>
                   </>
                 ) : (
                   <>
-                    <CheckIcon onClick={handleCheckMark} />
+                    <CheckIcon onClick={() => handleCheckMark(row._id)} />
                     <Toaster position="top-right" reverseOrder={false} />
                     <DeleteSenderNotification notificationId={row._id}>
                       <DeleteIcon onClick={handleCloseIcon} />

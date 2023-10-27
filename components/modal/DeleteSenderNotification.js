@@ -25,15 +25,13 @@ export default function DeleteSenderNotification({ children, notificationId }) {
   };
 
   async function deleteSenderNotification(notificationId) {
-    console.log("I'M GETTING USER ID ", userId);
-    console.log("I'M GETTING NOTIFICATION ID ", notificationId);
-
     try {
       await fetch(`/api/users/${userId}/notifications/${notificationId}`, {
         method: "DELETE",
       });
 
       mutate();
+
       handleClose();
     } catch (error) {
       console.error("Error deleting notification:", error);
