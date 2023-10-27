@@ -5,9 +5,6 @@ export default async function handler(request, response) {
   await dbConnect();
   const { id, notificationId } = request.query;
 
-  console.log("USER ID DELETE ", id);
-  console.log("NOTIFOICATION ID DELETE ", notificationId);
-
   if (request.method === "DELETE") {
     try {
       const user = await User.findById(id);
