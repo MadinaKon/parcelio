@@ -1,5 +1,3 @@
-// import dbConnect from "../../../../db/models/connect";
-// import User from "../../../../db/models/User";
 import dbConnect from "../../../../../db/models/connect";
 import User from "../../../../../db/models/User";
 
@@ -17,9 +15,13 @@ export default async function handler(request, response) {
         return response.status(404).json({ error: "User not found" });
       }
 
-      user.notifications = user.notifications.filter((notification) => {
-        notification.toString() !== notificationId;
-      });
+      await User.findByIdAndUpdate(
+        id,
+        {
+          $pull: { notifications: notificationId },
+        },
+        { new: true }
+      );
 
       response.status(200).json({
         status: `notification with id ${notificationId} successfully for userId ${id} deleted.`,
