@@ -2,12 +2,16 @@ import React, { Fragment } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Notification from "../notification/Notification";
+import Divider from "../divider/Divider";
 
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
   const id = session?.user?.userId;
+
+  // console.log("DEFAULT DATA IN USER PROFILE ", defaultData);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -115,28 +119,8 @@ export default function UserProfileForm({ formName, defaultData }) {
         {/* {defaultData ? "Update service" : "Add service"} */}
         Update user data
       </button>
-      <h4>You have following notifications</h4>
-      {defaultData?.notifications.map(
-        ({
-          _id,
-          length,
-          width,
-          height,
-          totalWeight,
-          packageType,
-          description,
-          serviceId,
-          email,
-          phoneNumber,
-        }) => (
-          <Fragment key={_id}>
-            <div>Length {length}</div>
-            <div>Height {height}</div>
-            <div>Width {width}</div>
-            <div>Total weight {totalWeight}</div>
-          </Fragment>
-        )
-      )}
+      <Divider />
+      <Notification defaultData={defaultData} />
     </form>
   );
 }

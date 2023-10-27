@@ -15,12 +15,12 @@ export default async function handler(request, response) {
     try {
       const { serviceId, userId, ...requestBody } = request.body;
 
-      await Package.create({ serviceId, userId, ...requestBody });
+      const pack = await Package.create({ serviceId, userId, ...requestBody });
 
       await User.findByIdAndUpdate(
         userId,
         {
-          $push: { notifications: serviceId },
+          $push: { notifications: pack._id },
         },
         { new: true }
       );

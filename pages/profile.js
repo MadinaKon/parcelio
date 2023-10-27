@@ -15,9 +15,7 @@ const StyledBackLink = styled(StyledLink)`
 export default function ProfilePage() {
   const { data: session } = useSession();
   const id = session?.user?.userId;
-  const { data: user, mutate } = useSWR(`/api/users/${id}`);
-
-  const router = useRouter();
+  const { data: user } = useSWR(`/api/users/${id}`);
 
   return (
     <>
