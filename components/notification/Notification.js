@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
+import useLocalStorageState from "use-local-storage-state";
 
 import styled from "styled-components";
 import DeleteSenderNotification from "../modal/DeleteSenderNotification";
@@ -27,7 +28,10 @@ const StyledTableRow = styled(TableRow)`
 `;
 export default function Notification({ defaultData }) {
   const [open, setOpen] = useState(false);
-  const [confirmedPackages, setConfirmedPackages] = useState([]);
+  const [confirmedPackages, setConfirmedPackages] = useLocalStorageState(
+    "confirmedPackages",
+    { defaultValue: [] }
+  );
 
   const handleCheckMark = (rowId) => {
     toast.success("You accepted this request from sender", {
@@ -73,7 +77,7 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
               <StyledTableCell align="right">
-                {confirmedPackages.includes(row._id) ? (
+                {confirmedPackages?.includes(row._id) ? (
                   <>
                     <div>Request confirmed</div>
                   </>
