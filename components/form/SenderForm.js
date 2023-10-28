@@ -3,6 +3,17 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Grid } from "@mui/material";
 
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  border: 2px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+`;
+
 export default function SenderForm({
   formName,
   defaultData,
@@ -54,7 +65,7 @@ export default function SenderForm({
           <label htmlFor="email">Email</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="email"
             name="email"
             type="email"
@@ -66,7 +77,7 @@ export default function SenderForm({
           <label htmlFor="phone">Phone number</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="phone"
             name="phoneNumber"
             type="text"
@@ -78,7 +89,7 @@ export default function SenderForm({
           <label htmlFor="packageType">Package type</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="packageType"
             name="packageType"
             type="text"
@@ -91,7 +102,7 @@ export default function SenderForm({
           <label htmlFor="totalWeight">Total weight</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="totalWeight"
             name="totalWeight"
             type="text"
@@ -103,7 +114,7 @@ export default function SenderForm({
           <label htmlFor="height">Height</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="height"
             name="height"
             type="text"
@@ -115,7 +126,7 @@ export default function SenderForm({
           <label htmlFor="width">Width</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="width"
             name="width"
             type="text"
@@ -127,7 +138,7 @@ export default function SenderForm({
           <label htmlFor="length">Length</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="length"
             name="length"
             type="text"
@@ -139,7 +150,7 @@ export default function SenderForm({
           <label htmlFor="weight">Weight</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             name="weight"
             id="weight"
             type="text"
