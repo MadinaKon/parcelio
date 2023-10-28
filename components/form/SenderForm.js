@@ -10,6 +10,8 @@ export default function SenderForm({
 }) {
   const { data: service, mutate } = useSWR("/api/services");
 
+  console.log("DEFAULT DATA SENDER FORM ", defaultData);
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -42,9 +44,9 @@ export default function SenderForm({
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
-      <h3>Send a package details</h3>
+      <h3>Send the details of the package</h3>
 
-      {/* {defaultData ? "Update service details" : "Send a package details"} */}
+      {/* {defaultData ? "Update service details" : "Send the details of the package"} */}
       <br />
       <label htmlFor="email">Email</label>
       <input
@@ -130,9 +132,10 @@ export default function SenderForm({
       ></textarea>
       <br />
 
-      <button type="submit">
+      {/* <button type="submit">
         {defaultData ? "Update service" : "Add service"}
-      </button>
+      </button> */}
+      <button type="submit">Submit</button>
     </form>
   );
 }

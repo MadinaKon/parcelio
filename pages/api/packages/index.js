@@ -25,7 +25,10 @@ export default async function handler(request, response) {
         { new: true }
       );
 
-      response.status(201).json({ status: "package successfully created" });
+      // response.status(201).json({ status: "package successfully created" });
+      response.status(201).json({
+        status: `package with package id ${pack._id} successfully created`,
+      });
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });
