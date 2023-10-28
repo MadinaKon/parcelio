@@ -4,6 +4,18 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Grid } from "@mui/material";
 
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  border: 2px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+`;
+
+
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/services");
@@ -72,7 +84,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="firstName">First name</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="firstName"
             name="firstName"
             type="text"
@@ -84,7 +96,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="lastName">last name</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="lastName"
             name="lastName"
             type="text"
@@ -96,7 +108,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="userName">userName</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="userName"
             name="userName"
             type="text"
@@ -108,7 +120,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="fromCity">From city</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="fromCity"
             name="fromCity"
             type="text"
@@ -120,7 +132,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="toCity">To city</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="toCity"
             name="toCity"
             type="text"
@@ -132,7 +144,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="flightDateTime">Flight date</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="flightDateTime"
             name="flightDateTime"
             type="date"
@@ -144,7 +156,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="availableKilos">availableKilos</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="availableKilos"
             name="availableKilos"
             type="text"
@@ -156,7 +168,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="phoneNumber">Phone number</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="phoneNumber"
             name="phoneNumber"
             type="text"
