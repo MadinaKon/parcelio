@@ -6,6 +6,27 @@ import Notification from "../notification/Notification";
 import Divider from "../divider/Divider";
 import { Grid } from "@mui/material";
 
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  border: 2px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+`;
+
+const StyledButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 100%;
+`;
+
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/users");
@@ -46,7 +67,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="name">Name</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="name"
             name="name"
             type="text"
@@ -60,7 +81,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="email">Email</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="email"
             name="email"
             type="text"
@@ -73,7 +94,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="image">Image</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="image"
             name="image"
             type="text"
@@ -86,7 +107,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="phoneNumber">Phone number</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="phoneNumber"
             name="phoneNumber"
             type="text"
@@ -97,7 +118,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="country">Country</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="country"
             name="country"
             type="text"
@@ -108,7 +129,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="city">City</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="city"
             name="city"
             type="text"
@@ -119,7 +140,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="address">Address</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="address"
             name="address"
             type="text"
@@ -130,18 +151,17 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="postalCode">Postal code</label>
         </Grid>
         <Grid item xs={11}>
-          <input
+          <StyledInput
             id="postalCode"
             name="postalCode"
             type="text"
             defaultValue={defaultData?.postalCode}
           />
         </Grid>
-        <Grid item xs={12}>
-          <button type="submit">
-            {/* {defaultData ? "Update service" : "Add service"} */}
+        <Grid item xs={2}>
+          <StyledButton type="submit" style={{ margin: "10px" }}>
             Update user data
-          </button>
+          </StyledButton>
         </Grid>
         <Divider />
         <Notification defaultData={defaultData} />

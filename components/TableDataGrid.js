@@ -30,7 +30,7 @@ export default function DataGridComponent({ data }) {
     { field: "phoneNumber", headerName: "Phone Number", width: 150 },
     { field: "fromCity", headerName: "From City", width: 150 },
     { field: "toCity", headerName: "To City", width: 150 },
-    { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
+    { field: "flightDateTime", headerName: "Flight Date", width: 200 },
     { field: "availableKilos", headerName: "Available Kilos", width: 150 },
     {
       field: "actions",
@@ -70,7 +70,7 @@ export default function DataGridComponent({ data }) {
         { field: "phoneNumber", headerName: "Phone Number", width: 150 },
         { field: "fromCity", headerName: "From City", width: 150 },
         { field: "toCity", headerName: "To City", width: 150 },
-        { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
+        { field: "flightDateTime", headerName: "Flight Date", width: 200 },
         { field: "availableKilos", headerName: "Available Kilos", width: 150 },
         {
           field: "actions",
@@ -104,7 +104,7 @@ export default function DataGridComponent({ data }) {
       setColumns([
         { field: "fromCity", headerName: "From City", width: 150 },
         { field: "toCity", headerName: "To City", width: 150 },
-        { field: "flightDateTime", headerName: "Flight Date Time", width: 200 },
+        { field: "flightDateTime", headerName: "Flight Date", width: 200 },
         { field: "availableKilos", headerName: "Available Kilos", width: 150 },
         {
           field: "actions",
