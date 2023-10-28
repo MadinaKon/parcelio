@@ -75,9 +75,11 @@ export default function Notification({ defaultData }) {
               <StyledTableCell component="th" scope="row">
                 {row.email}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="left">{row.phoneNumber}</StyledTableCell>
               <StyledTableCell align="right">{row.packageType}</StyledTableCell>
-              <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
+              <StyledTableCell align="center">
+                {row.totalWeight}
+              </StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
               <StyledTableCell align="right">
                 {confirmedPackages?.includes(row._id) ? (
