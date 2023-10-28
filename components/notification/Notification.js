@@ -42,7 +42,6 @@ export default function Notification({ defaultData }) {
   };
 
   const handleCloseIcon = () => {
-    console.log("handleCloseIcon is clicked ");
     setOpen(false);
   };
 
@@ -58,10 +57,10 @@ export default function Notification({ defaultData }) {
               borderRadius: "100px",
             }}
           >
-            <StyledTableCell>Date/Time</StyledTableCell>
-            <StyledTableCell align="right">Sender email</StyledTableCell>
-            <StyledTableCell align="right">Notification</StyledTableCell>
-            <StyledTableCell align="right">Sender phone number</StyledTableCell>
+            <StyledTableCell align="left">Sender email</StyledTableCell>
+            <StyledTableCell align="left">Sender phone number</StyledTableCell>
+            <StyledTableCell align="right">Package type</StyledTableCell>
+            <StyledTableCell align="center">Weight</StyledTableCell>
             <StyledTableCell align="center">Description</StyledTableCell>
             <StyledTableCell align="right">Actions</StyledTableCell>
           </StyledTableRow>
