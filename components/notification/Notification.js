@@ -94,7 +94,7 @@ export default function Notification({ defaultData }) {
                 ) : (
                   <>
                     <CheckIcon onClick={() => handleCheckMark(row._id)} />
-                    <Toaster position="top-right" reverseOrder={false} />
+                    <Toaster position="bottom-center" reverseOrder={false} />
                     <DeleteSenderNotification notificationId={row._id}>
                       <DeleteIcon onClick={handleCloseIcon} />
                     </DeleteSenderNotification>
