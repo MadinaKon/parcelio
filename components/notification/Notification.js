@@ -50,13 +50,18 @@ export default function Notification({ defaultData }) {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      style={{
+        marginBottom: "200px",
+      }}
+    >
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <TableHead>
           <StyledTableRow
             style={{
               backgroundColor: "teal",
-              border: "solid 5px yellow",
+              border: "solid 5px teal",
               marginBottom: "10px",
               borderRadius: "100px",
             }}
@@ -75,9 +80,11 @@ export default function Notification({ defaultData }) {
               <StyledTableCell component="th" scope="row">
                 {row.email}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="left">{row.phoneNumber}</StyledTableCell>
               <StyledTableCell align="right">{row.packageType}</StyledTableCell>
-              <StyledTableCell align="right">{row.totalWeight}</StyledTableCell>
+              <StyledTableCell align="center">
+                {row.totalWeight}
+              </StyledTableCell>
               <StyledTableCell align="right">{row.description}</StyledTableCell>
               <StyledTableCell align="right">
                 {confirmedPackages?.includes(row._id) ? (
