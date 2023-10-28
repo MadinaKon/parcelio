@@ -11,8 +11,10 @@ import { useSession } from "next-auth/react";
 
 export default function DeleteSenderNotification({ children, notificationId }) {
   const { data: session } = useSession();
-  const { data: user, mutate } = useSWR(`/api/users`);
   const userId = session?.user?.userId;
+  // const { data: user, mutate } = useSWR(`/api/users`);
+
+  const { data: user, mutate } = useSWR(`/api/users/${userId}`);
 
   const [open, setOpen] = useState(false);
 
@@ -37,6 +39,20 @@ export default function DeleteSenderNotification({ children, notificationId }) {
       console.error("Error deleting notification:", error);
     }
   }
+
+  // async function deleteSenderNotification(notificationId) {
+  //   try {
+  //     await fetch(`/api/users/${userId}/notifications/${notificationId}`, {
+  //       method: "DELETE",
+  //     });
+
+  //     mutate();
+
+  //     handleClose();
+  //   } catch (error) {
+  //     console.error("Error deleting notification:", error);
+  //   }
+  // }
 
   return (
     <>
