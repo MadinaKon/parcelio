@@ -14,6 +14,16 @@ const StyledInput = styled.input`
   border-radius: 10px;
 `;
 
+const StyledButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 100%;
+`;
+
 export default function SenderForm({
   formName,
   defaultData,
@@ -171,10 +181,7 @@ export default function SenderForm({
           ></textarea>
         </Grid>
 
-        {/* <button type="submit">
-        {defaultData ? "Update service" : "Add service"}
-      </button> */}
-        <button type="submit">Submit</button>
+        <StyledButton type="submit">Submit</StyledButton>
       </Grid>
     </form>
   );
