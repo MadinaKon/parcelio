@@ -12,7 +12,8 @@
   font-size: 14px;
   color: var(--primary-dark);
   margin-top: 20px;
-  width: 90vw;
-  max-width: 1200px;
-  border-radius: 10px 10px 0 0;
+  background-color: #1976d2;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
