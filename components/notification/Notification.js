@@ -50,7 +50,12 @@ export default function Notification({ defaultData }) {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      style={{
+        marginBottom: "200px",
+      }}
+    >
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <TableHead>
           <StyledTableRow
