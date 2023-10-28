@@ -163,7 +163,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             Update user data
           </StyledButton>
         </Grid>
-        <Divider />
+        {/* <Divider /> */}
         <Notification defaultData={defaultData} />
       </Grid>
     </form>
