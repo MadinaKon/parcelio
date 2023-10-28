@@ -129,7 +129,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="flightDateTime">Flight date time</label>
+          <label htmlFor="flightDateTime">Flight date</label>
         </Grid>
         <Grid item xs={6}>
           <input
