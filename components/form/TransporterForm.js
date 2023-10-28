@@ -25,6 +25,15 @@ const StyledButton = styled.button`
   width: 100%;
 `;
 
+const StyledTextArea = styled.textarea`
+  border: 2px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+`;
+
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/services");
@@ -189,13 +198,13 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="description">Description</label>
         </Grid>
         <Grid item xs={6}>
-          <textarea
+          <StyledTextArea
             name="description"
             id="description"
             cols="16"
             rows="10"
             defaultValue={defaultData?.description}
-          ></textarea>
+          ></StyledTextArea>
         </Grid>
         <Grid item xs={4}>
           <StyledButton type="submit">
