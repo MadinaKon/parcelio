@@ -38,7 +38,7 @@ export default function Home() {
       </Head>
       <Profile />
       <main>
-        <h1>Parcelio - send your parcel through community</h1>
+        <h1>Parcelio - send your parcel through Kyrgyz community 🇰🇬</h1>
         <DataGridComponent data={data} />
       </main>
     </>
