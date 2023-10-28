@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Notification from "../notification/Notification";
 import Divider from "../divider/Divider";
+import { Grid } from "@mui/material";
 
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
@@ -37,88 +38,114 @@ export default function UserProfileForm({ formName, defaultData }) {
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
-      <h2>Profile form</h2>
-
-      <label htmlFor="name">Name</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        defaultValue={defaultData?.name}
-        required
-        readOnly
-      />
-      <br />
-
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="text"
-        defaultValue={defaultData?.email}
-        required
-        readOnly
-      />
-      <br />
-      <label htmlFor="image">Image</label>
-      <input
-        id="image"
-        name="image"
-        type="text"
-        defaultValue={defaultData?.image}
-        required
-        readOnly
-      />
-      <br />
-      <label htmlFor="phoneNumber">Phone number</label>
-      <input
-        id="phoneNumber"
-        name="phoneNumber"
-        type="text"
-        defaultValue={defaultData?.phoneNumber}
-      />
-      <br />
-
-      <label htmlFor="country">Country</label>
-      <input
-        id="country"
-        name="country"
-        type="text"
-        defaultValue={defaultData?.country}
-      />
-      <br />
-      <label htmlFor="city">City</label>
-      <input
-        id="city"
-        name="city"
-        type="text"
-        defaultValue={defaultData?.city}
-      />
-      <br />
-
-      <label htmlFor="address">Address</label>
-      <input
-        id="address"
-        name="address"
-        type="text"
-        defaultValue={defaultData?.address}
-      />
-      <br />
-
-      <label htmlFor="postalCode">Postal code</label>
-      <input
-        id="postalCode"
-        name="postalCode"
-        type="text"
-        defaultValue={defaultData?.postalCode}
-      />
-      <br />
-      <button type="submit">
-        {/* {defaultData ? "Update service" : "Add service"} */}
-        Update user data
-      </button>
-      <Divider />
-      <Notification defaultData={defaultData} />
+      <Grid container>
+        <Grid item xs={50}>
+          <h2>Profile form</h2>
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="name">Name</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            defaultValue={defaultData?.name}
+            required
+            readOnly
+          />
+        </Grid>
+        <Grid item xs={25}>
+          {" "}
+          <label htmlFor="email">Email</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="email"
+            name="email"
+            type="text"
+            defaultValue={defaultData?.email}
+            required
+            readOnly
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="image">Image</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="image"
+            name="image"
+            type="text"
+            defaultValue={defaultData?.image}
+            required
+            readOnly
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="phoneNumber">Phone number</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="phoneNumber"
+            name="phoneNumber"
+            type="text"
+            defaultValue={defaultData?.phoneNumber}
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="country">Country</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="country"
+            name="country"
+            type="text"
+            defaultValue={defaultData?.country}
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="city">City</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            defaultValue={defaultData?.city}
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="address">Address</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            defaultValue={defaultData?.address}
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <label htmlFor="postalCode">Postal code</label>
+        </Grid>
+        <Grid item xs={25}>
+          <input
+            id="postalCode"
+            name="postalCode"
+            type="text"
+            defaultValue={defaultData?.postalCode}
+          />
+        </Grid>
+        <Grid item xs={25}>
+          <button type="submit">
+            {/* {defaultData ? "Update service" : "Add service"} */}
+            Update user data
+          </button>
+        </Grid>
+        <Divider />
+        <Notification defaultData={defaultData} />
+      </Grid>
     </form>
   );
 }
