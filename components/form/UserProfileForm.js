@@ -138,8 +138,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <button type="submit">
-            {/* {defaultData ? "Update service" : "Add service"} */}
+          <button type="submit" style={{ margin: "10px" }}>
             Update user data
           </button>
         </Grid>
