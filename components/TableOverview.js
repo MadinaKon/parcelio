@@ -31,7 +31,7 @@ export default function TableOverview({ data }) {
             <TableCell>Username</TableCell>
             <TableCell>From city</TableCell>
             <TableCell>To city</TableCell>
-            <TableCell>Flight Date time</TableCell>
+            <TableCell>Flight Date</TableCell>
             <TableCell>Available kilos</TableCell>
             <TableCell>Phone number</TableCell>
 

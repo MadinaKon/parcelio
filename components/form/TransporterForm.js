@@ -4,6 +4,36 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Grid } from "@mui/material";
 
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  border: 2px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+`;
+
+const StyledButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 100%;
+`;
+
+const StyledTextArea = styled.textarea`
+  border: 2px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+`;
+
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/services");
@@ -72,7 +102,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="firstName">First name</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="firstName"
             name="firstName"
             type="text"
@@ -84,7 +114,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="lastName">last name</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="lastName"
             name="lastName"
             type="text"
@@ -96,7 +126,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="userName">userName</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="userName"
             name="userName"
             type="text"
@@ -108,7 +138,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="fromCity">From city</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="fromCity"
             name="fromCity"
             type="text"
@@ -120,7 +150,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="toCity">To city</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="toCity"
             name="toCity"
             type="text"
@@ -129,10 +159,10 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="flightDateTime">Flight date time</label>
+          <label htmlFor="flightDateTime">Flight date</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="flightDateTime"
             name="flightDateTime"
             type="date"
@@ -144,7 +174,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="availableKilos">availableKilos</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="availableKilos"
             name="availableKilos"
             type="text"
@@ -156,7 +186,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="phoneNumber">Phone number</label>
         </Grid>
         <Grid item xs={6}>
-          <input
+          <StyledInput
             id="phoneNumber"
             name="phoneNumber"
             type="text"
@@ -168,18 +198,18 @@ export default function TransporterForm({ formName, defaultData, id }) {
           <label htmlFor="description">Description</label>
         </Grid>
         <Grid item xs={6}>
-          <textarea
+          <StyledTextArea
             name="description"
             id="description"
             cols="16"
             rows="10"
             defaultValue={defaultData?.description}
-          ></textarea>
+          ></StyledTextArea>
         </Grid>
-        <Grid item xs={6}>
-          <button type="submit">
+        <Grid item xs={4}>
+          <StyledButton type="submit">
             {defaultData ? "Update service" : "Add service"}
-          </button>
+          </StyledButton>
         </Grid>
       </Grid>
     </form>
