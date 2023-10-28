@@ -17,6 +17,16 @@ const StyledInput = styled.input`
   border-radius: 10px;
 `;
 
+const StyledButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 100%;
+`;
+
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/users");
@@ -148,10 +158,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             defaultValue={defaultData?.postalCode}
           />
         </Grid>
-        <Grid item xs={12}>
-          <button type="submit" style={{ margin: "10px" }}>
+        <Grid item xs={2}>
+          <StyledButton type="submit" style={{ margin: "10px" }}>
             Update user data
-          </button>
+          </StyledButton>
         </Grid>
         <Divider />
         <Notification defaultData={defaultData} />
