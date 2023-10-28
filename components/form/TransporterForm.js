@@ -2,6 +2,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { Grid } from "@mui/material";
 
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
@@ -65,90 +66,122 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
-      <label htmlFor="firstName">First name</label>
-      <input
-        id="firstName"
-        name="firstName"
-        type="text"
-        defaultValue={defaultData?.firstName}
-        required
-      />
-      <br />
-      <label htmlFor="lastName">last name</label>
-      <input
-        id="lastName"
-        name="lastName"
-        type="text"
-        defaultValue={defaultData?.lastName}
-        required
-      />
-      <br />
-      <label htmlFor="userName">userName</label>
-      <input
-        id="userName"
-        name="userName"
-        type="text"
-        defaultValue={defaultData?.userName}
-        required
-      />
-      <br />
-      <label htmlFor="fromCity">From city</label>
-      <input
-        id="fromCity"
-        name="fromCity"
-        type="text"
-        defaultValue={defaultData?.fromCity}
-        required
-      />
-      <br />
-      <label htmlFor="toCity">To city</label>
-      <input
-        id="toCity"
-        name="toCity"
-        type="text"
-        defaultValue={defaultData?.toCity}
-        required
-      />
-      <br />
-      <label htmlFor="flightDateTime">Flight date time</label>
-      <input
-        id="flightDateTime"
-        name="flightDateTime"
-        type="date"
-        defaultValue={defaultData?.flightDateTime}
-        required
-      />
-      <br />
-      <label htmlFor="availableKilos">availableKilos</label>
-      <input
-        id="availableKilos"
-        name="availableKilos"
-        type="text"
-        defaultValue={defaultData?.availableKilos}
-        required
-      />
-      <br />
-      <label htmlFor="phoneNumber">Phone number</label>
-      <input
-        id="phoneNumber"
-        name="phoneNumber"
-        type="text"
-        defaultValue={defaultData?.phoneNumber}
-        required
-      />
-      <br />
-      <label htmlFor="description">Description</label>
-      <textarea
-        name="description"
-        id="description"
-        cols="30"
-        rows="10"
-        defaultValue={defaultData?.description}
-      ></textarea>
-      <br />
-      <button type="submit">
-        {defaultData ? "Update service" : "Add service"}
-      </button>
+      <Grid container>
+        <Grid item xs={6}>
+          {" "}
+          <label htmlFor="firstName">First name</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="firstName"
+            name="firstName"
+            type="text"
+            defaultValue={defaultData?.firstName}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="lastName">last name</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            defaultValue={defaultData?.lastName}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="userName">userName</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="userName"
+            name="userName"
+            type="text"
+            defaultValue={defaultData?.userName}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="fromCity">From city</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="fromCity"
+            name="fromCity"
+            type="text"
+            defaultValue={defaultData?.fromCity}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="toCity">To city</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="toCity"
+            name="toCity"
+            type="text"
+            defaultValue={defaultData?.toCity}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="flightDateTime">Flight date time</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="flightDateTime"
+            name="flightDateTime"
+            type="date"
+            defaultValue={defaultData?.flightDateTime}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="availableKilos">availableKilos</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="availableKilos"
+            name="availableKilos"
+            type="text"
+            defaultValue={defaultData?.availableKilos}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="phoneNumber">Phone number</label>
+        </Grid>
+        <Grid item xs={6}>
+          <input
+            id="phoneNumber"
+            name="phoneNumber"
+            type="text"
+            defaultValue={defaultData?.phoneNumber}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <label htmlFor="description">Description</label>
+        </Grid>
+        <Grid item xs={6}>
+          <textarea
+            name="description"
+            id="description"
+            cols="16"
+            rows="10"
+            defaultValue={defaultData?.description}
+          ></textarea>
+        </Grid>
+        <Grid item xs={6}>
+          <button type="submit">
+            {defaultData ? "Update service" : "Add service"}
+          </button>
+        </Grid>
+      </Grid>
     </form>
   );
 }
