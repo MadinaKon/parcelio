@@ -39,13 +39,13 @@ export default function UserProfileForm({ formName, defaultData }) {
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
       <Grid container>
-        <Grid item xs={50}>
+        <Grid item xs={30}>
           <h2>Profile form</h2>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="name">Name</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="name"
             name="name"
@@ -55,11 +55,11 @@ export default function UserProfileForm({ formName, defaultData }) {
             readOnly
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           {" "}
           <label htmlFor="email">Email</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="email"
             name="email"
@@ -69,10 +69,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             readOnly
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="image">Image</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="image"
             name="image"
@@ -82,10 +82,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             readOnly
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="phoneNumber">Phone number</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="phoneNumber"
             name="phoneNumber"
@@ -93,10 +93,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             defaultValue={defaultData?.phoneNumber}
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="country">Country</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="country"
             name="country"
@@ -104,10 +104,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             defaultValue={defaultData?.country}
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="city">City</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="city"
             name="city"
@@ -115,10 +115,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             defaultValue={defaultData?.city}
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="address">Address</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="address"
             name="address"
@@ -126,10 +126,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             defaultValue={defaultData?.address}
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <label htmlFor="postalCode">Postal code</label>
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <input
             id="postalCode"
             name="postalCode"
@@ -137,7 +137,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             defaultValue={defaultData?.postalCode}
           />
         </Grid>
-        <Grid item xs={25}>
+        <Grid item xs={15}>
           <button type="submit">
             {/* {defaultData ? "Update service" : "Add service"} */}
             Update user data
