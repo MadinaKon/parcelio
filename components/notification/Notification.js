@@ -33,6 +33,10 @@ export default function Notification({ defaultData }) {
     { defaultValue: [] }
   );
 
+  if (defaultData?.notifications.length === 0) {
+    return null;
+  }
+
   const handleCheckMark = (rowId) => {
     toast.success("You accepted this request from sender", {
       duration: 8000,
