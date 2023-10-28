@@ -56,7 +56,7 @@ export default function Notification({ defaultData }) {
           <StyledTableRow
             style={{
               backgroundColor: "teal",
-              border: "solid 5px yellow",
+              border: "solid 5px teal",
               marginBottom: "10px",
               borderRadius: "100px",
             }}
