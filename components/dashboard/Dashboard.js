@@ -12,6 +12,8 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useRouter } from "next/router";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 const drawerWidth = 240;
 
@@ -37,6 +39,11 @@ const AppBar = styled(MuiAppBar, {
 export default function Dashboard({ children }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  const { data: session } = useSession();
+  const userId = session?.user?.userId;
+  const userApiUrl = userId ? `/api/users/${userId}` : "";
+  const { data: user } = useSWR(userApiUrl);
 
   const handleNotificationClick = () => {
     setOpen(true);
@@ -86,10 +93,14 @@ export default function Dashboard({ children }) {
             {children}
           </Typography>
           <IconButton color="inherit">
-            {/* <Badge badgeContent={99} color="secondary"> */}
-            <Badge badgeContent={99} color="secondary" variant="dot">
-              <NotificationsIcon onClick={handleNotificationClick} />
-            </Badge>
+            {userId && (
+              <Badge
+                badgeContent={user?.notifications?.length}
+                color="secondary"
+              >
+                <NotificationsIcon onClick={handleNotificationClick} />
+              </Badge>
+            )}
           </IconButton>
         </Toolbar>
       </AppBar>
