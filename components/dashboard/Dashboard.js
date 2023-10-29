@@ -42,8 +42,13 @@ export default function Dashboard({ children }) {
 
   const { data: session } = useSession();
   const userId = session?.user?.userId;
-
   const { data: user } = useSWR(`/api/users/${userId}`);
+
+  // if (session === null || session === undefined) {
+  //   console.log("NOT LOGGED IN USER ");
+  // }
+
+  //console.log("SESSION ", session);
 
   const handleNotificationClick = () => {
     setOpen(true);
