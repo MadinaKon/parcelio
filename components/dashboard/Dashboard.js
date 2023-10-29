@@ -42,13 +42,8 @@ export default function Dashboard({ children }) {
 
   const { data: session } = useSession();
   const userId = session?.user?.userId;
-  const { data: user } = useSWR(`/api/users/${userId}`);
-
-  // if (session === null || session === undefined) {
-  //   console.log("NOT LOGGED IN USER ");
-  // }
-
-  //console.log("SESSION ", session);
+  const userApiUrl = userId ? `/api/users/${userId}` : "";
+  const { data: user } = useSWR(userApiUrl);
 
   const handleNotificationClick = () => {
     setOpen(true);
@@ -98,9 +93,14 @@ export default function Dashboard({ children }) {
             {children}
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={user?.notifications?.length} color="secondary">
-              <NotificationsIcon onClick={handleNotificationClick} />
-            </Badge>
+            {userId && (
+              <Badge
+                badgeContent={user?.notifications?.length}
+                color="secondary"
+              >
+                <NotificationsIcon onClick={handleNotificationClick} />
+              </Badge>
+            )}
           </IconButton>
         </Toolbar>
       </AppBar>
