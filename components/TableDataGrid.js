@@ -176,7 +176,6 @@ export default function DataGridComponent({ data }) {
               title="Add service is available only for logged-in users"
               arrow
             >
-              {" "}
               <span>
                 <Button variant="contained" color="primary" disabled>
                   Add service
