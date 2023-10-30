@@ -6,6 +6,10 @@ import { Grid } from "@mui/material";
 
 import styled from "styled-components";
 
+const StyledForm = styled.form`
+  margin-top: 30px;
+  margin-bottom: 70px;
+`;
 const StyledInput = styled.input`
   border: 2px solid #eee;
   padding: 10px;
@@ -95,7 +99,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
   }
 
   return (
-    <form aria-labelledby={formName} onSubmit={handleSubmit}>
+    <StyledForm aria-labelledby={formName} onSubmit={handleSubmit}>
+      <h2>Create a service form</h2>
       <Grid container>
         <Grid item xs={6}>
           {" "}
@@ -212,6 +217,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
           </StyledButton>
         </Grid>
       </Grid>
-    </form>
+    </StyledForm>
   );
 }
