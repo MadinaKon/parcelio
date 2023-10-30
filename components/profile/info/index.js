@@ -15,9 +15,9 @@ export default function ProfileInfo({ session }) {
       /> */}
       <div>
         <h1>Hello {session.user?.name}</h1>
-        <p>You are signed in as {session.user?.email}</p>
-        <Avatar alt="Remy Sharp" src={session.user?.image} />
-        <AuthButton />
+        {/* <p>You are signed in as {session.user?.email}</p> */}
+        {/* <Avatar alt="Remy Sharp" src={session.user?.image} /> */}
+        {/* <AuthButton /> */}
       </div>
     </>
   );
