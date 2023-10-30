@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const StyledLink = styled.a`
+  margin-bottom: 20px;
   background-color: lightgreen;
   padding: 0.8rem 1.5rem;
   border-radius: 0.6rem;
