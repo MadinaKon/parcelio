@@ -21,45 +21,7 @@ const FixedLink = styled(StyledLink)`
 export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { data: session } = useSession();
-
-  const [columns, setColumns] = useState([
-    //   { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First Name", width: 150 },
-    { field: "lastName", headerName: "Last Name", width: 150 },
-    { field: "userName", headerName: "Username", width: 150 },
-    { field: "phoneNumber", headerName: "Phone Number", width: 150 },
-    { field: "fromCity", headerName: "From City", width: 150 },
-    { field: "toCity", headerName: "To City", width: 150 },
-    { field: "flightDateTime", headerName: "Flight Date", width: 200 },
-    { field: "availableKilos", headerName: "Available Kilos", width: 150 },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 230,
-      renderCell: (params) => {
-        return (
-          <>
-            <BasicModal id={params.row._id}>
-              {session ? (
-                <TransporterForm
-                  formName={"update-service"}
-                  defaultData={params.row}
-                  id={params.row._id}
-                />
-              ) : (
-                <SenderForm
-                  formName={"add-sender-service"}
-                  defaultData={params.row}
-                  transporterId={params.row.userId[0]}
-                  serviceId={params.row._id}
-                />
-              )}
-            </BasicModal>
-          </>
-        );
-      },
-    },
-  ]);
+  const [columns, setColumns] = useState([]);
 
   useEffect(() => {
     if (session) {
@@ -76,28 +38,7 @@ export default function DataGridComponent({ data }) {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params) => {
-            return (
-              <>
-                <BasicModal id={params.row._id}>
-                  {session ? (
-                    <TransporterForm
-                      formName={"update-service"}
-                      defaultData={params.row}
-                      id={params.row._id}
-                    />
-                  ) : (
-                    <SenderForm
-                      formName={"add-sender-service"}
-                      defaultData={params.row}
-                      userId={params.row._id}
-                      transporterId={params.row.userId[0]}
-                    />
-                  )}
-                </BasicModal>
-              </>
-            );
-          },
+          renderCell: (params) => renderActionsCell(params, session),
         },
       ]);
     } else {
@@ -110,32 +51,32 @@ export default function DataGridComponent({ data }) {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params) => {
-            return (
-              <>
-                <BasicModal id={params.row._id}>
-                  {session ? (
-                    <TransporterForm
-                      formName={"update-service"}
-                      defaultData={params.row}
-                      id={params.row._id}
-                    />
-                  ) : (
-                    <SenderForm
-                      formName={"add-sender-service"}
-                      defaultData={params.row}
-                      serviceId={params.row._id}
-                      transporterId={params.row.userId[0]}
-                    />
-                  )}
-                </BasicModal>
-              </>
-            );
-          },
+          renderCell: (params) => renderActionsCell(params, session),
         },
       ]);
     }
   }, [session]);
+
+  const renderActionsCell = (params, session) => {
+    return (
+      <BasicModal id={params.row._id}>
+        {session ? (
+          <TransporterForm
+            formName={"update-service"}
+            defaultData={params.row}
+            id={params.row._id}
+          />
+        ) : (
+          <SenderForm
+            formName={"add-sender-service"}
+            defaultData={params.row}
+            serviceId={params.row._id}
+            transporterId={params.row.userId[0]}
+          />
+        )}
+      </BasicModal>
+    );
+  };
 
   const handleButtonClick = (event) => {
     if (!session) {
@@ -148,16 +89,6 @@ export default function DataGridComponent({ data }) {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        // initialState={{
-        //   columns: {
-        //     columnVisibilityModel: {
-        //       firstName: false,
-        //       lastName: false,
-        //       userName: false,
-        //       phoneNumber: false,
-        //     },
-        //   },
-        // }}
         rows={data}
         columns={columns}
         pageSize={5}
