@@ -80,7 +80,7 @@ export default function SenderForm({
         </Grid>
         {/* {defaultData ? "Update service details" : "Send the details of the package"} */}
         <Grid item xs={6}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -92,7 +92,7 @@ export default function SenderForm({
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="phone">Phone number</label>
+          <label htmlFor="phone">Phone number *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -104,7 +104,7 @@ export default function SenderForm({
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="packageType">Package type</label>
+          <label htmlFor="packageType">Package type *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -117,7 +117,7 @@ export default function SenderForm({
         </Grid>
         <Grid item xs={6}>
           {" "}
-          <label htmlFor="totalWeight">Total weight</label>
+          <label htmlFor="totalWeight">Total weight *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -129,7 +129,7 @@ export default function SenderForm({
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="height">Height</label>
+          <label htmlFor="height">Height *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -141,7 +141,7 @@ export default function SenderForm({
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="width">Width</label>
+          <label htmlFor="width">Width *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -153,7 +153,7 @@ export default function SenderForm({
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="length">Length</label>
+          <label htmlFor="length">Length *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -165,7 +165,7 @@ export default function SenderForm({
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="weight">Weight</label>
+          <label htmlFor="weight">Weight *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
