@@ -23,8 +23,6 @@ export default function DataGridComponent({ data }) {
   const { data: session } = useSession();
   const [columns, setColumns] = useState([]);
 
-  console.log("DATA IN DataGridComponent ", data);
-
   useEffect(() => {
     if (session) {
       setColumns([
