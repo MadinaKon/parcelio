@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { StyledLink } from "../components/StyledLink.js";
 import DataGridComponent from "../components/TableDataGrid";
 import Profile from "../components/profile";
+import { useSession } from "next-auth/react";
 
 const List = styled.ul`
   list-style: none;
@@ -25,7 +26,13 @@ const FixedLink = styled(StyledLink)`
 `;
 
 export default function Home() {
-  const { data } = useSWR("/api/services", { fallbackData: [] });
+  const { data: session } = useSession();
+
+  const { data } = useSWR(`/api/services?userId=${session?.user.userId}`, {
+    fallbackData: [],
+  });
+
+  if (!data) return;
 
   return (
     <>

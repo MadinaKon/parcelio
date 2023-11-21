@@ -11,9 +11,19 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      // profile: (data) => {
-      //   console.log("DATA profile ", data);
-      // },
+      profile: (profile) => {
+        return {
+          id: profile.id,
+          // This ID is required but it will not be saved in your users collection
+          name: profile.name,
+          email: profile.email,
+          image: profile.avatar_url,
+
+          // You can add any other properties you want to the user object
+          admin: false,
+          preferedColors: ["#dddddd", "#ffffff"],
+        };
+      },
     }),
     // ...add more providers here
   ],
@@ -21,6 +31,7 @@ export const authOptions = {
   callbacks: {
     async session({ session, user }) {
       session.user.userId = user.id;
+
       return session;
     },
   },
