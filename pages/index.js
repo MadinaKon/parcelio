@@ -28,7 +28,12 @@ const FixedLink = styled(StyledLink)`
 export default function Home() {
   const { data: session } = useSession();
 
-  const { data } = useSWR(`/api/services?userId=${session?.user.userId}`, {
+  // const { data } = useSWR(`/api/services?userId=${session?.user.userId}`, {
+  //   fallbackData: [],
+  // });
+
+  const userId = session?.user?.userId || "652d4f3c6f5df5893c3e3abf";
+  const { data } = useSWR(`/api/services?userId=${userId}`, {
     fallbackData: [],
   });
 
