@@ -4,9 +4,16 @@ import dbConnect from "../../../db/models/connect";
 export default async function handler(request, response) {
   await dbConnect();
 
+  const { userId } = request.query;
+
   if (request.method === "GET") {
-    const services = await Service.find();
-    return response.status(200).json(services);
+    if (userId) {
+      const services = await Service.find({ userId });
+      return response.status(200).json(services);
+    } else {
+      const services = await Service.find();
+      return response.status(200).json(services);
+    }
   }
 
   if (request.method === "POST") {
