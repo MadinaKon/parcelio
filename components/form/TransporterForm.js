@@ -104,7 +104,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
       <Grid container>
         <Grid item xs={6}>
           {" "}
-          <label htmlFor="firstName">First name</label>
+          <label htmlFor="firstName">First name *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -116,7 +116,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="lastName">last name</label>
+          <label htmlFor="lastName">Last name *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -128,7 +128,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="userName">userName</label>
+          <label htmlFor="userName">Username *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -140,7 +140,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="fromCity">From city</label>
+          <label htmlFor="fromCity">From city *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -152,7 +152,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="toCity">To city</label>
+          <label htmlFor="toCity">To city *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -164,7 +164,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="flightDateTime">Flight date</label>
+          <label htmlFor="flightDateTime">Flight date *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -176,7 +176,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="availableKilos">availableKilos</label>
+          <label htmlFor="availableKilos">Available kilos *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
@@ -188,7 +188,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="phoneNumber">Phone number</label>
+          <label htmlFor="phoneNumber">Phone number *</label>
         </Grid>
         <Grid item xs={6}>
           <StyledInput
