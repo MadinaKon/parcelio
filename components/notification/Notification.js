@@ -16,7 +16,6 @@ import DeleteSenderNotification from "../modal/DeleteSenderNotification";
 import toast, { Toaster } from "react-hot-toast";
 
 const StyledTableCell = styled(TableCell)`
-  background-color: rgb(227, 252, 239);
   padding: 10px; /* Add padding */
   margin: 5px; /* Add margin */
 `;
