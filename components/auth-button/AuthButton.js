@@ -15,15 +15,17 @@ export default function AuthButton() {
   }
   return (
     <>
-      <button
+      {/* <button
         className={`${btn} ${login}`}
         onClick={() => signIn("github", { callbackUrl: `/` })}
       >
         Sign in with GitHub
-      </button>
-      <button className={`${btn} ${login}`} onClick={() => signIn()}>
-        Sign in with Email
-      </button>
+      </button> */}
+      {/* <button className={`${btn} ${login}`} onClick={() => signIn("google")}>
+        Sign in with Google
+      </button> */}
+
+      <button onClick={() => signIn()}> Sign in with Google</button>
     </>
   );
 }
