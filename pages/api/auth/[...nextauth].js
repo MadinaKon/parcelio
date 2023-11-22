@@ -11,21 +11,32 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      profile: (profile) => {
-        return {
-          id: profile.id,
-          // This ID is required but it will not be saved in your users collection
-          name: profile.name,
-          email: profile.email,
-          image: profile.avatar_url,
+      // profile: (profile) => {
+      //   return {
+      //     id: profile.id,
+      //     // This ID is required but it will not be saved in your users collection
+      //     name: profile.name,
+      //     email: profile.email,
+      //     image: profile.avatar_url,
 
-          // You can add any other properties you want to the user object
-          admin: false,
-          preferedColors: ["#dddddd", "#ffffff"],
-        };
-      },
+      //     // You can add any other properties you want to the user object
+      //     admin: false,
+      //     preferedColors: ["#dddddd", "#ffffff"],
+      //   };
+      // },
     }),
     // ...add more providers here
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
   ],
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
@@ -34,6 +45,17 @@ export const authOptions = {
 
       return session;
     },
+    async signIn({ account, profile }) {
+      if (account.provider === "google") {
+        console.log("ACCOUNT ", account);
+        console.log("PROFILE ", profile);
+        return profile.email_verified && profile.email.endsWith("@gmail.com");
+      }
+      return true; // Do different verification for other providers that don't have `email_verified`
+    },
+  },
+  session: {
+    strategy: "jwt",
   },
 };
 
