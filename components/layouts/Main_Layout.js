@@ -12,6 +12,7 @@ export default function Main_Layout({ children }) {
         </Head>
         <Nav />
       </Dashboard>
+      <br />
       <main>{children}</main>
       <Footer />
     </>
