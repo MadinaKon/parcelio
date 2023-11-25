@@ -7,7 +7,6 @@ export default async function handler(request, response) {
   const { userId } = request.query;
 
   if (request.method === "GET") {
-    console.log(userId);
     if (userId) {
       const services = await Service.find({ userId });
       return response.status(200).json(services);

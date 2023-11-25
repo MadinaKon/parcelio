@@ -42,8 +42,6 @@ export default function SenderForm({
 }) {
   const { data: service, mutate } = useSWR("/api/services");
 
-  console.log("DEFAULT DATA SENDER FORM ", defaultData);
-
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -53,7 +51,6 @@ export default function SenderForm({
   }
 
   async function openSenderRequest(requestBody) {
-    console.log("REQUEST PACKAGE ", requestBody);
     const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
