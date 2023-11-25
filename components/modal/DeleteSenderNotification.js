@@ -40,20 +40,6 @@ export default function DeleteSenderNotification({ children, notificationId }) {
     }
   }
 
-  // async function deleteSenderNotification(notificationId) {
-  //   try {
-  //     await fetch(`/api/users/${userId}/notifications/${notificationId}`, {
-  //       method: "DELETE",
-  //     });
-
-  //     mutate();
-
-  //     handleClose();
-  //   } catch (error) {
-  //     console.error("Error deleting notification:", error);
-  //   }
-  // }
-
   return (
     <>
       <Button variant="contained" color="error" onClick={handleClickOpen}>
