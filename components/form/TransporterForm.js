@@ -24,7 +24,6 @@ const StyledButton = styled.button`
   border: none;
   background-color: #1976d2;
   color: #fff;
-  font-weight: 600;
   border-radius: 5px;
   width: 100%;
 `;
@@ -207,7 +206,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
             name="description"
             id="description"
             cols="16"
-            rows="10"
+            rows="5"
             defaultValue={defaultData?.description}
           ></StyledTextArea>
         </Grid>

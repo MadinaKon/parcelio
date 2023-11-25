@@ -5,10 +5,8 @@ import { Grid } from "@mui/material";
 
 import styled from "styled-components";
 
-const StyledForm = styled.form`
-  padding: 20px;
-`;
-
+const StyledForm = styled.form``;
+// padding: 20px;
 const StyledInput = styled.input`
   border: 2px solid #eee;
   padding: 10px;
@@ -44,8 +42,6 @@ export default function SenderForm({
 }) {
   const { data: service, mutate } = useSWR("/api/services");
 
-  console.log("DEFAULT DATA SENDER FORM ", defaultData);
-
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -55,7 +51,6 @@ export default function SenderForm({
   }
 
   async function openSenderRequest(requestBody) {
-    console.log("REQUEST PACKAGE ", requestBody);
     const response = await fetch("/api/packages", {
       method: "POST",
       headers: {
@@ -188,7 +183,7 @@ export default function SenderForm({
             name="description"
             id="description"
             cols="16"
-            rows="10"
+            rows="5"
             defaultValue={defaultData?.description}
           ></StyledTextArea>
         </Grid>
