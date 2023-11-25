@@ -5,10 +5,8 @@ import { Grid } from "@mui/material";
 
 import styled from "styled-components";
 
-const StyledForm = styled.form`
-  padding: 20px;
-`;
-
+const StyledForm = styled.form``;
+// padding: 20px;
 const StyledInput = styled.input`
   border: 2px solid #eee;
   padding: 10px;
@@ -188,7 +186,7 @@ export default function SenderForm({
             name="description"
             id="description"
             cols="16"
-            rows="10"
+            rows="5"
             defaultValue={defaultData?.description}
           ></StyledTextArea>
         </Grid>
