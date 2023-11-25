@@ -5,6 +5,10 @@ import { Grid } from "@mui/material";
 
 import styled from "styled-components";
 
+const StyledForm = styled.form`
+  padding: 20px;
+`;
+
 const StyledInput = styled.input`
   border: 2px solid #eee;
   padding: 10px;
@@ -73,7 +77,7 @@ export default function SenderForm({
   }
 
   return (
-    <form aria-labelledby={formName} onSubmit={handleSubmit}>
+    <StyledForm aria-labelledby={formName} onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={12}>
           <h4>Send the details of the package</h4>
@@ -191,6 +195,6 @@ export default function SenderForm({
 
         <StyledButton type="submit">Submit</StyledButton>
       </Grid>
-    </form>
+    </StyledForm>
   );
 }
