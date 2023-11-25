@@ -24,7 +24,6 @@ const StyledButton = styled.button`
   border: none;
   background-color: #1976d2;
   color: #fff;
-  font-weight: 600;
   border-radius: 5px;
   width: 100%;
 `;
