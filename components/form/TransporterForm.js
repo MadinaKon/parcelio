@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -15,7 +15,15 @@ export default function TransporterForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
-  function handleSubmit(event) {
+  const [open, setOpen] = useState(false);
+  const handleOpenForm = () => setOpen(true);
+
+  const handleCloseForm = () => {
+    console.log("handleCloseForm is clicked");
+    setOpen(false);
+  };
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
@@ -23,12 +31,14 @@ export default function TransporterForm({ formName, defaultData, id }) {
     data.id = id;
 
     if (formName === "add-service") {
-      addService(data);
+      await addService(data);
     } else if (formName === "update-service") {
-      updateService(data);
+      await updateService(data);
     } else {
-      deleteService(id);
+      await deleteService(id);
     }
+
+    handleCloseForm();
   }
 
   async function addService(service) {
