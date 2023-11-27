@@ -2,38 +2,13 @@ import React from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Grid } from "@mui/material";
+import {
+  StyledForm,
+  StyledInput,
+  StyledButton,
+  StyledTextArea,
+} from "./css.styled";
 
-import styled from "styled-components";
-
-const StyledForm = styled.form``;
-// padding: 20px;
-const StyledInput = styled.input`
-  border: 2px solid #eee;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 0;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-`;
-
-const StyledButton = styled.button`
-  padding: 10px;
-  border: none;
-  background-color: #1976d2;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 5px;
-  width: 100%;
-`;
-
-const StyledTextArea = styled.textarea`
-  border: 2px solid #eee;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 0;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-`;
 export default function SenderForm({
   formName,
   defaultData,
