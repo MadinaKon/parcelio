@@ -23,3 +23,9 @@ export const StyledLink = styled.a`
       border: 3px solid lightsalmon;
     `}
 `;
+
+export const FixedLink = styled(StyledLink)`
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+`;

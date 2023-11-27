@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import Link from "next/link.js";
-import { StyledLink } from "../components/StyledLink.js";
+import { FixedLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
 import SenderForm from "./form/SenderForm.js";
 import { useRouter } from "next/router";
@@ -11,12 +10,6 @@ import TransporterForm from "./form/TransporterForm.js";
 import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Dashboard from "./dashboard/Dashboard.js";
-
-const FixedLink = styled(StyledLink)`
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-`;
 
 export default function DataGridComponent({ data }) {
   const router = useRouter();
