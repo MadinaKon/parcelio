@@ -42,6 +42,9 @@ export default function TransporterForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
+  
+
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);

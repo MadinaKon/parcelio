@@ -24,8 +24,8 @@ export default function BasicModal({ children, id }) {
   const router = useRouter();
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpenForm = () => setOpen(true);
+  const handleCloseForm = () => setOpen(false);
 
   const { data: session } = useSession();
 
@@ -39,29 +39,17 @@ export default function BasicModal({ children, id }) {
     <div>
       {session ? (
         <>
-          <Button onClick={handleOpen}>Update</Button>
+          <Button onClick={handleOpenForm}>Update</Button>
           <DeleteModal id={id} />
         </>
       ) : (
         <a onClick={handleButtonClick}>
           {!session && (
-            // <Tooltip
-            //   title="Contact is available only for logged-in users"
-            //   arrow
-            // >
-            //   <span>
-            //     <Button
-            //       onClick={handleOpen}
-            //       variant="contained"
-            //       color="primary"
-            //       disabled
-            //     >
-            //       Contact
-            //     </Button>
-            //   </span>
-            // </Tooltip>
-
-            <Button onClick={handleOpen} variant="contained" color="primary">
+            <Button
+              onClick={handleOpenForm}
+              variant="contained"
+              color="primary"
+            >
               Contact
             </Button>
           )}
@@ -70,7 +58,7 @@ export default function BasicModal({ children, id }) {
 
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseForm}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
