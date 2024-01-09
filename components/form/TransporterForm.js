@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Grid } from "@mui/material";
-
+import CustomCloseIcon from "../layouts/CloseIcon";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
   margin-top: 30px;
   margin-bottom: 70px;
 `;
+
+const StyledInputLabel = styled.label`
+  margin-bottom: 10px;
+`;
+
 const StyledInput = styled.input`
   border: 2px solid #eee;
   padding: 10px;
@@ -37,10 +42,33 @@ const StyledTextArea = styled.textarea`
   border-radius: 10px;
 `;
 
+const InputField = ({ label, id, name, type, defaultValue, required }) => (
+  <>
+    <StyledInputLabel htmlFor={id}>{label} *</StyledInputLabel>
+    <StyledInput
+      id={id}
+      name={name}
+      type={type}
+      defaultValue={defaultValue}
+      required={required}
+    />
+  </>
+);
+
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    console.log("Close is clicked");
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -100,13 +128,13 @@ export default function TransporterForm({ formName, defaultData, id }) {
   return (
     <StyledForm aria-labelledby={formName} onSubmit={handleSubmit}>
       <h2>Create a service form</h2>
+      <CustomCloseIcon onClick={handleClose} />
       <Grid container>
         <Grid item xs={6}>
           {" "}
-          <label htmlFor="firstName">First name *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          {/* <label htmlFor="firstName">First name *</label> */}
+          <InputField
+            label="First name"
             id="firstName"
             name="firstName"
             type="text"
@@ -115,10 +143,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="lastName">Last name *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="Last name"
             id="lastName"
             name="lastName"
             type="text"
@@ -126,11 +152,10 @@ export default function TransporterForm({ formName, defaultData, id }) {
             required
           />
         </Grid>
+
         <Grid item xs={6}>
-          <label htmlFor="userName">Username *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="Username"
             id="userName"
             name="userName"
             type="text"
@@ -139,10 +164,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="fromCity">From city *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="fromCity"
             id="fromCity"
             name="fromCity"
             type="text"
@@ -150,11 +173,10 @@ export default function TransporterForm({ formName, defaultData, id }) {
             required
           />
         </Grid>
+
         <Grid item xs={6}>
-          <label htmlFor="toCity">To city *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="toCity"
             id="toCity"
             name="toCity"
             type="text"
@@ -162,23 +184,21 @@ export default function TransporterForm({ formName, defaultData, id }) {
             required
           />
         </Grid>
+
         <Grid item xs={6}>
-          <label htmlFor="flightDateTime">Flight date *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="flightDateTime"
             id="flightDateTime"
             name="flightDateTime"
-            type="date"
+            type="text"
             defaultValue={defaultData?.flightDateTime}
             required
           />
         </Grid>
+
         <Grid item xs={6}>
-          <label htmlFor="availableKilos">Available kilos *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="availableKilos"
             id="availableKilos"
             name="availableKilos"
             type="text"
@@ -187,10 +207,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <label htmlFor="phoneNumber">Phone number *</label>
-        </Grid>
-        <Grid item xs={6}>
-          <StyledInput
+          <InputField
+            label="phoneNumber"
             id="phoneNumber"
             name="phoneNumber"
             type="text"
@@ -198,6 +216,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
             required
           />
         </Grid>
+
         <Grid item xs={6}>
           <label htmlFor="description">Description</label>
         </Grid>
