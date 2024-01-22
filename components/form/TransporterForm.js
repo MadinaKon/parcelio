@@ -41,12 +41,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
-  const [clickX, setClickX] = useState();
-
-  function onClickX() {
-    setClickX(true);
-    console.log("x clicked");
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -106,7 +100,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
   return (
     <StyledForm aria-labelledby={formName} onSubmit={handleSubmit}>
       <h2>Create a service form</h2>
-      <div onClick={onClickX}>X</div>
       <Grid container>
         <Grid item xs={6}>
           {" "}
