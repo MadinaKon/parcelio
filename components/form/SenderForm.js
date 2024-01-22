@@ -42,14 +42,6 @@ export default function SenderForm({
 }) {
   const { data: service, mutate } = useSWR("/api/services");
 
-  // const [clickX, setClickX] = useState();
-  const [close, setClose] = useState();
-
-  function onClickX() {
-    setClose(true);
-    console.log("x clicked");
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -84,7 +76,6 @@ export default function SenderForm({
       <Grid container>
         <Grid item xs={12}>
           <h4>Send the details of the package</h4>
-          <div onClick={onClickX}>X</div>
         </Grid>
         {/* {defaultData ? "Update service details" : "Send the details of the package"} */}
         <Grid item xs={6}>
