@@ -87,12 +87,11 @@ export default function BasicModal({ children, id }) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {children}
           </Typography>
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
         </Box>
       </Modal>
-
-      <IconButton onClick={handleClose}>
-        <CloseIcon />
-      </IconButton>
     </div>
   );
 }
