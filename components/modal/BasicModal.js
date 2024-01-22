@@ -2,11 +2,16 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Tooltip } from "@mui/material";
 import DeleteModal from "./DeleteModal";
+
+// import Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const style = {
   position: "absolute",
@@ -25,7 +30,10 @@ export default function BasicModal({ children, id }) {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const { data: session } = useSession();
 
@@ -68,13 +76,17 @@ export default function BasicModal({ children, id }) {
         </a>
       )}
 
-      <Modal
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      >
+      > */}
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {children}
           </Typography>
