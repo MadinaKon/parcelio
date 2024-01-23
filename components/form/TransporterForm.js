@@ -99,6 +99,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
     router.push("/");
   }
+
   async function deleteService(id) {
     await fetch(`/api/services/${id}`, {
       method: "DELETE",
@@ -220,7 +221,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
             defaultValue={defaultData?.description}
           ></StyledTextArea>
         </Grid>
-        <Grid item xs={4}>
+                <Grid item xs={4}>
           <StyledButton type="submit">
             {defaultData ? "Update service" : "Add service"}
           </StyledButton>
