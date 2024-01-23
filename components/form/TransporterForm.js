@@ -42,7 +42,16 @@ export default function TransporterForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
-  function handleSubmit(event) {
+  const [open, setOpen] = useState(true);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => {
+    setOpen(false);
+    console.log("TransporterForm handle close clicked");
+  };
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
@@ -52,7 +61,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
     if (formName === "add-service") {
       addService(data);
     } else if (formName === "update-service") {
-      updateService(data);
+      await updateService(data);
+      handleClose();
     } else {
       deleteService(id);
     }
@@ -89,6 +99,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
     router.push("/");
   }
+
   async function deleteService(id) {
     await fetch(`/api/services/${id}`, {
       method: "DELETE",
@@ -210,7 +221,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
             defaultValue={defaultData?.description}
           ></StyledTextArea>
         </Grid>
-        <Grid item xs={4}>
+                <Grid item xs={4}>
           <StyledButton type="submit">
             {defaultData ? "Update service" : "Add service"}
           </StyledButton>
