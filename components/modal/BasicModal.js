@@ -5,10 +5,7 @@ import Typography from "@mui/material/Typography";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Tooltip } from "@mui/material";
 import DeleteModal from "./DeleteModal";
-
-// import Modal from "@mui/material/Modal";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
@@ -53,22 +50,6 @@ export default function BasicModal({ children, id }) {
       ) : (
         <a onClick={handleButtonClick}>
           {!session && (
-            // <Tooltip
-            //   title="Contact is available only for logged-in users"
-            //   arrow
-            // >
-            //   <span>
-            //     <Button
-            //       onClick={handleOpen}
-            //       variant="contained"
-            //       color="primary"
-            //       disabled
-            //     >
-            //       Contact
-            //     </Button>
-            //   </span>
-            // </Tooltip>
-
             <Button onClick={handleOpen} variant="contained" color="primary">
               Contact
             </Button>
@@ -76,12 +57,6 @@ export default function BasicModal({ children, id }) {
         </a>
       )}
 
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      > */}
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <IconButton onClick={handleClose}>
