@@ -42,7 +42,16 @@ export default function TransporterForm({ formName, defaultData, id }) {
   const { data: service, mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
-  function handleSubmit(event) {
+  const [open, setOpen] = useState(true);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => {
+    setOpen(false);
+    console.log("TransporterForm handle close clicked");
+  };
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
@@ -52,7 +61,8 @@ export default function TransporterForm({ formName, defaultData, id }) {
     if (formName === "add-service") {
       addService(data);
     } else if (formName === "update-service") {
-      updateService(data);
+      await updateService(data);
+      handleClose();
     } else {
       deleteService(id);
     }
