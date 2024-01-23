@@ -20,6 +20,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  m: 4,
 };
 
 export default function BasicModal({ children, id }) {
@@ -57,7 +58,18 @@ export default function BasicModal({ children, id }) {
         </a>
       )}
 
-      <Modal open={open} onClose={handleClose}>
+      {/* <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {children}
+          </Typography>
+        </Box>
+      </Modal> */}
+
+      <Modal open={open}>
         <Box sx={style}>
           <IconButton onClick={handleClose}>
             <CloseIcon />
