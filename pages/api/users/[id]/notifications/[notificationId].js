@@ -5,6 +5,8 @@ export default async function handler(request, response) {
   await dbConnect();
   const { id, notificationId } = request.query;
 
+  console.log(("REQUEST QUERY ", request.query));
+
   if (request.method === "DELETE") {
     try {
       const user = await User.findById(id);
@@ -12,10 +14,17 @@ export default async function handler(request, response) {
         return response.status(404).json({ error: "User not found" });
       }
 
+      // await User.findByIdAndUpdate(
+      //   id,
+      //   {
+      //     $pull: { notifications: notificationId },
+      //   },
+      //   { new: true }
+      // )
       await User.findByIdAndUpdate(
         id,
         {
-          $pull: { notifications: notificationId },
+          $set: { "notifications.read": true },
         },
         { new: true }
       );
