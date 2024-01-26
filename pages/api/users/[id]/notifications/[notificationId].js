@@ -17,16 +17,24 @@ export default async function handler(request, response) {
       // await User.findByIdAndUpdate(
       //   id,
       //   {
-      //     $pull: { notifications: notificationId },
+
+      //     $set: { "notifications.$.read": true },
       //   },
-      //   { new: true }
-      // )
+      //   {
+      //     arrayFilters: [{ "notifications.$._id": notificationId }],
+      //     new: true,
+      //   }
+      // );
+
       await User.findByIdAndUpdate(
         id,
         {
-          $set: { "notifications.read": true },
+          $set: { "notifications.$[element].read": true },
         },
-        { new: true }
+        {
+          arrayFilters: [{ "element._id": notificationId }],
+          new: true,
+        }
       );
 
       response.status(200).json({

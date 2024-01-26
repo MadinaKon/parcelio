@@ -16,9 +16,14 @@ const userSchema = new Schema({
   phoneNumber: { type: String, required: true },
   serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },
   // notifications: [{ type: Schema.Types.ObjectId, ref: "Package" }],
+  // notifications: [
+  //   {
+  //     read: { type: Boolean, default: false },
+  //   },
+  // ],
   notifications: [
     {
-      // notificationsId: { type: [Schema.Types.ObjectId], ref: "Package" },
+      //  _id: { type: Schema.Types.ObjectId, ref: "Package" },
       read: { type: Boolean, default: false },
     },
   ],

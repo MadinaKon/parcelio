@@ -26,6 +26,10 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 export default function Notification({ defaultData }) {
+  console.log("DEFAULT DATA ", defaultData);
+
+  // console.log("defaultData?.notifications ", defaultData?.notifications);
+
   const [open, setOpen] = useState(false);
   const [confirmedPackages, setConfirmedPackages] = useLocalStorageState(
     "confirmedPackages",
