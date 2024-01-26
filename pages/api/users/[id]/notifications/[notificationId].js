@@ -14,27 +14,13 @@ export default async function handler(request, response) {
         return response.status(404).json({ error: "User not found" });
       }
 
-      // await User.findByIdAndUpdate(
-      //   id,
-      //   {
-
-      //     $set: { "notifications.$.read": true },
-      //   },
-      //   {
-      //     arrayFilters: [{ "notifications.$._id": notificationId }],
-      //     new: true,
-      //   }
-      // );
-
       await User.findByIdAndUpdate(
         id,
         {
-          $set: { "notifications.$[element].read": true },
+          $pull: { notifications: notificationId },
         },
-        {
-          arrayFilters: [{ "element._id": notificationId }],
-          new: true,
-        }
+        { $set: { "notifications.$.read": true } },
+        { new: true }
       );
 
       response.status(200).json({

@@ -26,17 +26,13 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 export default function Notification({ defaultData }) {
-  console.log("DEFAULT DATA ", defaultData);
-
-  // console.log("defaultData?.notifications ", defaultData?.notifications);
-
   const [open, setOpen] = useState(false);
   const [confirmedPackages, setConfirmedPackages] = useLocalStorageState(
     "confirmedPackages",
     { defaultValue: [] }
   );
 
-  if (defaultData?.notifications.length === 0) {
+  if (defaultData?.notifications?.length === 0) {
     return null;
   }
 
@@ -78,7 +74,7 @@ export default function Notification({ defaultData }) {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {defaultData?.notifications.map((row) => (
+          {defaultData?.notifications?.map((row) => (
             <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.email}
