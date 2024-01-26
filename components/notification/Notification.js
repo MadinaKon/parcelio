@@ -32,7 +32,7 @@ export default function Notification({ defaultData }) {
     { defaultValue: [] }
   );
 
-  if (defaultData?.notifications.length === 0) {
+  if (defaultData?.notifications?.length === 0) {
     return null;
   }
 
@@ -74,7 +74,7 @@ export default function Notification({ defaultData }) {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {defaultData?.notifications.map((row) => (
+          {defaultData?.notifications?.map((row) => (
             <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.email}

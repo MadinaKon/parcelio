@@ -32,6 +32,8 @@ export default async function handler(request, response) {
         (notification) => notification._id.toString() !== id
       );
 
+      console.log("user.notifications ", user.notifications);
+
       return response.json(user);
     } catch (error) {
       console.log(error);

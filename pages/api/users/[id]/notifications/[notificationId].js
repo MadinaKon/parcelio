@@ -5,6 +5,8 @@ export default async function handler(request, response) {
   await dbConnect();
   const { id, notificationId } = request.query;
 
+  console.log(("REQUEST QUERY ", request.query));
+
   if (request.method === "DELETE") {
     try {
       const user = await User.findById(id);
@@ -17,6 +19,7 @@ export default async function handler(request, response) {
         {
           $pull: { notifications: notificationId },
         },
+        { $set: { "notifications.$.read": true } },
         { new: true }
       );
 
