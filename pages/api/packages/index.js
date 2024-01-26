@@ -17,14 +17,6 @@ export default async function handler(request, response) {
 
       const pack = await Package.create({ serviceId, userId, ...requestBody });
 
-      // await User.findByIdAndUpdate(
-      //   userId,
-      //   {
-      //     $push: { notifications: pack._id },
-      //   },
-      //   { new: true }
-      // );
-
       await User.findByIdAndUpdate(
         userId,
         {
