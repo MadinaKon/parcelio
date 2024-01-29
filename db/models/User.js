@@ -15,12 +15,20 @@ const userSchema = new Schema({
   city: { type: String },
   phoneNumber: { type: String, required: true },
   serviceId: { type: [Schema.Types.ObjectId], ref: "Service" },
-  notifications: [{ type: Schema.Types.ObjectId, ref: "Package" }],
+  // notifications: [{ type: Schema.Types.ObjectId, ref: "Package" }],
   // notifications: [
   //   {
   //     read: { type: Boolean, default: false },
   //   },
   // ],
+  notifications: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Package",
+
+      read: { type: Boolean, default: false },
+    },
+  ],
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

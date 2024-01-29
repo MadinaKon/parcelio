@@ -5,7 +5,32 @@ export default async function handler(request, response) {
   await dbConnect();
   const { id, notificationId } = request.query;
 
-  console.log(("REQUEST QUERY ", request.query));
+  if (request.method === "PUT") {
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return response.status(404).json({ error: "User not found" });
+      }
+
+      console.log("PUT on notificationId ", notificationId);
+
+      await User.findByIdAndUpdate(
+        id,
+        {
+          $pull: { notifications: notificationId },
+        },
+        // { $set: { "notifications.$.read": true } },
+        { new: true }
+      );
+
+      response.status(200).json({
+        status: `notification with id ${notificationId} successfully for userId ${id} deleted.`,
+      });
+    } catch (error) {
+      console.log(error);
+      response.status(400).json({ error: error.message });
+    }
+  }
 
   if (request.method === "DELETE") {
     try {

@@ -9,12 +9,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 
-export default function DeleteSenderNotification({ children, notificationId }) {
-  console.log("DeleteSenderNotification notificationId ", notificationId);
+export default function MarkAsReadNotification({ children, notificationId }) {
+  console.log("MarkAsReadNotification notificationId ", notificationId);
 
   const { data: session } = useSession();
   const userId = session?.user?.userId;
-  // const { data: user, mutate } = useSWR(`/api/users`);
 
   const { data: user, mutate } = useSWR(`/api/users/${userId}`);
 
@@ -28,10 +27,10 @@ export default function DeleteSenderNotification({ children, notificationId }) {
     setOpen(false);
   };
 
-  async function deleteSenderNotification(notificationId) {
+  async function decreaseSenderNotificationCount(notificationId) {
     try {
       await fetch(`/api/users/${userId}/notifications/${notificationId}`, {
-        method: "DELETE",
+        method: "PUT",
       });
 
       mutate();
@@ -59,7 +58,7 @@ export default function DeleteSenderNotification({ children, notificationId }) {
             Cancel
           </Button>
           <Button
-            onClick={() => deleteSenderNotification(notificationId)}
+            onClick={() => decreaseSenderNotificationCount(notificationId)}
             color="primary"
             autoFocus
           >
