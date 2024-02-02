@@ -2,12 +2,12 @@ import styled, { css } from "styled-components";
 
 export const StyledLink = styled.a`
   margin-bottom: 20px;
-  background-color: lightgreen;
-  padding: 0.8rem 1.5rem;
-  border-radius: 0.6rem;
-  color: black;
+  background-color: #1976d2;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
 
   ${({ justifySelf }) =>
     justifySelf &&
