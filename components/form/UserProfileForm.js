@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Notification from "../notification/Notification";
-import Divider from "../divider/Divider";
 import { Grid } from "@mui/material";
 
 import styled from "styled-components";
@@ -163,7 +162,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             Update user data
           </StyledButton>
         </Grid>
-        {/* <Divider /> */}
+
         <Notification defaultData={defaultData} />
       </Grid>
     </form>
