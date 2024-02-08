@@ -14,6 +14,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import BellIcon from "../BellIcon";
 
 const drawerWidth = 240;
 
@@ -98,7 +99,8 @@ export default function Dashboard({ children }) {
                 badgeContent={user?.notifications?.length}
                 color="secondary"
               >
-                <NotificationsIcon onClick={handleNotificationClick} />
+                {/* <NotificationsIcon onClick={handleNotificationClick} /> */}
+                <BellIcon />
               </Badge>
             )}
           </IconButton>
