@@ -8,12 +8,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useLocalStorageState from "use-local-storage-state";
 
 import styled from "styled-components";
 import DeleteSenderNotification from "../modal/DeleteSenderNotification";
 import toast, { Toaster } from "react-hot-toast";
+import MarkAsReadNotification from "../modal/MarkAsReadNotification";
 
 const StyledTableCell = styled(TableCell)`
   padding: 10px; /* Add padding */
@@ -32,7 +34,7 @@ export default function Notification({ defaultData }) {
     { defaultValue: [] }
   );
 
-  if (defaultData?.notifications.length === 0) {
+  if (defaultData?.notifications?.length === 0) {
     return null;
   }
 
@@ -74,7 +76,7 @@ export default function Notification({ defaultData }) {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {defaultData?.notifications.map((row) => (
+          {defaultData?.notifications?.map((row) => (
             <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.email}
@@ -88,7 +90,12 @@ export default function Notification({ defaultData }) {
               <StyledTableCell align="right">
                 {confirmedPackages?.includes(row._id) ? (
                   <>
-                    <div>Request confirmed</div>
+                    <CheckIcon onClick={() => handleCheckMark(row._id)} />
+                    <Toaster position="bottom-center" reverseOrder={false} />
+                    <MarkAsReadNotification notificationId={row._id}>
+                      {/* <DoneAllIcon onClick={handleCloseIcon} /> */}
+                      <div>Request confirmed</div>
+                    </MarkAsReadNotification>
                   </>
                 ) : (
                   <>
