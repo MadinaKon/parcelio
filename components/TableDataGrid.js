@@ -12,6 +12,9 @@ import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Dashboard from "./dashboard/Dashboard.js";
 
+import { AppContext } from "./AppContext.js";
+import { useContext } from "react";
+
 const FixedLink = styled(StyledLink)`
   position: fixed;
   bottom: 50px;
@@ -22,6 +25,9 @@ export default function DataGridComponent({ data }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [columns, setColumns] = useState([]);
+
+  const app = useContext(AppContext);
+  console.log("DataGridComponent context: ", app);
 
   useEffect(() => {
     if (session) {
