@@ -15,12 +15,12 @@ export default function AuthButton() {
   }
   return (
     <>
-      {/* <button
+      <button
         className={`${btn} ${login}`}
         onClick={() => signIn("github", { callbackUrl: `/` })}
       >
         Sign in with GitHub
-      </button> */}
+      </button>
       <button className={`${btn} ${login}`} onClick={() => signIn("google")}>
         Sign in with Google
       </button>
