@@ -6,7 +6,9 @@ describe("TableDataGrid Component", () => {
 
   it("should display the correct columns for authenticated users", () => {
     // Simulate user authentication
-    cy.login(); // Assuming you have a custom command for logging in
+    // cy.login(); // Assuming you have a custom command for logging in
+
+    cy.loginWithGitHub();
 
     // Check if the user-specific columns are displayed
     cy.get(".MuiDataGrid-columnHeaderTitle")
