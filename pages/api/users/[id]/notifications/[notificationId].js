@@ -16,13 +16,13 @@ export default async function handler(request, response) {
       const updatedUser = await User.findByIdAndUpdate(
         id,
         {
-          $pull: { notifications: { _id: notificationId } }, // Remove subdocument by _id
+          $pull: { notifications: notificationId }, // Remove string from array
         },
         { new: true }
       );
 
       response.status(200).json({
-        status: `notification with id ${notificationId} successfully for userId ${id} deleted.`,
+        status: `notification with id ${notificationId} successfully deleted for userId ${id}`,
         notificationCount: updatedUser.notifications.length,
         user: updatedUser,
       });
