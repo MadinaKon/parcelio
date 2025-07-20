@@ -32,6 +32,8 @@ export default function UserProfileForm({ formName, defaultData }) {
   const { data: session } = useSession();
   const id = session?.user?.userId;
 
+  console.log("user id is ", id)
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
