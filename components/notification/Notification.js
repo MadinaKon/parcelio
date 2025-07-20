@@ -27,6 +27,10 @@ const StyledTableRow = styled(TableRow)`
 `;
 export default function Notification({ defaultData }) {
   const [open, setOpen] = useState(false);
+  const [notifications, setNotifications] = useState(
+    defaultData.notifications || []
+  );
+
   const [confirmedPackages, setConfirmedPackages] = useLocalStorageState(
     "confirmedPackages",
     { defaultValue: [] }
@@ -36,12 +40,42 @@ export default function Notification({ defaultData }) {
     return null;
   }
 
-  const handleCheckMark = (rowId) => {
-    toast.success("You accepted this request from sender", {
-      duration: 8000,
-    });
+  // const handleCheckMark = (rowId) => {
+  //   toast.success("You accepted this request from sender", {
+  //     duration: 8000,
+  //   });
 
+  //   setConfirmedPackages([...confirmedPackages, rowId]);
+  // };
+
+  // const handleCheckMark = async (rowId) => {
+  //   toast.success("You accepted this request from sender", {
+  //     duration: 8000,
+  //   });
+
+  //   setConfirmedPackages([...confirmedPackages, rowId]);
+
+  //   // Call backend to delete notification
+  //   try {
+  //     await fetch(`/api/users/${defaultData._id}/notifications/${rowId}`, {
+  //       method: "DELETE",
+  //     });
+  //   } catch (error) {
+  //     toast.error("Failed to remove notification");
+  //   }
+  // };
+
+  const handleCheckMark = async (rowId) => {
+    toast.success("You accepted this request from sender", { duration: 8000 });
     setConfirmedPackages([...confirmedPackages, rowId]);
+    try {
+      await fetch(`/api/users/${defaultData._id}/notifications/${rowId}`, {
+        method: "DELETE",
+      });
+      setNotifications(notifications.filter((n) => n._id !== rowId));
+    } catch (error) {
+      toast.error("Failed to remove notification");
+    }
   };
 
   const handleCloseIcon = () => {
@@ -74,7 +108,7 @@ export default function Notification({ defaultData }) {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {defaultData?.notifications.map((row) => (
+          {notifications.map((row) => (
             <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.email}
