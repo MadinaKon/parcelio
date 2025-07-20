@@ -16,7 +16,7 @@ export default async function handler(request, response) {
       const updatedUser = await User.findByIdAndUpdate(
         id,
         {
-          $pull: { notifications: notificationId }, // Use string matching
+          $pull: { notifications: { _id: notificationId } }, // Remove subdocument by _id
         },
         { new: true }
       );
