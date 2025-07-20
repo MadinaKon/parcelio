@@ -1,13 +1,24 @@
 import dbConnect from "../../../../db/models/connect";
 import User from "../../../../db/models/User";
+import mongoose from "mongoose";
 
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
 
+  // Validate id
+  if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+    return response.status(400).json({ error: "Invalid or missing user id" });
+  }
+
   if (request.method === "GET") {
-    const user = await User.findById(id).populate("notifications");
-    return response.status(200).json(user);
+    try {
+      const user = await User.findById(id).populate("notifications");
+      return response.status(200).json(user);
+    } catch (error) {
+      console.log(error);
+      return response.status(400).json({ error: error.message });
+    }
   }
 
   if (request.method === "PATCH") {
