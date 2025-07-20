@@ -56,6 +56,8 @@ export default function UserProfileForm({ formName, defaultData }) {
     }
   }
 
+  console.log("default  data ", defaultData);
+
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
       <Grid container>
@@ -70,7 +72,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="name"
             name="name"
             type="text"
-            defaultValue={defaultData?.name}
+            defaultValue={defaultData?.name || ""}
             required
             readOnly
           />
@@ -84,7 +86,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="email"
             name="email"
             type="text"
-            defaultValue={defaultData?.email}
+            defaultValue={defaultData?.email || ""}
             required
             readOnly
           />
@@ -97,7 +99,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="image"
             name="image"
             type="text"
-            defaultValue={defaultData?.image}
+            defaultValue={defaultData?.image || ""}
             required
             readOnly
           />
@@ -110,7 +112,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="phoneNumber"
             name="phoneNumber"
             type="text"
-            defaultValue={defaultData?.phoneNumber}
+            defaultValue={defaultData?.phoneNumber || ""}
           />
         </Grid>
         <Grid item xs={1}>
@@ -121,7 +123,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="country"
             name="country"
             type="text"
-            defaultValue={defaultData?.country}
+            defaultValue={defaultData?.country || ""}
           />
         </Grid>
         <Grid item xs={1}>
@@ -132,7 +134,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="city"
             name="city"
             type="text"
-            defaultValue={defaultData?.city}
+            defaultValue={defaultData?.city || ""}
           />
         </Grid>
         <Grid item xs={1}>
@@ -143,7 +145,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="address"
             name="address"
             type="text"
-            defaultValue={defaultData?.address}
+            defaultValue={defaultData?.address || ""}
           />
         </Grid>
         <Grid item xs={1}>
@@ -154,7 +156,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="postalCode"
             name="postalCode"
             type="text"
-            defaultValue={defaultData?.postalCode}
+            defaultValue={defaultData?.postalCode || ""}
           />
         </Grid>
         <Grid item xs={2}>
