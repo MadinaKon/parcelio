@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -28,13 +28,19 @@ const StyledTableRow = styled(TableRow)`
 export default function Notification({ defaultData }) {
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState(
-    defaultData.notifications || []
+    defaultData?.notifications || []
   );
 
   const [confirmedPackages, setConfirmedPackages] = useLocalStorageState(
     "confirmedPackages",
     { defaultValue: [] }
   );
+
+  useEffect(() => {
+    if (defaultData?.notifications) {
+      setNotifications(defaultData.notifications);
+    }
+  }, [defaultData?.notifications]);
 
   if (defaultData?.notifications.length === 0) {
     return null;
