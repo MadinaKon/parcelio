@@ -88,7 +88,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onFocus={() => setName("")}
             required
           />
         </Grid>
@@ -103,7 +102,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            onFocus={() => setEmail("")}
             required
             readOnly
           />
@@ -130,7 +128,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            onFocus={() => setPhoneNumber("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -143,7 +140,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            onFocus={() => setCountry("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -156,7 +152,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            onFocus={() => setCity("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -169,7 +164,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            onFocus={() => setAddress("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -182,7 +176,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
-            onFocus={() => setPostalCode("")}
           />
         </Grid>
         <Grid item xs={2}>
