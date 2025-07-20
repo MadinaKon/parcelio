@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -28,9 +28,19 @@ const StyledButton = styled.button`
 
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
+
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
   const id = session?.user?.userId;
+  const [name, setName] = useState(defaultData?.name || "");
+  const [email, setEmail] = useState(defaultData?.email || "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    defaultData?.phoneNumber || ""
+  );
+  const [country, setCountry] = useState(defaultData?.country || "");
+  const [city, setCity] = useState(defaultData?.city || "");
+  const [address, setAddress] = useState(defaultData?.address || "");
+  const [postalCode, setPostalCode] = useState(defaultData?.postalCode || "");
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -58,6 +68,10 @@ export default function UserProfileForm({ formName, defaultData }) {
 
   console.log("default  data ", defaultData);
 
+  if (!defaultData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <form aria-labelledby={formName} onSubmit={handleSubmit}>
       <Grid container>
@@ -72,9 +86,10 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="name"
             name="name"
             type="text"
-            defaultValue={defaultData?.name || ""}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onFocus={() => setName("")}
             required
-            readOnly
           />
         </Grid>
         <Grid item xs={1}>
@@ -86,7 +101,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="email"
             name="email"
             type="text"
-            defaultValue={defaultData?.email || ""}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setEmail("")}
             required
             readOnly
           />
@@ -101,7 +118,6 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             defaultValue={defaultData?.image || ""}
             required
-            readOnly
           />
         </Grid>
         <Grid item xs={1}>
@@ -112,7 +128,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="phoneNumber"
             name="phoneNumber"
             type="text"
-            defaultValue={defaultData?.phoneNumber || ""}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            onFocus={() => setPhoneNumber("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -123,7 +141,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="country"
             name="country"
             type="text"
-            defaultValue={defaultData?.country || ""}
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            onFocus={() => setCountry("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -134,7 +154,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="city"
             name="city"
             type="text"
-            defaultValue={defaultData?.city || ""}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            onFocus={() => setCity("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -145,7 +167,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="address"
             name="address"
             type="text"
-            defaultValue={defaultData?.address || ""}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            onFocus={() => setAddress("")}
           />
         </Grid>
         <Grid item xs={1}>
@@ -156,7 +180,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="postalCode"
             name="postalCode"
             type="text"
-            defaultValue={defaultData?.postalCode || ""}
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
+            onFocus={() => setPostalCode("")}
           />
         </Grid>
         <Grid item xs={2}>
