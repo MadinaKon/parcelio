@@ -16,7 +16,7 @@ export default async function handler(request, response) {
       const updatedUser = await User.findByIdAndUpdate(
         id,
         {
-          $pull: { notifications: new mongoose.Types.ObjectId(notificationId) },
+          $pull: { notifications: notificationId }, // Use string matching
         },
         { new: true }
       );
