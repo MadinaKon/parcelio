@@ -110,7 +110,12 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
   return (
     <StyledForm aria-labelledby={formName} onSubmit={handleSubmit}>
-      <h2>Create a service form</h2>
+      <h2>
+        {formName === "add-service"
+          ? "Create a service form"
+          : "Update a service form"}
+      </h2>
+
       <Grid container>
         <Grid item xs={6}>
           {" "}
@@ -221,7 +226,7 @@ export default function TransporterForm({ formName, defaultData, id }) {
             defaultValue={defaultData?.description}
           ></StyledTextArea>
         </Grid>
-                <Grid item xs={4}>
+        <Grid item xs={4}>
           <StyledButton type="submit">
             {defaultData ? "Update service" : "Add service"}
           </StyledButton>
