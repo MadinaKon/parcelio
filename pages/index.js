@@ -5,6 +5,7 @@ import { StyledLink } from "../components/StyledLink.js";
 import DataGridComponent from "../components/TableDataGrid";
 import Profile from "../components/profile";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 const List = styled.ul`
   list-style: none;
@@ -27,6 +28,7 @@ const FixedLink = styled(StyledLink)`
 
 export default function Home() {
   const { data: session } = useSession();
+  const [searchQuery, setSearchQuery] = useState("");
   let apiUrl;
   if (session) {
     apiUrl = `/api/services?userId=${session?.user.userId}`;
@@ -40,6 +42,10 @@ export default function Home() {
 
   if (!data) return;
 
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <>
       <Head>
@@ -52,6 +58,7 @@ export default function Home() {
       <Profile />
       <main>
         <h1>Parcelio - send your parcel through Kyrgyz community 🇰🇬</h1>
+        <input onChange={handleChange} />
         <DataGridComponent data={data} />
       </main>
     </>
