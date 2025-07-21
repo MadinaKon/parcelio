@@ -29,6 +29,7 @@ const FixedLink = styled(StyledLink)`
 export default function Home() {
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
+
   let apiUrl;
   if (session) {
     apiUrl = `/api/services?userId=${session?.user.userId}`;
@@ -42,9 +43,16 @@ export default function Home() {
 
   if (!data) return;
 
-  const handleChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
+  const filteredData = data.filter(
+    (item) =>
+      // fields to search by
+      (item.firstName &&
+        item.firstName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (item.lastName &&
+        item.lastName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (item.userName &&
+        item.userName.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
   return (
     <>
@@ -58,8 +66,16 @@ export default function Home() {
       <Profile />
       <main>
         <h1>Parcelio - send your parcel through Kyrgyz community 🇰🇬</h1>
-        <input onChange={handleChange} />
-        <DataGridComponent data={data} />
+
+        <input
+          type="text"
+          placeholder="Search users..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{ margin: "10px 0", padding: "5px", width: "100%" }}
+        />
+        {/* <DataGridComponent data={data} /> */}
+        <DataGridComponent data={filteredData} />
       </main>
     </>
   );
