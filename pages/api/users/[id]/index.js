@@ -55,6 +55,9 @@ export default async function handler(request, response) {
         });
       });
 
+      console.log("FIELDS RECEIVED:", fields);
+      console.log("FILES RECEIVED:", files);
+
       const updateData = { ...fields };
 
       // Convert any array fields to strings
@@ -70,14 +73,20 @@ export default async function handler(request, response) {
         const fileName = `${Date.now()}-${file.originalFilename}`;
         const newPath = path.join(uploadDir, fileName);
 
+        console.log("Saving file from:", file.filepath, "to:", newPath);
         fs.renameSync(file.filepath, newPath);
         // Set the full URL path for the image
         updateData.image = `/uploads/${fileName}`;
+        console.log("Image path set in updateData:", updateData.image);
+      } else {
+        console.log("No image file received in the request.");
       }
 
       // Clean up unwanted fields
       delete updateData.userId;
       delete updateData.id;
+
+      console.log("Final updateData to be saved:", updateData);
 
       const updatedUser = await User.findByIdAndUpdate(
         id,
