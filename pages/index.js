@@ -26,6 +26,15 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
+const SearchInput = styled.input`
+  margin: 10px 0;
+  padding: 5px;
+  width: 30%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
 export default function Home() {
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
@@ -64,12 +73,11 @@ export default function Home() {
       <main>
         <h1>Parcelio - send your parcel through Kyrgyz community 🇰🇬</h1>
 
-        <input
+        <SearchInput
           type="text"
           placeholder="Search users..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ margin: "10px 0", padding: "5px", width: "30%" }}
         />
         {/* <DataGridComponent data={data} /> */}
         <DataGridComponent data={filteredData} />
