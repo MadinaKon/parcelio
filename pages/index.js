@@ -1,30 +1,10 @@
 import Head from "next/head";
 import useSWR from "swr";
 import styled from "styled-components";
-import { StyledLink } from "../components/StyledLink.js";
 import DataGridComponent from "../components/TableDataGrid";
 import Profile from "../components/profile";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-
-const List = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding-left: 0;
-`;
-
-const ListItem = styled.li`
-  position: relative;
-  width: 100%;
-`;
-const FixedLink = styled(StyledLink)`
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-`;
 
 const SearchInput = styled.input`
   margin: 10px 0;
