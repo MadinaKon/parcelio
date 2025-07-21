@@ -46,12 +46,9 @@ export default function Home() {
   const filteredData = data.filter(
     (item) =>
       // fields to search by
-      (item.firstName &&
-        item.firstName.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.lastName &&
-        item.lastName.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.userName &&
-        item.userName.toLowerCase().includes(searchQuery.toLowerCase()))
+      item.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.userName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
