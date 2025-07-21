@@ -6,6 +6,7 @@ import Notification from "../notification/Notification";
 import { Grid } from "@mui/material";
 
 import styled from "styled-components";
+import Image from "next/image";
 
 const StyledInput = styled.input`
   border: 2px solid #eee;
@@ -41,6 +42,8 @@ export default function UserProfileForm({ formName, defaultData }) {
   const [city, setCity] = useState(defaultData?.city || "");
   const [address, setAddress] = useState(defaultData?.address || "");
   const [postalCode, setPostalCode] = useState(defaultData?.postalCode || "");
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(defaultData?.image || "");
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -65,6 +68,14 @@ export default function UserProfileForm({ formName, defaultData }) {
       mutate();
     }
   }
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   console.log("default  data ", defaultData);
 
@@ -110,13 +121,30 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="image">Image</label>
         </Grid>
         <Grid item xs={11}>
-          <StyledInput
+          {/* <StyledInput
             id="image"
             name="image"
             type="text"
             defaultValue={defaultData?.image || ""}
             required
+          /> */}
+
+          <input
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
           />
+          {imagePreview && (
+            <Image
+              src={imagePreview}
+              alt="Preview"
+              width={150}
+              height={150}
+              style={{ marginTop: "10px", objectFit: "contain" }}
+            />
+          )}
         </Grid>
         <Grid item xs={1}>
           <label htmlFor="phoneNumber">Phone number</label>
