@@ -13,16 +13,24 @@ export default async function handler(request, response) {
         return response.status(404).json({ error: "User not found" });
       }
 
+      // const updatedUser = await User.findByIdAndUpdate(
+      //   id,
+      //   {
+      //     $pull: { notifications: notificationId }, // Remove string from array
+      //   },
+      //   { new: true }
+      // );
+
       const updatedUser = await User.findByIdAndUpdate(
         id,
         {
-          $pull: { notifications: { _id: notificationId } }, // Remove subdocument by _id
+          $pull: { notifications: notificationId }, // Remove string from array
         },
         { new: true }
-      );
+      ).populate("notifications");
 
       response.status(200).json({
-        status: `notification with id ${notificationId} successfully for userId ${id} deleted.`,
+        status: `notification with id ${notificationId} successfully deleted for userId ${id}`,
         notificationCount: updatedUser.notifications.length,
         user: updatedUser,
       });
