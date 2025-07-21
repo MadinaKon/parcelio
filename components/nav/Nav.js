@@ -28,13 +28,8 @@ export default function Nav() {
 
           <Link href="/profile">
             Profile
-            {/* <Avatar alt="Remy Sharp" src={session.user?.image} /> */}
-            <Image
-              src={session.user?.image}
-              width={120}
-              height={120}
-              alt="profile"
-            />
+             <Avatar alt="Remy Sharp" src={session.user?.image} /> 
+     
           </Link>
           {/* <Link href={`/profile/${id}`}>Profile</Link> */}
         </>
