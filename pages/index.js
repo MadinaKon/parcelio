@@ -5,6 +5,7 @@ import { StyledLink } from "../components/StyledLink.js";
 import DataGridComponent from "../components/TableDataGrid";
 import Profile from "../components/profile";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 const List = styled.ul`
   list-style: none;
@@ -25,8 +26,19 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
+const SearchInput = styled.input`
+  margin: 10px 0;
+  padding: 5px;
+  width: 30%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
 export default function Home() {
   const { data: session } = useSession();
+  const [searchQuery, setSearchQuery] = useState("");
+
   let apiUrl;
   if (session) {
     apiUrl = `/api/services?userId=${session?.user.userId}`;
@@ -40,6 +52,14 @@ export default function Home() {
 
   if (!data) return;
 
+  const filteredData = data.filter(
+    (item) =>
+      // fields to search by
+      item.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.userName?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <Head>
@@ -52,7 +72,15 @@ export default function Home() {
       <Profile />
       <main>
         <h1>Parcelio - send your parcel through Kyrgyz community 🇰🇬</h1>
-        <DataGridComponent data={data} />
+
+        <SearchInput
+          type="text"
+          placeholder="Search users..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        {/* <DataGridComponent data={data} /> */}
+        <DataGridComponent data={filteredData} />
       </main>
     </>
   );
