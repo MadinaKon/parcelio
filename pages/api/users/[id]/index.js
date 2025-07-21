@@ -5,11 +5,17 @@ import formidable from "formidable";
 import fs from "fs";
 import path from "path";
 
+export const config = {
+  api: {
+    bodyParser: false, // Required for formidable to handle multipart/form-data
+  },
+};
+
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
 
-  // Validate id
+  // Validate ID
   if (!id || !mongoose.Types.ObjectId.isValid(id)) {
     return response.status(400).json({ error: "Invalid or missing user id" });
   }
@@ -17,80 +23,95 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     try {
       const user = await User.findById(id).populate("notifications");
+      if (!user) {
+        return response.status(404).json({ error: "User not found" });
+      }
       return response.status(200).json(user);
     } catch (error) {
-      console.log(error);
-      return response.status(400).json({ error: error.message });
+      console.error(error);
+      return response.status(500).json({ error: error.message });
     }
   }
 
   if (request.method === "PATCH") {
     try {
-      await User.findByIdAndUpdate(id, { $set: request.body }, { new: true });
+      // Ensure upload directory exists
+      const uploadDir = path.join(process.cwd(), "public/uploads");
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
 
-         // Parse multipart form data
-         const form = formidable({
-          uploadDir: path.join(process.cwd(), "public/uploads"),
-          keepExtensions: true,
-          maxFileSize: 5 * 1024 * 1024, // 5MB limit
-        });
-  
-        // Ensure upload directory exists
-        if (!fs.existsSync(path.join(process.cwd(), "public/uploads"))) {
-          fs.mkdirSync(path.join(process.cwd(), "public/uploads"), { recursive: true });
-        }
-  
-        const [fields, files] = await new Promise((resolve, reject) => {
-          form.parse(request, (err, fields, files) => {
-            if (err) reject(err);
-            resolve([fields, files]);
-          });
-        });
+      // Parse form data (including files)
+      const form = formidable({
+        uploadDir,
+        keepExtensions: true,
+        maxFileSize: 5 * 1024 * 1024, // 5MB
+      });
 
-         // Prepare update data
+      const [fields, files] = await new Promise((resolve, reject) => {
+        form.parse(request, (err, fields, files) => {
+          if (err) return reject(err);
+          resolve([fields, files]);
+        });
+      });
+
       const updateData = { ...fields };
+
+      // Convert any array fields to strings
+      for (const key in updateData) {
+        if (Array.isArray(updateData[key])) {
+          updateData[key] = updateData[key][0];
+        }
+      }
 
       // Handle image upload
       if (files.image) {
-        const file = files.image;
+        const file = Array.isArray(files.image) ? files.image[0] : files.image;
         const fileName = `${Date.now()}-${file.originalFilename}`;
-        const newPath = path.join(process.cwd(), "public/uploads", fileName);
-        
-        // Move file to uploads directory
+        const newPath = path.join(uploadDir, fileName);
+
         fs.renameSync(file.filepath, newPath);
-        
-        // Update image path in database
+        // Set the full URL path for the image
         updateData.image = `/uploads/${fileName}`;
       }
 
-      // Remove userId and id from update data (they're not user fields)
+      // Clean up unwanted fields
       delete updateData.userId;
       delete updateData.id;
 
-      await User.findByIdAndUpdate(id, { $set: updateData }, { new: true });
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        { $set: updateData },
+        { new: true }
+      ).populate("notifications");
 
-      response.status(200).json({ status: `Update with id ${id} updated!` });
+      if (!updatedUser) {
+        return response.status(404).json({ error: "User not found" });
+      }
+
+      return response.status(200).json(updatedUser);
     } catch (error) {
-      console.log(error);
-      response.status(400).json({ error: error.message });
+      console.error(error);
+      return response.status(400).json({ error: error.message });
     }
   }
 
   if (request.method === "DELETE") {
     try {
-      const user = await User.findById(id);
-      if (!user) {
+      const deletedUser = await User.findByIdAndDelete(id);
+
+      if (!deletedUser) {
         return response.status(404).json({ error: "User not found" });
       }
 
-      user.notifications = user.notifications.filter(
-        (notification) => notification._id.toString() !== id
-      );
-
-      return response.json(user);
+      return response
+        .status(200)
+        .json({ status: `User ${id} deleted successfully` });
     } catch (error) {
-      console.log(error);
-      response.status(400).json({ error: error.message });
+      console.error(error);
+      return response.status(400).json({ error: error.message });
     }
   }
+
+  return response.status(405).json({ error: "Method not allowed" });
 }

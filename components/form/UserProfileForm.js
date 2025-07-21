@@ -69,16 +69,26 @@ export default function UserProfileForm({ formName, defaultData }) {
   }
 
   async function updateUserProfile(data) {
+    const formData = new FormData();
+
+    // Add all form fields to FormData
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    // Add image file if selected
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
     const response = await fetch(`/api/users/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      // Don't set Content-Type header, let the browser set it with the boundary
+      body: formData,
     });
 
     if (response.ok) {
-      mutate();
+      mutate(); // Refresh the data
     }
   }
 
@@ -95,7 +105,7 @@ export default function UserProfileForm({ formName, defaultData }) {
     setImageFile(file);
     if (file) {
       // Revoke previous URL if it exists
-      if (imagePreview && imagePreview.startsWith('blob:')) {
+      if (imagePreview && imagePreview.startsWith("blob:")) {
         URL.revokeObjectURL(imagePreview);
       }
       setImagePreview(URL.createObjectURL(file));
@@ -104,14 +114,11 @@ export default function UserProfileForm({ formName, defaultData }) {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (imagePreview && imagePreview.startsWith('blob:')) {
+      if (imagePreview && imagePreview.startsWith("blob:")) {
         URL.revokeObjectURL(imagePreview);
       }
     };
   }, [imagePreview]);
-
-
-  console.log("default  data ", defaultData);
 
   if (!defaultData) {
     return <div>Loading...</div>;
