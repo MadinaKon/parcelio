@@ -82,13 +82,34 @@ export default function UserProfileForm({ formName, defaultData }) {
     }
   }
 
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setImageFile(file);
+  //   if (file) {
+  //     setImagePreview(URL.createObjectURL(file));
+  //   }
+  // };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
     if (file) {
+      // Revoke previous URL if it exists
+      if (imagePreview && imagePreview.startsWith('blob:')) {
+        URL.revokeObjectURL(imagePreview);
+      }
       setImagePreview(URL.createObjectURL(file));
     }
   };
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (imagePreview && imagePreview.startsWith('blob:')) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
 
   console.log("default  data ", defaultData);
 
