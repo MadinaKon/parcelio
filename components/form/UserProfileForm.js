@@ -45,6 +45,19 @@ export default function UserProfileForm({ formName, defaultData }) {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(defaultData?.image || "");
 
+  useEffect(() => {
+    if (defaultData) {
+      setName(defaultData.name || "");
+      setEmail(defaultData.email || "");
+      setPhoneNumber(defaultData.phoneNumber || "");
+      setCountry(defaultData.country || "");
+      setCity(defaultData.city || "");
+      setAddress(defaultData.address || "");
+      setPostalCode(defaultData.postalCode || "");
+      setImagePreview(defaultData.image || "");
+    }
+  }, [defaultData]);
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
