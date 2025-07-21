@@ -72,7 +72,7 @@ export default function Home() {
           placeholder="Search users..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ margin: "10px 0", padding: "5px", width: "100%" }}
+          style={{ margin: "10px 0", padding: "5px", width: "30%" }}
         />
         {/* <DataGridComponent data={data} /> */}
         <DataGridComponent data={filteredData} />
