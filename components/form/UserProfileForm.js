@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -6,6 +6,7 @@ import Notification from "../notification/Notification";
 import { Grid } from "@mui/material";
 
 import styled from "styled-components";
+import Image from "next/image";
 
 const StyledInput = styled.input`
   border: 2px solid #eee;
@@ -28,9 +29,34 @@ const StyledButton = styled.button`
 
 export default function UserProfileForm({ formName, defaultData }) {
   const router = useRouter();
+
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
   const id = session?.user?.userId;
+  const [name, setName] = useState(defaultData?.name || "");
+  const [email, setEmail] = useState(defaultData?.email || "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    defaultData?.phoneNumber || ""
+  );
+  const [country, setCountry] = useState(defaultData?.country || "");
+  const [city, setCity] = useState(defaultData?.city || "");
+  const [address, setAddress] = useState(defaultData?.address || "");
+  const [postalCode, setPostalCode] = useState(defaultData?.postalCode || "");
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(defaultData?.image || "");
+
+  useEffect(() => {
+    if (defaultData) {
+      setName(defaultData.name || "");
+      setEmail(defaultData.email || "");
+      setPhoneNumber(defaultData.phoneNumber || "");
+      setCountry(defaultData.country || "");
+      setCity(defaultData.city || "");
+      setAddress(defaultData.address || "");
+      setPostalCode(defaultData.postalCode || "");
+      setImagePreview(defaultData.image || "");
+    }
+  }, [defaultData]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -43,17 +69,59 @@ export default function UserProfileForm({ formName, defaultData }) {
   }
 
   async function updateUserProfile(data) {
+    const formData = new FormData();
+
+    // Add all form fields to FormData
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    // Add image file if selected
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
     const response = await fetch(`/api/users/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      // Don't set Content-Type header, let the browser set it with the boundary
+      body: formData,
     });
 
     if (response.ok) {
-      mutate();
+      mutate(); // Refresh the data
     }
+  }
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setImageFile(file);
+  //   if (file) {
+  //     setImagePreview(URL.createObjectURL(file));
+  //   }
+  // };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+    if (file) {
+      // Revoke previous URL if it exists
+      if (imagePreview && imagePreview.startsWith("blob:")) {
+        URL.revokeObjectURL(imagePreview);
+      }
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (imagePreview && imagePreview.startsWith("blob:")) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
+  if (!defaultData) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -70,9 +138,9 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="name"
             name="name"
             type="text"
-            defaultValue={defaultData?.name}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
-            readOnly
           />
         </Grid>
         <Grid item xs={1}>
@@ -84,7 +152,8 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="email"
             name="email"
             type="text"
-            defaultValue={defaultData?.email}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             readOnly
           />
@@ -93,14 +162,30 @@ export default function UserProfileForm({ formName, defaultData }) {
           <label htmlFor="image">Image</label>
         </Grid>
         <Grid item xs={11}>
-          <StyledInput
+          {/* <StyledInput
             id="image"
             name="image"
             type="text"
-            defaultValue={defaultData?.image}
+            defaultValue={defaultData?.image || ""}
             required
-            readOnly
+          /> */}
+
+          <input
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
           />
+          {imagePreview && (
+            <Image
+              src={imagePreview}
+              alt="Preview"
+              width={150}
+              height={150}
+              style={{ marginTop: "10px", objectFit: "contain" }}
+            />
+          )}
         </Grid>
         <Grid item xs={1}>
           <label htmlFor="phoneNumber">Phone number</label>
@@ -110,7 +195,8 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="phoneNumber"
             name="phoneNumber"
             type="text"
-            defaultValue={defaultData?.phoneNumber}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </Grid>
         <Grid item xs={1}>
@@ -121,7 +207,8 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="country"
             name="country"
             type="text"
-            defaultValue={defaultData?.country}
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
           />
         </Grid>
         <Grid item xs={1}>
@@ -132,7 +219,8 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="city"
             name="city"
             type="text"
-            defaultValue={defaultData?.city}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
           />
         </Grid>
         <Grid item xs={1}>
@@ -143,7 +231,8 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="address"
             name="address"
             type="text"
-            defaultValue={defaultData?.address}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
           />
         </Grid>
         <Grid item xs={1}>
@@ -154,7 +243,8 @@ export default function UserProfileForm({ formName, defaultData }) {
             id="postalCode"
             name="postalCode"
             type="text"
-            defaultValue={defaultData?.postalCode}
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
           />
         </Grid>
         <Grid item xs={2}>

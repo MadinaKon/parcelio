@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Dashboard from "../dashboard/Dashboard";
 import { Avatar } from "@mui/material";
+import Image from "next/image";
 
 export default function Nav() {
   const { data: session } = useSession();
@@ -27,7 +28,13 @@ export default function Nav() {
 
           <Link href="/profile">
             Profile
-            <Avatar alt="Remy Sharp" src={session.user?.image} />
+            {/* <Avatar alt="Remy Sharp" src={session.user?.image} /> */}
+            <Image
+              src={session.user?.image}
+              width={120}
+              height={120}
+              alt="profile"
+            />
           </Link>
           {/* <Link href={`/profile/${id}`}>Profile</Link> */}
         </>
