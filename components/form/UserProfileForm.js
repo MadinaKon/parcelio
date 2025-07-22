@@ -253,7 +253,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           </StyledButton>
         </Grid>
 
-        <Notification defaultData={defaultData} />
+        {/* <Notification defaultData={defaultData} /> */}
       </Grid>
     </form>
   );
