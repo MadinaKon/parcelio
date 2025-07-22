@@ -7,16 +7,23 @@ export default function NotificationsPage() {
   const userId = session?.user?.userId;
 
   // Fetch user data (including notifications)
-  const { data: user, isLoading } = useSWR(
-    userId ? `/api/users/${userId}` : null
-  );
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useSWR(userId ? `/api/users/${userId}` : null);
 
+  if (error) return <div>Error loading notifications</div>;
   if (isLoading || !user) return <div>Loading...</div>;
 
   return (
     <div>
       <h1>Notifications</h1>
-      <Notification defaultData={user} />
+      {user.notifications?.length > 0 ? (
+        <Notification defaultData={user} />
+      ) : (
+        <p>No notifications yet</p>
+      )}
     </div>
   );
 }
