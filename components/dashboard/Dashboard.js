@@ -14,6 +14,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import NextLink from "next/link";
 
 const drawerWidth = 240;
 
@@ -92,13 +93,17 @@ export default function Dashboard({ children }) {
           >
             {children}
           </Typography>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            component={NextLink}
+            href="/notifications"
+          >
             {userId && (
               <Badge
                 badgeContent={user?.notifications?.length}
                 color="secondary"
               >
-                <NotificationsIcon onClick={handleNotificationClick} />
+                <NotificationsIcon />
               </Badge>
             )}
           </IconButton>

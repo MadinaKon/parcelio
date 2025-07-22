@@ -24,7 +24,10 @@ const StyledButton = styled.button`
   color: #fff;
   font-weight: 600;
   border-radius: 5px;
-  width: 100%;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  z-index: 1000;
 `;
 
 export default function UserProfileForm({ formName, defaultData }) {
@@ -253,7 +256,7 @@ export default function UserProfileForm({ formName, defaultData }) {
           </StyledButton>
         </Grid>
 
-        <Notification defaultData={defaultData} />
+        {/* <Notification defaultData={defaultData} /> */}
       </Grid>
     </form>
   );
