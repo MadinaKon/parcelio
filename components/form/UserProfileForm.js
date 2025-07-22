@@ -24,7 +24,8 @@ const StyledButton = styled.button`
   color: #fff;
   font-weight: 600;
   border-radius: 5px;
-  width: 100%;
+  position: fixed;
+  bottom: 50px;
 `;
 
 export default function UserProfileForm({ formName, defaultData }) {
