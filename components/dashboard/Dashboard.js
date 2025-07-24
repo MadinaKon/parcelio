@@ -45,15 +45,7 @@ export default function Dashboard({ children }) {
   const userId = session?.user?.userId;
   const userApiUrl = userId ? `/api/users/${userId}` : "";
   const { data: user } = useSWR(userApiUrl);
-
-
-  const handleNotificationClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
+  
 
   const toggleDrawer = () => {
     setOpen(!open);
