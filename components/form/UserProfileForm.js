@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import useSWR from "swr";
 import Notification from "../notification/Notification";
 import { Grid } from "@mui/material";
@@ -31,8 +30,6 @@ const StyledButton = styled.button`
 `;
 
 export default function UserProfileForm({ formName, defaultData }) {
-  const router = useRouter();
-
   const { data: service, mutate } = useSWR("/api/users");
   const { data: session } = useSession();
   const id = session?.user?.userId;
