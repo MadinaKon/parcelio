@@ -1,6 +1,5 @@
 import Link from "next/link.js";
 import styled from "styled-components";
-import { useRouter } from "next/router";
 import { StyledLink } from "../components/StyledLink.js";
 import useSWR from "swr";
 import TransporterForm from "../components/form/TransporterForm.js";
@@ -12,9 +11,6 @@ const StyledBackLink = styled(StyledLink)`
 `;
 
 export default function CreateServicePage() {
-  const { mutate } = useSWR("/api/services");
-
-  const router = useRouter();
   const { data: session } = useSession();
 
   // if (!session) {
