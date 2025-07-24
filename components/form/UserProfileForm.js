@@ -30,7 +30,7 @@ const StyledButton = styled.button`
 `;
 
 export default function UserProfileForm({ formName, defaultData }) {
-  const { data: service, mutate } = useSWR("/api/users");
+  const { mutate } = useSWR("/api/users");
   const { data: session } = useSession();
   const id = session?.user?.userId;
   const [name, setName] = useState(defaultData?.name || "");
