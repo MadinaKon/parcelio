@@ -9,7 +9,6 @@ import Image from "next/image";
 export default function Nav() {
   const { data: session } = useSession();
   const router = useRouter();
-  const { id } = router.query;
 
   return (
     <nav className={nav}>
@@ -28,8 +27,7 @@ export default function Nav() {
 
           <Link href="/profile">
             Profile
-             <Avatar alt="Remy Sharp" src={session.user?.image} /> 
-     
+            <Avatar alt="Remy Sharp" src={session.user?.image} />
           </Link>
           {/* <Link href={`/profile/${id}`}>Profile</Link> */}
         </>
