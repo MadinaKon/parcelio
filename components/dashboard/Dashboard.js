@@ -46,10 +46,6 @@ export default function Dashboard({ children }) {
   const userApiUrl = userId ? `/api/users/${userId}` : "";
   const { data: user } = useSWR(userApiUrl);
 
-  const handleNotificationClick = () => {
-    setOpen(true);
-    router.push("/profile");
-  };
 
   const handleNotificationClose = (event, reason) => {
     if (reason === "clickaway") {
