@@ -44,8 +44,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
   const [open, setOpen] = useState(true);
 
-  const handleOpen = () => setOpen(true);
-
   const handleClose = () => {
     setOpen(false);
     console.log("TransporterForm handle close clicked");
