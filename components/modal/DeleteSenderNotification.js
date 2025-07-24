@@ -12,11 +12,13 @@ import { useSession } from "next-auth/react";
 export default function DeleteSenderNotification({ children, notificationId }) {
   const { data: session } = useSession();
   const userId = session?.user?.userId;
-  // const { data: user, mutate } = useSWR(`/api/users`);
-
-  const { data: user, mutate } = useSWR(`/api/users/${userId}`);
+  const { mutate } = useSWR(`/api/users/${userId}`);
 
   const [open, setOpen] = useState(false);
+
+  if (!userId) {
+    return null;
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
