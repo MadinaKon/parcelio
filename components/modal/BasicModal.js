@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import DeleteModal from "./DeleteModal";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
@@ -24,8 +23,6 @@ const style = {
 };
 
 export default function BasicModal({ children, id }) {
-  const router = useRouter();
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
 
