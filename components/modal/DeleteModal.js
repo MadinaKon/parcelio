@@ -10,7 +10,7 @@ import useSWR from "swr";
 export default function DeleteModal({ id }) {
   const [open, setOpen] = useState(false);
 
-  const { data: service, mutate } = useSWR(`/api/services`);
+  const { mutate } = useSWR(`/api/services`);
 
   const handleClickOpen = () => {
     setOpen(true);

@@ -39,12 +39,10 @@ const StyledTextArea = styled.textarea`
 
 export default function TransporterForm({ formName, defaultData, id }) {
   const router = useRouter();
-  const { data: service, mutate } = useSWR("/api/services");
+  const { mutate } = useSWR("/api/services");
   const { data: session } = useSession();
 
   const [open, setOpen] = useState(true);
-
-  const handleOpen = () => setOpen(true);
 
   const handleClose = () => {
     setOpen(false);

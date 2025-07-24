@@ -80,6 +80,7 @@ export default function Notification({ defaultData }) {
       });
       setNotifications(notifications.filter((n) => n._id !== rowId));
     } catch (error) {
+      console.error("Failed to remove notification:", error);
       toast.error("Failed to remove notification");
     }
   };
