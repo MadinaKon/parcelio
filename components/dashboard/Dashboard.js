@@ -11,7 +11,6 @@ import Badge from "@mui/material/Badge";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
@@ -39,13 +38,11 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Dashboard({ children }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   const { data: session } = useSession();
   const userId = session?.user?.userId;
   const userApiUrl = userId ? `/api/users/${userId}` : "";
   const { data: user } = useSWR(userApiUrl);
-  
 
   const toggleDrawer = () => {
     setOpen(!open);
