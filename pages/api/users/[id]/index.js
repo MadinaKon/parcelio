@@ -68,16 +68,28 @@ export default async function handler(request, response) {
       }
 
       // Handle image upload
+
       if (files.image) {
         const file = Array.isArray(files.image) ? files.image[0] : files.image;
+        const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+        const ext = path.extname(file.originalFilename).toLowerCase();
+
+        if (!allowedExtensions.includes(ext)) {
+          // Delete the temporary file to avoid clutter
+          fs.unlinkSync(file.filepath);
+          return response.status(400).json({
+            error: `Invalid file type: only ${allowedExtensions.join(
+              ", "
+            )} allowed.`,
+          });
+        }
+
         const fileName = `${Date.now()}-${file.originalFilename}`;
         const newPath = path.join(uploadDir, fileName);
 
         console.log("Saving file from:", file.filepath, "to:", newPath);
         fs.renameSync(file.filepath, newPath);
-        // Set the full URL path for the image
         updateData.image = `/uploads/${fileName}`;
-        console.log("Image path set in updateData:", updateData.image);
       } else {
         console.log("No image file received in the request.");
       }
