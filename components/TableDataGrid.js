@@ -4,7 +4,6 @@ import Link from "next/link.js";
 import { StyledLink } from "../components/StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
 import SenderForm from "./form/SenderForm.js";
-import { useRouter } from "next/router";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
@@ -19,7 +18,6 @@ const FixedLink = styled(StyledLink)`
 `;
 
 export default function DataGridComponent({ data }) {
-  const router = useRouter();
   const { data: session } = useSession();
   const [columns, setColumns] = useState([]);
 
