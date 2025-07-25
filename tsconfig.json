@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    // "jsx": "preserve",
+    "jsx": "preserve",
+    "strict": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "incremental": true,
+    "module": "esnext"
+  },
+  "include": ["src", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["dist", "node_modules"]
+}

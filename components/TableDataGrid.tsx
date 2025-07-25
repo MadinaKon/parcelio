@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link.js";
-import { StyledLink } from "../components/StyledLink.js";
+import { StyledLink } from "./StyledLink.js";
 import { DataGrid } from "@mui/x-data-grid";
 import SenderForm from "./form/SenderForm.js";
 import BasicModal from "./modal/BasicModal.js";
@@ -16,7 +16,11 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
-export default function DataGridComponent({ data }) {
+type Props = {
+  data: Array<Record<string, any>>;
+};
+
+export default function DataGridComponent({ data }: Props) {
   const { data: session } = useSession();
   const [columns, setColumns] = useState([]);
 
