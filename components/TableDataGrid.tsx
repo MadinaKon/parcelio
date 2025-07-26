@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link.js";
 import { StyledLink } from "./StyledLink.js";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import SenderForm from "./form/SenderForm.js";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
@@ -44,16 +44,16 @@ export default function DataGridComponent({ data }: Props) {
       ]);
     } else {
       setColumns([
-        { field: "fromCity", headerName: "From City", width: 150 },
-        { field: "toCity", headerName: "To City", width: 150 },
-        { field: "flightDateTime", headerName: "Flight Date", width: 200 },
-        { field: "availableKilos", headerName: "Available Kilos", width: 150 },
+        { field: "fromCity", headerName: "From City", width: 150 } as GridColDef,
+        { field: "toCity", headerName: "To City", width: 150 } as GridColDef,
+        { field: "flightDateTime", headerName: "Flight Date", width: 200 } as GridColDef,
+        { field: "availableKilos", headerName: "Available Kilos", width: 150 } as GridColDef,
         {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params) => renderActionsCell(params, session),
-        },
+          renderCell: (params: GridRenderCellParams) => renderActionsCell(params, session),
+        } as GridColDef,
       ]);
     }
   }, [session]);
@@ -92,10 +92,12 @@ export default function DataGridComponent({ data }: Props) {
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5, 10, 20]}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 5, page: 0 } },
+        }}
+        pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        disableSelectionOnClick
+        disableRowSelectionOnClick
         getRowId={getRowId}
       />
 
