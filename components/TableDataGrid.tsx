@@ -16,8 +16,22 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
+type Service = {
+  _id: string;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  phoneNumber?: string;
+  fromCity: string;
+  toCity: string;
+  flightDateTime: string; // Consider `Date` if you're parsing it
+  availableKilos: number;
+  userId?: string[]; // Based on usage: params.row.userId[0]
+  actions?: React.ReactNode; // For renderCell injection
+};
+
 type Props = {
-  data: Array<Record<string, any>>;
+  data: Service[];
 };
 
 export default function DataGridComponent({ data }: Props) {
@@ -39,26 +53,43 @@ export default function DataGridComponent({ data }: Props) {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params) => renderActionsCell(params, session),
+          renderCell: (params: GridRenderCellParams) =>
+            renderActionsCell(params, session),
         },
       ]);
     } else {
       setColumns([
-        { field: "fromCity", headerName: "From City", width: 150 } as GridColDef,
+        {
+          field: "fromCity",
+          headerName: "From City",
+          width: 150,
+        } as GridColDef,
         { field: "toCity", headerName: "To City", width: 150 } as GridColDef,
-        { field: "flightDateTime", headerName: "Flight Date", width: 200 } as GridColDef,
-        { field: "availableKilos", headerName: "Available Kilos", width: 150 } as GridColDef,
+        {
+          field: "flightDateTime",
+          headerName: "Flight Date",
+          width: 200,
+        } as GridColDef,
+        {
+          field: "availableKilos",
+          headerName: "Available Kilos",
+          width: 150,
+        } as GridColDef,
         {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params: GridRenderCellParams) => renderActionsCell(params, session),
+          renderCell: (params: GridRenderCellParams) =>
+            renderActionsCell(params, session),
         } as GridColDef,
       ]);
     }
   }, [session]);
 
-  const renderActionsCell = (params, session) => {
+  const renderActionsCell = (
+    params: GridRenderCellParams,
+    session
+  ): React.ReactNode => {
     return (
       <BasicModal id={params.row._id}>
         {session ? (
@@ -79,13 +110,14 @@ export default function DataGridComponent({ data }: Props) {
     );
   };
 
-  const handleButtonClick = (event) => {
+  const handleButtonClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (!session) {
       event.preventDefault();
     }
   };
 
-  const getRowId = (data) => data._id;
+  // const getRowId = (data) => data._id;
+  const getRowId = (data: Service) => data._id;
 
   return (
     <div style={{ height: 400, width: "100%" }}>
