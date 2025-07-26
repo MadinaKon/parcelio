@@ -15,10 +15,6 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 export default function TableOverview({ data }) {
   return (
     <React.Fragment>
