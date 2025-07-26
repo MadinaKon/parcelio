@@ -116,7 +116,6 @@ export default function DataGridComponent({ data }: Props) {
     }
   };
 
-  // const getRowId = (data) => data._id;
   const getRowId = (data: Service) => data._id;
 
   return (
