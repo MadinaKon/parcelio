@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
 import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
+import { Session } from "next-auth";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -63,32 +64,32 @@ export default function DataGridComponent({ data }: Props) {
           field: "fromCity",
           headerName: "From City",
           width: 150,
-        } as GridColDef,
+        },
         { field: "toCity", headerName: "To City", width: 150 } as GridColDef,
         {
           field: "flightDateTime",
           headerName: "Flight Date",
           width: 200,
-        } as GridColDef,
+        },
         {
           field: "availableKilos",
           headerName: "Available Kilos",
           width: 150,
-        } as GridColDef,
+        },
         {
           field: "actions",
           headerName: "Actions",
           width: 230,
           renderCell: (params: GridRenderCellParams) =>
             renderActionsCell(params, session),
-        } as GridColDef,
+        },
       ]);
     }
   }, [session]);
 
   const renderActionsCell = (
     params: GridRenderCellParams,
-    session
+    session: Session | null
   ): React.ReactNode => {
     return (
       <BasicModal id={params.row._id}>
