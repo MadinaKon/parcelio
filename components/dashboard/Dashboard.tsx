@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -34,7 +34,11 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function Dashboard({ children }) {
+interface DashboardProps {
+  children?: ReactNode;
+}
+
+export default function Dashboard({ children }: DashboardProps) {
   const [open, setOpen] = useState(false);
 
   const { data: session } = useSession();
