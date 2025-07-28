@@ -16,17 +16,10 @@ export default function Nav() {
       )}
 
       {session && (
-        <>
-          {/* <Link href="/user/">Your services</Link> */}
-          {/* TODO here we need authentication, after that http://localhost:3001/services/undefined/updateService will be replaced userId services */}
-          {/* <Link href={`/services/${id}/updateService`}>Update service</Link> */}
-
-          <Link href="/profile">
-            Profile
-            <Avatar alt="Remy Sharp" src={session.user?.image} />
-          </Link>
-          {/* <Link href={`/profile/${id}`}>Profile</Link> */}
-        </>
+        <Link href="/profile">
+          Profile
+          <Avatar alt="Remy Sharp" src={session.user?.image} />
+        </Link>
       )}
     </nav>
   );
