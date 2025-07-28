@@ -19,6 +19,10 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
+interface DashboardProps {
+  children?: ReactNode;
+}
+
 const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
@@ -35,10 +39,6 @@ const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme, open }) => ({
     }),
   }),
 }));
-
-interface DashboardProps {
-  children?: ReactNode;
-}
 
 export default function Dashboard({ children }: DashboardProps) {
   const [open, setOpen] = useState(false);
