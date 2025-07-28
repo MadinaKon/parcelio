@@ -6,11 +6,9 @@ export default function AuthButton() {
 
   if (session) {
     return (
-      <>
-        <button className={`${btn} ${logout}`} onClick={() => signOut()}>
-          Sign out
-        </button>
-      </>
+      <button className={`${btn} ${logout}`} onClick={() => signOut()}>
+        Sign out
+      </button>
     );
   }
   return (
