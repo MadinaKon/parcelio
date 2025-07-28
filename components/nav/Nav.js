@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { nav } from "./Nav.module.css";
 import { useSession } from "next-auth/react";
-import Dashboard from "../dashboard/Dashboard";
 import { Avatar } from "@mui/material";
-import Image from "next/image";
 
 export default function Nav() {
   const { data: session } = useSession();
