@@ -36,7 +36,7 @@ type Props = {
 
 export default function DataGridComponent({ data }: Props) {
   const { data: session } = useSession();
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState<GridColDef[]>([]);
 
   useEffect(() => {
     if (session) {
