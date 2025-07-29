@@ -2,8 +2,13 @@ import Head from "next/head";
 import Footer from "../footer/Footer";
 import Nav from "../nav/Nav";
 import Dashboard from "../dashboard/Dashboard";
+import { ReactNode } from "react";
 
-export default function Main_Layout({ children }) {
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+export default function MainLayout({ children }: Readonly<MainLayoutProps>) {
   return (
     <>
       <Dashboard>
