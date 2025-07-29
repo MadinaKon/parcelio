@@ -28,8 +28,6 @@ type TableOverviewRow = {
   // amount?: number;
 };
 
-// export default function TableOverview({ data }) {
-
 export default function TableOverview({ data }: { data: TableOverviewRow[] }) {
   return (
     <React.Fragment>
