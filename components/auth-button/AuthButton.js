@@ -6,7 +6,11 @@ export default function AuthButton() {
 
   if (session) {
     return (
-      <button className={`${btn} ${logout}`} onClick={() => signOut()}>
+      <button
+        className={`${btn} ${logout}`}
+        onClick={() => signOut()}
+        data-cy="sign-out"
+      >
         Sign out
       </button>
     );
@@ -16,10 +20,15 @@ export default function AuthButton() {
       <button
         className={`${btn} ${login}`}
         onClick={() => signIn("github", { callbackUrl: `/` })}
+        data-cy="sign-in-github"
       >
         Sign in with GitHub
       </button>
-      <button className={`${btn} ${login}`} onClick={() => signIn("google")}>
+      <button
+        className={`${btn} ${login}`}
+        onClick={() => signIn("google")}
+        data-cy="sign-in-google"
+      >
         Sign in with Google
       </button>
     </>

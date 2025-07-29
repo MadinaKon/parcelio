@@ -49,9 +49,10 @@ export default function SignIn() {
             onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
+            data-cy="sign-in-form"
           ></Box>
         </Box>
-        <AuthButton />
+        <AuthButton data-cy="auth-button" />
       </Container>
     </ThemeProvider>
   );
