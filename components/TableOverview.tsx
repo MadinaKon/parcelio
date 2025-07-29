@@ -28,7 +28,11 @@ type TableOverviewRow = {
   // amount?: number;
 };
 
-export default function TableOverview({ data }: { data: TableOverviewRow[] }) {
+interface TableOverviewProps {
+  data: TableOverviewRow[];
+}
+
+export default function TableOverview({ data }: TableOverviewProps) {
   return (
     <React.Fragment>
       <title>Table overview page</title>
