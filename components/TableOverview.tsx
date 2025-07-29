@@ -1,13 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-// import Link from "@mui/material/Link";
 import Link from "next/link.js";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { StyledLink } from "../components/StyledLink.js";
+import { StyledLink } from "./StyledLink.js";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -15,11 +14,25 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
-function preventDefault(event) {
-  event.preventDefault();
+type TableOverviewRow = {
+  _id: string;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  fromCity: string;
+  toCity: string;
+  flightDateTime: string;
+  availableKilos: number;
+  phoneNumber?: string;
+  // paymentMethod?: string;
+  // amount?: number;
+};
+
+interface TableOverviewProps {
+  data: TableOverviewRow[];
 }
 
-export default function TableOverview({ data }) {
+export default function TableOverview({ data }: TableOverviewProps) {
   return (
     <React.Fragment>
       <title>Table overview page</title>
@@ -39,7 +52,7 @@ export default function TableOverview({ data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {data.map((row: TableOverviewRow) => (
             <TableRow key={row._id}>
               <TableCell>{row.firstName}</TableCell>
               <TableCell>{row.lastName}</TableCell>

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link.js";
-import { StyledLink } from "../components/StyledLink.js";
-import { DataGrid } from "@mui/x-data-grid";
+import { StyledLink } from "./StyledLink.js";
+import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import SenderForm from "./form/SenderForm.js";
 import BasicModal from "./modal/BasicModal.js";
 import { useSession } from "next-auth/react";
 import TransporterForm from "./form/TransporterForm.js";
 import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import Dashboard from "./dashboard/Dashboard.js";
+import { Session } from "next-auth";
 
 const FixedLink = styled(StyledLink)`
   position: fixed;
@@ -17,9 +17,27 @@ const FixedLink = styled(StyledLink)`
   right: 50px;
 `;
 
-export default function DataGridComponent({ data }) {
+type Service = {
+  _id: string;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  phoneNumber?: string;
+  fromCity: string;
+  toCity: string;
+  flightDateTime: string; // Consider `Date` if you're parsing it
+  availableKilos: number;
+  userId?: string[]; // Based on usage: params.row.userId[0]
+  actions?: React.ReactNode; // For renderCell injection
+};
+
+type Props = {
+  data: Service[];
+};
+
+export default function DataGridComponent({ data }: Props) {
   const { data: session } = useSession();
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState<GridColDef[]>([]);
 
   useEffect(() => {
     if (session) {
@@ -36,26 +54,43 @@ export default function DataGridComponent({ data }) {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params) => renderActionsCell(params, session),
+          renderCell: (params: GridRenderCellParams) =>
+            renderActionsCell(params, session),
         },
       ]);
     } else {
       setColumns([
-        { field: "fromCity", headerName: "From City", width: 150 },
-        { field: "toCity", headerName: "To City", width: 150 },
-        { field: "flightDateTime", headerName: "Flight Date", width: 200 },
-        { field: "availableKilos", headerName: "Available Kilos", width: 150 },
+        {
+          field: "fromCity",
+          headerName: "From City",
+          width: 150,
+        },
+        { field: "toCity", headerName: "To City", width: 150 } as GridColDef,
+        {
+          field: "flightDateTime",
+          headerName: "Flight Date",
+          width: 200,
+        },
+        {
+          field: "availableKilos",
+          headerName: "Available Kilos",
+          width: 150,
+        },
         {
           field: "actions",
           headerName: "Actions",
           width: 230,
-          renderCell: (params) => renderActionsCell(params, session),
+          renderCell: (params: GridRenderCellParams) =>
+            renderActionsCell(params, session),
         },
       ]);
     }
   }, [session]);
 
-  const renderActionsCell = (params, session) => {
+  const renderActionsCell = (
+    params: GridRenderCellParams,
+    session: Session | null
+  ): React.ReactNode => {
     return (
       <BasicModal id={params.row._id}>
         {session ? (
@@ -76,26 +111,28 @@ export default function DataGridComponent({ data }) {
     );
   };
 
-  const handleButtonClick = (event) => {
+  const handleButtonClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (!session) {
       event.preventDefault();
     }
   };
 
-  const getRowId = (data) => data._id;
+
+  const getRowId = (data: Service) => data._id;
 
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5, 10, 20]}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 5, page: 0 } },
+        }}
+        pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        disableSelectionOnClick
+        disableRowSelectionOnClick
         getRowId={getRowId}
       />
-
       <Link href="/createService" passHref legacyBehavior>
         <a onClick={handleButtonClick}>
           {session ? (

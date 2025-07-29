@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { ReactNode, useState } from "react";
+import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import useSWR from "swr";
@@ -17,9 +15,15 @@ import NextLink from "next/link";
 
 const drawerWidth = 240;
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+interface DashboardProps {
+  children?: ReactNode;
+}
+
+const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -36,7 +40,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function Dashboard({ children }) {
+export default function Dashboard({ children }: DashboardProps) {
   const [open, setOpen] = useState(false);
 
   const { data: session } = useSession();
