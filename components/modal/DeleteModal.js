@@ -31,7 +31,12 @@ export default function DeleteModal({ id }) {
 
   return (
     <>
-      <Button variant="contained" color="error" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={handleClickOpen}
+        data-cy="delete-service-btn"
+      >
         Delete
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -42,10 +47,19 @@ export default function DeleteModal({ id }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={handleClose}
+            color="primary"
+            data-cy="cancel-delete-btn"
+          >
             Cancel
           </Button>
-          <Button onClick={() => deleteService(id)} color="primary" autoFocus>
+          <Button
+            onClick={() => deleteService(id)}
+            color="primary"
+            autoFocus
+            data-cy="confirm-delete-btn"
+          >
             Confirm
           </Button>
         </DialogActions>

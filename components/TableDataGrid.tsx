@@ -117,7 +117,6 @@ export default function DataGridComponent({ data }: Props) {
     }
   };
 
-
   const getRowId = (data: Service) => data._id;
 
   return (
@@ -132,18 +131,24 @@ export default function DataGridComponent({ data }: Props) {
         checkboxSelection
         disableRowSelectionOnClick
         getRowId={getRowId}
+        data-cy="service-table"
       />
       <Link href="/createService" passHref legacyBehavior>
-        <a onClick={handleButtonClick}>
+        <a onClick={handleButtonClick} data-cy="add-service-link">
           {session ? (
-            <FixedLink> Add service</FixedLink>
+            <FixedLink data-cy="add-service-btn"> Add service</FixedLink>
           ) : (
             <Tooltip
               title="Add service is available only for logged-in users"
               arrow
             >
               <span>
-                <Button variant="contained" color="primary" disabled>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled
+                  data-cy="add-service-btn-disabled"
+                >
                   Add service
                 </Button>
               </span>

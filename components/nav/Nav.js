@@ -8,15 +8,21 @@ export default function Nav() {
 
   return (
     <nav className={nav}>
-      <Link href="/">Home</Link>
+      <Link href="/" data-cy="nav-home">
+        Home
+      </Link>
       {session ? (
-        <Link href="/signin">Sign out</Link>
+        <Link href="/signin" data-cy="nav-sign-out">
+          Sign out
+        </Link>
       ) : (
-        <Link href="/signin">Sign in</Link>
+        <Link href="/signin" data-cy="nav-sign-in">
+          Sign in
+        </Link>
       )}
 
       {session && (
-        <Link href="/profile">
+        <Link href="/profile" data-cy="nav-profile">
           Profile
           <Avatar alt="Remy Sharp" src={session.user?.image} />
         </Link>
