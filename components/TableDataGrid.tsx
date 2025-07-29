@@ -117,6 +117,7 @@ export default function DataGridComponent({ data }: Props) {
     }
   };
 
+
   const getRowId = (data: Service) => data._id;
 
   return (
@@ -132,7 +133,6 @@ export default function DataGridComponent({ data }: Props) {
         disableRowSelectionOnClick
         getRowId={getRowId}
       />
-
       <Link href="/createService" passHref legacyBehavior>
         <a onClick={handleButtonClick}>
           {session ? (
