@@ -31,6 +31,9 @@ export default function AuthButton() {
       >
         Sign in with Google
       </button>
+      <button onClick={() => signIn("email")} data-cy="sign-in-button">
+        Sign in with Email
+      </button>
     </>
   );
 }

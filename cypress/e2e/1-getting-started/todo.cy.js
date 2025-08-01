@@ -5,9 +5,21 @@ describe("parcelio", () => {
     cy.visit("http://localhost:3000/");
   });
 
-  it("displays two todo items by default", () => {
+  it("navigation link signin", () => {
     cy.get("[data-cy='nav-sign-in']").click();
     cy.url().should("include", "/signin");
+    cy.get("[data-cy='sign-in-github']").should("exist");
+    cy.get("[data-cy='sign-in-google']").should("exist");
+  });
+
+  it("github login", () => {
+    cy.get("[data-cy='nav-sign-in']").click();
+    cy.url().should("include", "/signin");
+    cy.get("[data-cy='sign-in-github']").should("exist");
+    cy.get("[data-cy='sign-in-github']").click();
+    cy.loginBySession();
+    cy.visit("/");
+    cy.contains("Welcome, konurbaevamadina+github@gmail.com");
   });
 
   // it("can add new todo items", () => {
