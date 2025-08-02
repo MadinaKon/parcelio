@@ -18,7 +18,7 @@ describe("Email Authentication", () => {
     cy.get("h1").should("contain.text", "Check your email");
 
     // Wait for email to arrive (you can increase timeout if needed)
-    cy.wait(5000);
+    cy.wait(15000);
 
     cy.task("getMailtrapEmail").then((emailHtml) => {
       const magicLink = /href="(https:\/\/[^"]+signin[^"]+)"/.exec(
