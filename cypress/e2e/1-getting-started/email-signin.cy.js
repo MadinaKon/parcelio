@@ -21,9 +21,11 @@ describe("Email Authentication", () => {
     cy.wait(15000);
 
     cy.task("getMailtrapEmail").then((emailHtml) => {
-      const magicLink = /href="(https:\/\/[^"]+signin[^"]+)"/.exec(
-        emailHtml
-      )?.[1];
+      // Updated regex to match the actual email format
+      const magicLink =
+        /href="(http:\/\/localhost:3000\/api\/auth\/callback\/email[^"]+)"/.exec(
+          emailHtml
+        )?.[1];
 
       expect(magicLink, "Magic link found in email").to.exist;
 
