@@ -2,11 +2,10 @@
 
 describe("parcelio", () => {
   beforeEach(() => {
-    // cy.visit("http://localhost:3000/");
     cy.visit(Cypress.env("TEST_URL"));
   });
 
-  it("navigation link signin", () => {
+  it.skip("navigation link signin", () => {
     cy.get("[data-cy='nav-sign-in']").click();
     cy.url().should("include", "/signin");
     cy.get("[data-cy='sign-in-github']").should("exist");
@@ -14,7 +13,7 @@ describe("parcelio", () => {
     cy.get("[data-cy='sign-in-button']").should("exist");
   });
 
-  it.skip("github login", () => {
+  it("github login", () => {
     cy.get("[data-cy='nav-sign-in']").click();
     cy.url().should("include", "/signin");
     cy.get("[data-cy='sign-in-github']").should("exist");
