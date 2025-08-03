@@ -17,7 +17,9 @@ describe("Email Authentication", () => {
 
     cy.get("[data-cy='sign-in-button']").click();
     cy.url().should("include", "/api/auth/signin");
-    cy.get("#input-email-for-email-provider").type("s0539451@htw-berlin.de");
+    cy.get("#input-email-for-email-provider").type(
+      Cypress.env("TEST_EMAIL") || "test@example.com"
+    );
 
     cy.get("button#submitButton").click();
     cy.get("h1").should("contain.text", "Check your email");
