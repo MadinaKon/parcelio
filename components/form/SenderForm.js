@@ -72,7 +72,11 @@ export default function SenderForm({
   }
 
   return (
-    <StyledForm aria-labelledby={formName} onSubmit={handleSubmit}>
+    <StyledForm
+      aria-labelledby={formName}
+      onSubmit={handleSubmit}
+      data-cy="sender-form"
+    >
       <Grid container>
         <Grid item xs={12}>
           <h4>Send the details of the package</h4>
@@ -188,7 +192,9 @@ export default function SenderForm({
           ></StyledTextArea>
         </Grid>
 
-        <StyledButton type="submit">Submit</StyledButton>
+        <StyledButton type="submit" data-cy="sender-submit-btn">
+          Submit
+        </StyledButton>
       </Grid>
     </StyledForm>
   );
