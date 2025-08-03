@@ -1,9 +1,12 @@
 import { defineConfig } from "cypress";
 
+console.log(process.env.CYPRESS_MAILSLURP_API_KEY);
+
 export default defineConfig({
-  env: {
-    MAILSLURP_API_KEY: Cypress.env("MAILSLURP_API_KEY"),
-  },
+  defaultCommandTimeout: 30000,
+  responseTimeout: 30000,
+  requestTimeout: 30000,
+
   e2e: {
     setupNodeEvents(on, config) {
       // ...

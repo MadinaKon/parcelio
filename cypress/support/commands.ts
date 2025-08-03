@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="cypress-mailslurp" />
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -35,4 +36,3 @@
 //     }
 //   }
 // }
-/// <reference types="cypress-mailslurp" />
