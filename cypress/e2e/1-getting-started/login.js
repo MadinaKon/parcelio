@@ -2,7 +2,8 @@
 
 describe("parcelio", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/");
+    // cy.visit("http://localhost:3000/");
+    cy.visit(Cypress.env("TEST_URL"));
   });
 
   it("navigation link signin", () => {
@@ -37,18 +38,21 @@ describe("parcelio", () => {
     cy.url().should("include", "/signin");
     cy.get("[data-cy='sign-in-button']").should("exist");
     cy.get("[data-cy='sign-in-button']").should("be.visible");
-    cy.get("[data-cy='sign-in-button']").should("contain.text", "Sign in with Email");
+    cy.get("[data-cy='sign-in-button']").should(
+      "contain.text",
+      "Sign in with Email"
+    );
   });
 
   it("email sign-in form interaction", () => {
     cy.get("[data-cy='nav-sign-in']").click();
     cy.url().should("include", "/signin");
     cy.get("[data-cy='sign-in-button']").click();
-    
+
     // Test email form if it appears after clicking the button
     // This assumes clicking the email button shows a form
     cy.get("[data-cy='sign-in-form']").should("exist");
-    
+
     // Test form fields if they exist
     cy.get("[data-cy='sign-in-form']").within(() => {
       // Add email field test if it exists
@@ -63,7 +67,7 @@ describe("parcelio", () => {
     cy.get("[data-cy='sign-in-github']").click();
     cy.loginBySession();
     cy.visit("/");
-    
+
     // Then test sign out
     cy.get("[data-cy='nav-sign-out']").should("exist");
     cy.get("[data-cy='nav-sign-out']").click();
@@ -75,7 +79,7 @@ describe("parcelio", () => {
     cy.get("[data-cy='sign-in-github']").click();
     cy.loginBySession();
     cy.visit("/");
-    
+
     cy.get("[data-cy='nav-profile']").should("exist");
     cy.get("[data-cy='nav-profile']").should("contain.text", "Profile");
   });

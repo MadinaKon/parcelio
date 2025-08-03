@@ -2,7 +2,8 @@
 
 describe("Email Authentication", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/");
+    // cy.visit("http://localhost:3000/");
+    cy.visit(Cypress.env("TEST_URL"));
   });
 
   it("should display email sign-in button on signin page", () => {

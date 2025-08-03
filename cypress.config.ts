@@ -17,6 +17,10 @@ interface MailtrapEmail {
 
 export default defineConfig({
   e2e: {
+    baseUrl: process.env.CYPRESS_TEST_URL,
+    env: {
+      TEST_URL: process.env.CYPRESS_TEST_URL,
+    },
     async setupNodeEvents(
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions
