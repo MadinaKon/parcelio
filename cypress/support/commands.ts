@@ -49,7 +49,7 @@
 //   });
 // });
 
-+Cypress.Commands.add(
+Cypress.Commands.add(
   "loginBySession",
   (email = Cypress.env("TEST_USER_EMAIL")) => {
     cy.request("POST", Cypress.env("GITHUB_LOGIN_URL"), {
