@@ -125,7 +125,11 @@ export default function UserProfileForm({ formName, defaultData }) {
   }
 
   return (
-    <form aria-labelledby={formName} onSubmit={handleSubmit}>
+    <form
+      aria-labelledby={formName}
+      onSubmit={handleSubmit}
+      data-cy="profile-form"
+    >
       <Grid container>
         <Grid item xs={12}>
           <h2>Profile form</h2>
@@ -141,6 +145,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            data-cy="profile-name"
           />
         </Grid>
         <Grid item xs={1}>
@@ -156,6 +161,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             onChange={(e) => setEmail(e.target.value)}
             required
             readOnly
+            data-cy="profile-email"
           />
         </Grid>
         <Grid item xs={1}>
@@ -176,6 +182,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="file"
             accept="image/*"
             onChange={handleImageChange}
+            data-cy="profile-image"
           />
           {imagePreview && (
             <Image
@@ -197,6 +204,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
+            data-cy="profile-phoneNumber"
           />
         </Grid>
         <Grid item xs={1}>
@@ -209,6 +217,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            data-cy="profile-country"
           />
         </Grid>
         <Grid item xs={1}>
@@ -221,6 +230,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            data-cy="profile-city"
           />
         </Grid>
         <Grid item xs={1}>
@@ -233,6 +243,7 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            data-cy="profile-address"
           />
         </Grid>
         <Grid item xs={1}>
@@ -245,10 +256,15 @@ export default function UserProfileForm({ formName, defaultData }) {
             type="text"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
+            data-cy="profile-postalCode"
           />
         </Grid>
         <Grid item xs={2}>
-          <StyledButton type="submit" style={{ margin: "10px" }}>
+          <StyledButton
+            type="submit"
+            style={{ margin: "10px" }}
+            data-cy="profile-update-btn"
+          >
             Update user data
           </StyledButton>
         </Grid>

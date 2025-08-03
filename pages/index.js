@@ -58,6 +58,7 @@ export default function Home() {
           placeholder="Search users..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          data-cy="search-input"
         />
         {/* <DataGridComponent data={data} /> */}
         <DataGridComponent data={filteredData} />
