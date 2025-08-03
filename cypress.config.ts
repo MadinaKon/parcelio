@@ -49,10 +49,23 @@ export default defineConfig({
               throw new Error("No emails found in Mailtrap inbox");
             }
 
+            console.log("Fetched emails:", response.data[0]);
+
             const latestEmail = response.data[0];
 
-            const emailContent: AxiosResponse<string> = await axios.get(
-              `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}/body.html`,
+            // const emailContent: AxiosResponse<string> = await axios.get(
+            //   `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}/body.html`,
+            //   {
+            //     headers: {
+            //       Authorization: `Bearer ${API_TOKEN}`,
+            //       "Content-Type": "application/json",
+            //     },
+            //   }
+            // );
+            // return emailContent.data;
+
+            const emailResponse: AxiosResponse<any> = await axios.get(
+              `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}`,
               {
                 headers: {
                   Authorization: `Bearer ${API_TOKEN}`,
@@ -61,7 +74,9 @@ export default defineConfig({
               }
             );
 
-            return emailContent.data;
+            return (
+              emailResponse.data.html_body || emailResponse.data.text_body || ""
+            );
           } catch (error: any) {
             console.error("Mailtrap API Error:", error.message);
             if (error.response) {
