@@ -19,24 +19,16 @@ export default defineConfig({
         async getMailtrapEmail(): Promise<string> {
           const MAILTRAP_INBOX_ID = process.env.MAILTRAP_INBOX_ID;
           const API_TOKEN = process.env.MAILTRAP_API_KEY;
+          const MAILTRAP_ACCOUNT_ID = process.env.MAILTRAP_ACCOUNT_ID;
 
           if (!API_TOKEN || !MAILTRAP_INBOX_ID) {
             throw new Error("Mailtrap API credentials are not set in .env");
           }
 
           try {
-            // const response: AxiosResponse<MailtrapEmail[]> = await axios.get(
-            //   `https://mailtrap.io/api/v1/inboxes/${MAILTRAP_INBOX_ID}/messages`,
-            //   {
-            //     headers: {
-            //       Authorization: `Bearer ${API_TOKEN}`,
-            //       "Content-Type": "application/json",
-            //     },
-            //   }
-            // );
-
             const response: AxiosResponse<MailtrapEmail[]> = await axios.get(
-              `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages`,
+              // `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages`,
+              `https://mailtrap.io/api/v2/accounts/${MAILTRAP_ACCOUNT_ID}/inboxes/${MAILTRAP_INBOX_ID}/messages`,
               {
                 headers: {
                   Authorization: `Bearer ${API_TOKEN}`,
@@ -53,19 +45,9 @@ export default defineConfig({
 
             const latestEmail = response.data[0];
 
-            // const emailContent: AxiosResponse<string> = await axios.get(
-            //   `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}/body.html`,
-            //   {
-            //     headers: {
-            //       Authorization: `Bearer ${API_TOKEN}`,
-            //       "Content-Type": "application/json",
-            //     },
-            //   }
-            // );
-            // return emailContent.data;
-
             const emailResponse: AxiosResponse<any> = await axios.get(
-              `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}`,
+              // `https://mailtrap.io/api/v2/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}`,
+              `https://mailtrap.io/api/v2/accounts/${MAILTRAP_ACCOUNT_ID}/inboxes/${MAILTRAP_INBOX_ID}/messages/${latestEmail.id}`,
               {
                 headers: {
                   Authorization: `Bearer ${API_TOKEN}`,
