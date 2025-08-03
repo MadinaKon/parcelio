@@ -6,13 +6,13 @@ describe("Email Authentication", () => {
   });
 
   it("should complete email sign-in via magic link", () => {
-    const testEmail = "s0539451@htw-berlin.de";
-
     cy.get("[data-cy='nav-sign-in']").click();
     cy.url().should("include", "/signin");
 
     cy.get("[data-cy='sign-in-button']").click();
-    cy.get("#input-email-for-email-provider").type(testEmail);
+    cy.get("#input-email-for-email-provider").type(
+      Cypress.env("TEST_EMAIL") || "test@example.com"
+    );
     cy.get("button#submitButton").click();
 
     cy.get("h1").should("contain.text", "Check your email");
