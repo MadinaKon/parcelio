@@ -2,7 +2,8 @@
 
 describe("Email Authentication", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/");
+    // cy.visit("http://localhost:3000/");
+    cy.visit(Cypress.env("TEST_URL"));
   });
 
   it("should complete email sign-in via magic link", () => {
