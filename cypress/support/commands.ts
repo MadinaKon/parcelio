@@ -35,3 +35,4 @@
 //     }
 //   }
 // }
+/// <reference types="cypress-mailslurp" />
