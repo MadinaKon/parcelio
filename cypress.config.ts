@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import { defineConfig } from "cypress";
 
 // Check if MailSlurp API key is available
@@ -6,10 +9,6 @@ if (!mailslurpApiKey) {
   console.warn(
     "⚠️  Warning: CYPRESS_MAILSLURP_API_KEY not set. MailSlurp tests will be skipped."
   );
-  console.log("To enable MailSlurp tests:");
-  console.log("1. Sign up at https://app.mailslurp.com/sign-up/");
-  console.log("2. Get your API key from the dashboard");
-  console.log("3. Set CYPRESS_MAILSLURP_API_KEY environment variable");
 }
 
 export default defineConfig({
@@ -21,7 +20,8 @@ export default defineConfig({
     baseUrl: "http://localhost:3000",
     setupNodeEvents(on, config) {
       // Add environment variable to Cypress config
-      config.env.MAILSLURP_API_KEY = mailslurpApiKey;
+      // config.env.MAILSLURP_API_KEY = mailslurpApiKey;
+      config.env.MAILSLURP_API_KEY = process.env.CYPRESS_MAILSLURP_API_KEY;
       return config;
     },
   },
