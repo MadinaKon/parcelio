@@ -1,40 +1,79 @@
 /// <reference types="cypress" />
 
-describe("Email Authentication", () => {
-  beforeEach(() => {
-    cy.visit(Cypress.env("TEST_URL"));
+describe("Email Authentication with MailSlurp", () => {
+  let inboxId;
+  let emailAddress;
+
+  before(function () {
+    // Check if MailSlurp API key is available
+    const apiKey = Cypress.env("MAILSLURP_API_KEY");
+    if (!apiKey) {
+      cy.log("⚠️  MailSlurp API key not found. Skipping MailSlurp tests.");
+      this.skip();
+      return;
+    }
+
+    cy.log("Creating MailSlurp inbox for test");
+    return cy
+      .mailslurp()
+      .then((mailslurp) => mailslurp.createInbox())
+      .then((inbox) => {
+        inboxId = inbox.id;
+        emailAddress = inbox.emailAddress;
+        cy.log(`Created inbox: ${inboxId} with email: ${emailAddress}`);
+        cy.wrap(inboxId).as("inboxId");
+        cy.wrap(emailAddress).as("emailAddress");
+      });
   });
 
-  it("should complete email sign-in via magic link", () => {
+  beforeEach(() => {
+    cy.visit("/");
+  });
+
+  it("should complete email sign-in via magic link", function () {
+    // Skip test if MailSlurp is not configured
+    if (!Cypress.env("MAILSLURP_API_KEY")) {
+      cy.log("Skipping test - MailSlurp not configured");
+      this.skip();
+      return;
+    }
+
     cy.get("[data-cy='nav-sign-in']").click();
     cy.url().should("include", "/signin");
 
     cy.get("[data-cy='sign-in-button']").click();
-    cy.get("#input-email-for-email-provider").type(
-      Cypress.env("TEST_EMAIL") || "test@example.com"
-    );
+
+    // Use the MailSlurp email address
+    cy.get("@emailAddress").then((email) => {
+      cy.get("#input-email-for-email-provider").type(email);
+    });
+
     cy.get("button#submitButton").click();
 
     cy.get("h1").should("contain.text", "Check your email");
 
-    // Wait for email to arrive (you can increase timeout if needed)
-    cy.wait(15000);
+    // Wait for email to arrive and extract magic link
+    cy.wait(10000); // Wait for email to be sent
 
-    cy.task("getMailtrapEmail").then((emailHtml) => {
-      // Updated regex to match the actual email format
-      const magicLink =
-        /href="(http:\/\/localhost:3000\/api\/auth\/callback\/email[^"]+)"/.exec(
-          emailHtml
-        )?.[1];
+    cy.mailslurp()
+      .then((mailslurp) => mailslurp.waitForLatestEmail(inboxId, 30000))
+      .then((email) => {
+        cy.log(`Received email: ${email.subject}`);
 
-      expect(magicLink, "Magic link found in email").to.exist;
+        // Extract magic link from email body
+        const magicLink =
+          /href="(http:\/\/localhost:3000\/api\/auth\/callback\/email[^"]+)"/.exec(
+            email.body
+          )?.[1];
 
-      // Visit the sign-in link
-      cy.visit(magicLink);
+        expect(magicLink, "Magic link found in email").to.exist;
 
-      // Final assertion: e.g., user lands on dashboard
-      cy.url().should("include", "/dashboard");
-      cy.get("h1").should("contain.text", "Welcome");
-    });
+        // Visit the sign-in link
+        cy.visit(magicLink);
+
+        // Final assertion: user should be signed in
+        cy.url().should("not.include", "/signin");
+        cy.get("[data-cy='sign-out']").should("be.visible");
+      });
   });
 });
