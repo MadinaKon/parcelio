@@ -4,6 +4,11 @@ import axios, { AxiosResponse } from "axios";
 
 dotenv.config();
 
+// Debug environment variables
+console.log("Environment variables check:");
+console.log("MAILTRAP_API_KEY exists:", !!process.env.MAILTRAP_API_KEY);
+console.log("MAILTRAP_INBOX_ID exists:", !!process.env.MAILTRAP_INBOX_ID);
+console.log("MAILTRAP_ACCOUNT_ID exists:", !!process.env.MAILTRAP_ACCOUNT_ID);
 
 interface MailtrapEmail {
   id: number;
@@ -12,7 +17,7 @@ interface MailtrapEmail {
 
 export default defineConfig({
   e2e: {
-     baseUrl: process.env.CYPRESS_TEST_URL,
+    baseUrl: process.env.CYPRESS_TEST_URL,
     env: {
       TEST_URL: process.env.CYPRESS_TEST_URL,
     },
@@ -26,6 +31,13 @@ export default defineConfig({
           const API_TOKEN = process.env.MAILTRAP_API_KEY;
           const MAILTRAP_ACCOUNT_ID = process.env.MAILTRAP_ACCOUNT_ID;
 
+          console.log("Task execution - Environment variables:");
+          console.log("MAILTRAP_INBOX_ID:", MAILTRAP_INBOX_ID);
+          console.log("MAILTRAP_ACCOUNT_ID:", MAILTRAP_ACCOUNT_ID);
+          console.log(
+            "API_TOKEN (first 10 chars):",
+            API_TOKEN?.substring(0, 10) + "..."
+          );
 
           if (!API_TOKEN || !MAILTRAP_INBOX_ID) {
             throw new Error("Mailtrap API credentials are not set in .env");
@@ -33,7 +45,7 @@ export default defineConfig({
 
           try {
             // First, test if we can access the API at all
-         
+
             try {
               const testResponse = await axios.get(
                 "https://mailtrap.io/api/v1/user",

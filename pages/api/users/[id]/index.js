@@ -55,7 +55,6 @@ export default async function handler(request, response) {
         });
       });
 
-
       const updateData = { ...fields };
 
       // Convert any array fields to strings
