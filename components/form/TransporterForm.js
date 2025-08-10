@@ -46,7 +46,6 @@ export default function TransporterForm({ formName, defaultData, id }) {
 
   const handleClose = () => {
     setOpen(false);
-    console.log("TransporterForm handle close clicked");
   };
 
   async function handleSubmit(event) {

@@ -55,8 +55,6 @@ export default async function handler(request, response) {
         });
       });
 
-      console.log("FIELDS RECEIVED:", fields);
-      console.log("FILES RECEIVED:", files);
 
       const updateData = { ...fields };
 
